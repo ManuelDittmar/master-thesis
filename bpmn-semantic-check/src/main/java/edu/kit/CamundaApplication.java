@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableProcessApplication("bpmn-semantic-check")
+@EnableProcessApplication("bpmn-pragmatic-check")
 public class CamundaApplication {
 
   public static void main(String... args) {

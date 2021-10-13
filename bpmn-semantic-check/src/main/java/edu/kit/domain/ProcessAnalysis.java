@@ -1,7 +1,7 @@
 package edu.kit.domain;
 
-import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.Process;
+
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ public class ProcessAnalysis {
     private String processKey;
     private String processName;
     private boolean isExecutable;
+    private List<SequenceFlowDTO> sequenceFlowDTOList;
 
     private double coefficientOfConnectivity;
     private double completeLabeling;
@@ -23,10 +24,12 @@ public class ProcessAnalysis {
     private double sequentiality;
     private double size;
 
-    public ProcessAnalysis(Process process) {
+    public ProcessAnalysis(Process process, List<SequenceFlowDTO> sequenceFlowDTOList) {
         this.processName = process.getName();
         this.processKey = process.getId();
         this.isExecutable = process.isExecutable();
+        this.sequenceFlowDTOList = sequenceFlowDTOList;
+        setRightwardFlowDirection();
     }
 
     public String getProcessKey() {
@@ -87,5 +90,23 @@ public class ProcessAnalysis {
 
     public double getSize() {
         return size;
+    }
+
+    /*public List<SequenceFlowDTO> getSequenceFlowDTOList() {
+        return sequenceFlowDTOList;
+    }*/
+
+    // TODO Check if really only to the right is best practice
+
+    private void setRightwardFlowDirection() {
+        double sequenceFlowsCount = sequenceFlowDTOList.size();
+        double flowDirectionRightCount = 0;
+        for (SequenceFlowDTO sequenceFlowDTO:this.sequenceFlowDTOList) {
+            if(sequenceFlowDTO.flowDirection.equals("right")) {
+                flowDirectionRightCount++;
+            }
+        }
+        this.rightwardFlowDirection = flowDirectionRightCount/sequenceFlowsCount;
+
     }
 }
