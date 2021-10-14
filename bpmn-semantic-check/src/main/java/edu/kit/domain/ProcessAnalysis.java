@@ -92,7 +92,7 @@ public class ProcessAnalysis {
         return size;
     }
 
-    /*public List<SequenceFlowDTO> getSequenceFlowDTOList() {
+   /* public List<SequenceFlowDTO> getSequenceFlowDTOList() {
         return sequenceFlowDTOList;
     }*/
 
@@ -102,7 +102,7 @@ public class ProcessAnalysis {
         double sequenceFlowsCount = sequenceFlowDTOList.size();
         double flowDirectionRightCount = 0;
         for (SequenceFlowDTO sequenceFlowDTO:this.sequenceFlowDTOList) {
-            if(sequenceFlowDTO.flowDirection.equals("right")) {
+            if(sequenceFlowDTO.flowDirection.contains(FlowDirection.RIGHT)) {
                 flowDirectionRightCount++;
             }
         }

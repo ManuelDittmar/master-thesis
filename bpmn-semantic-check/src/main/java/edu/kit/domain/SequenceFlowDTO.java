@@ -5,6 +5,7 @@ import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,12 +17,13 @@ public class SequenceFlowDTO {
     Point end;
     String sourceId;
     String targetId;
-    String flowDirection;
+    List<FlowDirection> flowDirection;
 
 
     public SequenceFlowDTO(SequenceFlow sequenceFlow, List<Waypoint> waypoints) {
         this.sequenceFlowId = sequenceFlow.getId();
         this.waypoints = waypoints;
+        this.flowDirection = new ArrayList<>();
         int start_x = Integer.parseInt(waypoints.get(0).getAttributeValue("x"));
         int start_y = Integer.parseInt(waypoints.get(0).getAttributeValue("y"));
         int end_x = Integer.parseInt(waypoints.get(waypoints.size() -1).getAttributeValue("x"));
@@ -30,7 +32,7 @@ public class SequenceFlowDTO {
         this.end = new Point(end_x,end_y);
         this.sourceId = sequenceFlow.getSource().getId();
         this.targetId = sequenceFlow.getTarget().getId();
-        setFlowDirection();
+        calculateFlowDirection();
     }
 
     public String getSequenceFlowId() {
@@ -53,27 +55,25 @@ public class SequenceFlowDTO {
         return targetId;
     }
 
-    public void setFlowDirection() {
+    public void calculateFlowDirection() {
         int x = end.x - start.x;
         int y = end.y - start.y;
 
         if(x > 0) {
-            this.flowDirection = "right";
+            this.flowDirection.add(FlowDirection.RIGHT);
         } else if(x < 0) {
-            this.flowDirection = "left";
+            this.flowDirection.add(FlowDirection.LEFT);
         }
-        else if(x == 0) {
-            if(y > 0) {
-                this.flowDirection = "down";
+        if(y > 0) {
+            this.flowDirection.add(FlowDirection.DOWN);
+        } else if (y < 0) {
+            this.flowDirection.add(FlowDirection.UP);
             }
-            else if (y < 0) {
-                this.flowDirection = "up";
-            }
-        }
+
     // TODO Overlapping start and end!
     }
 
-    public String getFlowDirection() {
+    public List<FlowDirection> getFlowDirection() {
         return flowDirection;
     }
 }
