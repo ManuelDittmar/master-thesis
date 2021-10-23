@@ -11,7 +11,7 @@ public class RightwardFlowDirection implements QualityCriteria {
     private String criteriaID = "Rightward Flow Direction";
     private List<SequenceFlowDTO> sequenceFlowDTOList;
     private double rightwardFlowDirection;
-    private List<SequenceFlowDTO> outliers;
+    private List<String> outliers;
 
     public RightwardFlowDirection(List<SequenceFlowDTO> sequenceFlowDTOList) {
         this.sequenceFlowDTOList = sequenceFlowDTOList;
@@ -22,13 +22,13 @@ public class RightwardFlowDirection implements QualityCriteria {
     public void calculate() {
         double sequenceFlowsCount = sequenceFlowDTOList.size();
         double flowDirectionRightCount = 0;
-        List<SequenceFlowDTO> outliers = new ArrayList<>();
+        List<String> outliers = new ArrayList<>();
         for (SequenceFlowDTO sequenceFlowDTO:this.sequenceFlowDTOList) {
             if(sequenceFlowDTO.getFlowDirection().contains(FlowDirection.RIGHT)) {
                 flowDirectionRightCount++;
             }
             else {
-                outliers.add(sequenceFlowDTO);
+                outliers.add(sequenceFlowDTO.getSequenceFlowId());
             }
         }
         this.rightwardFlowDirection = flowDirectionRightCount/sequenceFlowsCount;

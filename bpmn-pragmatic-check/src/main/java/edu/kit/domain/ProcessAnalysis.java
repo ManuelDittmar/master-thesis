@@ -1,7 +1,9 @@
 package edu.kit.domain;
 
+import edu.kit.domain.qualityMetrics.CompleteLabeling;
 import edu.kit.domain.qualityMetrics.QualityCriteria;
 import edu.kit.domain.qualityMetrics.RightwardFlowDirection;
+import org.camunda.bpm.model.bpmn.instance.FlowElement;
 import org.camunda.bpm.model.bpmn.instance.Process;
 
 
@@ -23,6 +25,8 @@ public class ProcessAnalysis {
         this.qualityCriteriaList = new ArrayList<>();
         // Here you can add the criterias you want to include in your process analysis
         qualityCriteriaList.add(new RightwardFlowDirection(sequenceFlowDTOList));
+        qualityCriteriaList.add(new CompleteLabeling(process));
+
     }
 
     public String getProcessKey() {
