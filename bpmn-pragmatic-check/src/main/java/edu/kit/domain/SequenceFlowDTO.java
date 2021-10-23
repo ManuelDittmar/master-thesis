@@ -39,22 +39,6 @@ public class SequenceFlowDTO {
         return sequenceFlowId;
     }
 
-    public Point getStart() {
-        return start;
-    }
-
-    public Point getEnd() {
-        return end;
-    }
-
-    public String getSourceId() {
-        return sourceId;
-    }
-
-    public String getTargetId() {
-        return targetId;
-    }
-
     public void calculateFlowDirection() {
         int x = end.x - start.x;
         int y = end.y - start.y;
