@@ -6,6 +6,8 @@ import edu.kit.domain.SequenceFlowDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: What about loops?
+
 public class RightwardFlowDirection implements QualityCriteria {
 
     private String criteriaID = "Rightward Flow Direction";
@@ -36,6 +38,7 @@ public class RightwardFlowDirection implements QualityCriteria {
 
     }
 
+    @Override
     public String getCriteriaID() {
         return this.criteriaID;
     }

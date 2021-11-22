@@ -9,4 +9,5 @@ public interface QualityCriteria {
     public void calculate();
     public double getScore();
     public List getOutliers();
+    public String getCriteriaID();
 }

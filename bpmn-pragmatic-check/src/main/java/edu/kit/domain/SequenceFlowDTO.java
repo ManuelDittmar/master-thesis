@@ -60,4 +60,16 @@ public class SequenceFlowDTO {
     public List<FlowDirection> getFlowDirection() {
         return flowDirection;
     }
+
+    public Point getStart() {
+        return start;
+    }
+
+    public Point getEnd() {
+        return end;
+    }
+
+    public List<Waypoint> getWaypoints() {
+        return waypoints;
+    }
 }

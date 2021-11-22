@@ -1,8 +1,6 @@
 package edu.kit.domain;
 
-import edu.kit.domain.qualityMetrics.CompleteLabeling;
-import edu.kit.domain.qualityMetrics.QualityCriteria;
-import edu.kit.domain.qualityMetrics.RightwardFlowDirection;
+import edu.kit.domain.qualityMetrics.*;
 import org.camunda.bpm.model.bpmn.instance.FlowElement;
 import org.camunda.bpm.model.bpmn.instance.Process;
 
@@ -17,6 +15,7 @@ public class ProcessAnalysis {
     private List<SequenceFlowDTO> sequenceFlowDTOList;
     private List<QualityCriteria> qualityCriteriaList;
 
+    // TODO make a configuration for addting the criteria
     public ProcessAnalysis(Process process, List<SequenceFlowDTO> sequenceFlowDTOList) {
         this.processName = process.getName();
         this.processKey = process.getId();
@@ -26,7 +25,8 @@ public class ProcessAnalysis {
         // Here you can add the criterias you want to include in your process analysis
         qualityCriteriaList.add(new RightwardFlowDirection(sequenceFlowDTOList));
         qualityCriteriaList.add(new CompleteLabeling(process));
-
+        qualityCriteriaList.add(new EdgeCrossing(sequenceFlowDTOList));
+        qualityCriteriaList.add(new EdgeOrthogonality(sequenceFlowDTOList));
     }
 
     public String getProcessKey() {

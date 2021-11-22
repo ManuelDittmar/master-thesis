@@ -20,14 +20,14 @@ public class CompleteLabeling implements QualityCriteria{
         calculate();
     }
 
-    // TODO joining gateways and sequence flows that are not from a gateway should be excluded here
+    // TODO default flow does not need to be labeled
     @Override
     public void calculate() {
         double elementsCount = process.getFlowElements().size();
         for (FlowElement element:process.getFlowElements()) {
             if (element.getName() == null) {
                 // Merging Gateways do not need labeling
-                if (element.getElementType().getBaseType().getTypeName().equals("gateway")) {
+                if (element.getElementType().getTypeName().matches("exclusiveGateway|inclusiveGateway")) {
                     Gateway gateway = (Gateway) element;
                     if (gateway.getSucceedingNodes().list().size() > 1) {
                         outliers.add(element.getId());
@@ -36,13 +36,17 @@ public class CompleteLabeling implements QualityCriteria{
                 // Sequence Flows that are not coming from a gateway do not need labeling
                 if (element.getElementType().getBaseType().getTypeName().equals("flowElement")) {
                     SequenceFlow sequenceFlow = (SequenceFlow) element;
-                    String sourceType = sequenceFlow.getSource().getElementType().getBaseType().getTypeName();
-                    if (sourceType.equals("gateway")) {
+                    String sourceType = sequenceFlow.getSource().getElementType().getTypeName();
+                    if (sourceType.matches("exclusiveGateway|inclusiveGateway")) {
                         Gateway gateway = (Gateway) sequenceFlow.getSource();
                         if(gateway.getSucceedingNodes().list().size() > 1) {
                             outliers.add(element.getId());
                         }
                     }
+                }
+                // Tasks and Events need to be labeled always
+                if(element.getElementType().getBaseType().getTypeName().matches("activity|task|throwEvent|catchEvent")){
+                    outliers.add(element.getId());
                 }
             }
         }
@@ -52,6 +56,7 @@ public class CompleteLabeling implements QualityCriteria{
 
     }
 
+    @Override
     public String getCriteriaID() {
         return criteriaID;
     }
