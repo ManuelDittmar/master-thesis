@@ -7,14 +7,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EdgeOrthogonality implements QualityCriteria{
+public class EdgeOrthogonality extends QualityCriteria{
 
-    private String criteriaID = "Edge Orthogonality";
-    private double edgeOrthogonality;
     private List<SequenceFlowDTO> sequenceFlowDTOList;
-    private List<String> outliers;
 
     public EdgeOrthogonality(List<SequenceFlowDTO> sequenceFlowDTOList){
+        criteriaID = "Edge Orthogonality";
         this.sequenceFlowDTOList = sequenceFlowDTOList;
         this.outliers = new ArrayList<>();
         calculate();
@@ -34,22 +32,7 @@ public class EdgeOrthogonality implements QualityCriteria{
             }
         }
         double outliersCount = outliers.size();
-        this.edgeOrthogonality = (sequenceFlowDTOList.size()-outliersCount)/sequenceFlowDTOList.size();
+        this.score = (sequenceFlowDTOList.size()-outliersCount)/sequenceFlowDTOList.size();
 
-    }
-
-    @Override
-    public double getScore() {
-        return edgeOrthogonality;
-    }
-
-    @Override
-    public List getOutliers() {
-        return outliers;
-    }
-
-    @Override
-    public String getCriteriaID() {
-        return criteriaID;
     }
 }

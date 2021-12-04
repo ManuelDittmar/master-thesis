@@ -8,14 +8,12 @@ import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EdgeCrossing implements QualityCriteria{
+public class EdgeCrossing extends QualityCriteria{
 
-    private String criteriaID = "Edge Crossing";
-    private double edgeCrossing;
     private List<SequenceFlowDTO> sequenceFlowDTOList;
-    private List<String[]> outliers;
 
     public EdgeCrossing(List<SequenceFlowDTO> sequenceFlowDTOList){
+        criteriaID = "Edge Crossing";
         this.sequenceFlowDTOList = sequenceFlowDTOList;
         this.outliers = new ArrayList<>();
         calculate();
@@ -82,24 +80,8 @@ public class EdgeCrossing implements QualityCriteria{
 
             }
             double outliersCount = outliers.size();
-            this.edgeCrossing = (sequenceFlowDTOList.size()-outliersCount)/sequenceFlowDTOList.size();
+            this.score = (sequenceFlowDTOList.size()-outliersCount)/sequenceFlowDTOList.size();
         }
-
-    @Override
-    public String getCriteriaID() {
-        return criteriaID;
-    }
-
-
-    @Override
-    public double getScore() {
-        return edgeCrossing;
-    }
-
-    @Override
-    public List getOutliers() {
-        return outliers;
-    }
 
     static Point lineLineIntersection(Point A, Point B, Point C, Point D)
     {

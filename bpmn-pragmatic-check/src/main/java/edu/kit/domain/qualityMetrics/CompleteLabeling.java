@@ -7,14 +7,12 @@ import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.glassfish.jersey.internal.jsr166.Flow;
 
-public class CompleteLabeling implements QualityCriteria{
+public class CompleteLabeling extends QualityCriteria{
 
-    String criteriaID = "Complete Labeling";
     Process process;
-    private List<String> outliers;
-    private double completeLabeling;
 
     public CompleteLabeling(Process process) {
+        criteriaID = "Complete Labeling";
         this.process = process;
         outliers = new ArrayList<String>();
         calculate();
@@ -51,23 +49,8 @@ public class CompleteLabeling implements QualityCriteria{
             }
         }
         double outliersCount = outliers.size();
-        this.completeLabeling = (elementsCount-outliersCount)/elementsCount;
+        this.score = (elementsCount-outliersCount)/elementsCount;
 
 
-    }
-
-    @Override
-    public String getCriteriaID() {
-        return criteriaID;
-    }
-
-    @Override
-    public double getScore() {
-        return this.completeLabeling;
-    }
-
-    @Override
-    public List getOutliers() {
-        return this.outliers;
     }
 }

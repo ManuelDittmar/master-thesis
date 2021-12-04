@@ -2,12 +2,22 @@ package edu.kit.domain.qualityMetrics;
 
 import java.util.List;
 
-public interface QualityCriteria {
+public abstract class QualityCriteria {
     
-    String criteriaID = null;
+    String criteriaID;
+    double score;
+    List outliers;
     
-    public void calculate();
-    public double getScore();
-    public List getOutliers();
-    public String getCriteriaID();
+    public abstract void calculate();
+    public List getOutliers() {
+        return outliers;
+    };
+    public String getCriteriaID() {
+        return criteriaID;
+    }
+
+    public double getScore() {
+        return score;
+    };
+
 }
