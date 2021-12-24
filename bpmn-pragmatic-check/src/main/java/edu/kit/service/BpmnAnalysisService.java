@@ -1,7 +1,6 @@
 package edu.kit.service;
 
 import edu.kit.domain.DiagramAnalysis;
-import edu.kit.domain.ProcessAnalysis;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.springframework.stereotype.Service;

@@ -1,11 +1,9 @@
 package edu.kit.domain.qualityMetrics;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
-import org.glassfish.jersey.internal.jsr166.Flow;
 
 public class CompleteLabeling extends QualityCriteria{
 

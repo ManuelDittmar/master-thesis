@@ -1,7 +1,6 @@
 package edu.kit.domain;
 
 import edu.kit.domain.qualityMetrics.*;
-import org.camunda.bpm.model.bpmn.instance.FlowElement;
 import org.camunda.bpm.model.bpmn.instance.Process;
 
 
@@ -27,6 +26,8 @@ public class ProcessAnalysis {
         qualityCriteriaList.add(new CompleteLabeling(process));
         qualityCriteriaList.add(new EdgeCrossing(sequenceFlowDTOList));
         qualityCriteriaList.add(new EdgeOrthogonality(sequenceFlowDTOList));
+        qualityCriteriaList.add(new TaskTypeDefinition(process));
+        qualityCriteriaList.add(new BehavioralErrors(process));
     }
 
     public String getProcessKey() {
