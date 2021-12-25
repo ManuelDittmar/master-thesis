@@ -1,6 +1,7 @@
 package edu.kit.domain.qualityMetrics;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
@@ -17,10 +18,18 @@ public class CompleteLabeling extends QualityCriteria{
     }
 
     // TODO default flow does not need to be labeled
+    // TODO does a subprocess need to be labeled?
     @Override
     public void calculate() {
-        double elementsCount = process.getFlowElements().size();
-        for (FlowElement element:process.getFlowElements()) {
+        List<FlowElement> elementList = new ArrayList<>();
+        elementList.addAll(process.getFlowElements());
+
+        if(hasSubProcess(process)) {
+            elementList.addAll(getFlowElementsOfSubprocesses(process));
+        }
+        double elementsCount = elementList.size();
+        for (FlowElement element:elementList) {
+            System.out.println(element.getName());
             if (element.getName() == null) {
                 // Merging Gateways do not need labeling
                 if (element.getElementType().getTypeName().matches("exclusiveGateway|inclusiveGateway")) {

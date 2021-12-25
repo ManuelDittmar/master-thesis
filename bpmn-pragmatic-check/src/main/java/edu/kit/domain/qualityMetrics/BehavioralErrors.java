@@ -25,7 +25,6 @@ public class BehavioralErrors extends QualityCriteria{
         for (FlowElement element: process.getChildElementsByType(StartEvent.class)) {
             StartEvent startEvent = (StartEvent) element;
             for (FlowNode node :startEvent.getSucceedingNodes().list()) {
-                System.out.println("Start: " + startEvent.getId() + " -> " + node.getId());
             }
         }
     }
