@@ -17,8 +17,8 @@ public class CompleteLabeling extends QualityCriteria{
         calculate();
     }
 
-    // TODO default flow does not need to be labeled
     // TODO does a subprocess need to be labeled?
+
     @Override
     public void calculate() {
         List<FlowElement> elementList = new ArrayList<>();
@@ -29,7 +29,6 @@ public class CompleteLabeling extends QualityCriteria{
         }
         double elementsCount = elementList.size();
         for (FlowElement element:elementList) {
-            System.out.println(element.getName());
             if (element.getName() == null) {
                 // Merging Gateways do not need labeling
                 if (element.getElementType().getTypeName().matches("exclusiveGateway|inclusiveGateway")) {
@@ -44,8 +43,12 @@ public class CompleteLabeling extends QualityCriteria{
                     String sourceType = sequenceFlow.getSource().getElementType().getTypeName();
                     if (sourceType.matches("exclusiveGateway|inclusiveGateway")) {
                         Gateway gateway = (Gateway) sequenceFlow.getSource();
-                        if(gateway.getSucceedingNodes().list().size() > 1) {
-                            outliers.add(element.getId());
+                        if(gateway.getSucceedingNodes().list().size() > 1 ) {
+                            String defaultSequenceFlow = gateway.getAttributeValue("default");
+                            if(defaultSequenceFlow == null || !defaultSequenceFlow.equals(element.getId())){
+                                System.out.println(gateway.getAttributeValue("default"));
+                                outliers.add(element.getId());
+                            }
                         }
                     }
                 }

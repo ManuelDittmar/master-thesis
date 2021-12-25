@@ -8,6 +8,8 @@ import java.util.List;
 
 //TODO: What about loops?
 
+// TODO: just upwards
+
 public class RightwardFlowDirection extends QualityCriteria {
 
     private final List<SequenceFlowDTO> sequenceFlowDTOList;
