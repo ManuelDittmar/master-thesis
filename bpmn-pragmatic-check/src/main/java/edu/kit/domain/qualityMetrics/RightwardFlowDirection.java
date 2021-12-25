@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RightwardFlowDirection extends QualityCriteria {
 
-    private List<SequenceFlowDTO> sequenceFlowDTOList;
+    private final List<SequenceFlowDTO> sequenceFlowDTOList;
 
     public RightwardFlowDirection(List<SequenceFlowDTO> sequenceFlowDTOList) {
         criteriaID = "Rightward Flow Direction";

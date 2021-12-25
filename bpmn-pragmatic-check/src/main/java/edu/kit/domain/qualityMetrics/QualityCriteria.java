@@ -11,13 +11,14 @@ public abstract class QualityCriteria {
     public abstract void calculate();
     public List getOutliers() {
         return outliers;
-    };
+    }
+
     public String getCriteriaID() {
         return criteriaID;
     }
 
     public double getScore() {
         return score;
-    };
+    }
 
 }

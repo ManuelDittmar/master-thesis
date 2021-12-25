@@ -1,8 +1,6 @@
 package edu.kit.domain.qualityMetrics;
 
-import org.camunda.bpm.model.bpmn.instance.Event;
 import org.camunda.bpm.model.bpmn.instance.Process;
-import org.camunda.bpm.model.bpmn.instance.Task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +31,6 @@ public class TaskTypeDefinition extends QualityCriteria{
 
     @Override
     public void calculate() {
-        //process.getModelInstance().getModelElementsByType(Task.class).stream().forEach(element -> System.out.println(element.getId()));
         int taskCount = (int) process.getFlowElements().stream().filter(flowElement -> flowElement.getElementType().getBaseType().getTypeName().matches("task|activity")).count();
         this.outliers = process.getFlowElements().stream()
                 .filter(flowElement -> forbiddenTaskTypes.contains(flowElement.getElementType().getTypeName())).map(task -> task.getId()).collect(Collectors.toList());

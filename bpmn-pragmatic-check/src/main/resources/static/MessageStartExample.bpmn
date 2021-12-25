@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0bu1s5y" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="1.1.0">
+  <bpmn:process id="Process_065j7cd" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Message received">
+      <bpmn:outgoing>Flow_0dy1y8s</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1540iyb" messageRef="Message_2905ao0" />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1s3riih" name="Process completed">
+      <bpmn:incoming>Flow_0dy1y8s</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0dy1y8s" sourceRef="StartEvent_1" targetRef="Event_1s3riih" />
+  </bpmn:process>
+  <bpmn:message id="Message_2905ao0" name="StartExample" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_065j7cd">
+      <bpmndi:BPMNEdge id="Flow_0dy1y8s_di" bpmnElement="Flow_0dy1y8s">
+        <di:waypoint x="215" y="97" />
+        <di:waypoint x="312" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_07h0cu8_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="79" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="152" y="122" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1s3riih_di" bpmnElement="Event_1s3riih">
+        <dc:Bounds x="312" y="79" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="305" y="122" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

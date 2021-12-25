@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.4.4</version>
+    <version>2.6.1</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>edu.kit</groupId>
@@ -27,9 +27,12 @@
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -64,7 +67,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.6.0</version>
         <configuration>
-          <mainClass>edu.kit.CamundaApplication</mainClass>
+          <mainClass>edu.kit.ProcessAnalysisApplication</mainClass>
         </configuration>
       </plugin>
     </plugins>

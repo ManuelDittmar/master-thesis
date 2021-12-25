@@ -10,7 +10,7 @@ import java.util.List;
 
 public class EdgeCrossing extends QualityCriteria{
 
-    private List<SequenceFlowDTO> sequenceFlowDTOList;
+    private final List<SequenceFlowDTO> sequenceFlowDTOList;
 
     public EdgeCrossing(List<SequenceFlowDTO> sequenceFlowDTOList){
         criteriaID = "Edge Crossing";

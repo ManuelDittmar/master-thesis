@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessAnalysis {
-    private String processKey;
-    private String processName;
-    private boolean isExecutable;
-    private List<SequenceFlowDTO> sequenceFlowDTOList;
-    private List<QualityCriteria> qualityCriteriaList;
+    private final String processKey;
+    private final String processName;
+    private final boolean isExecutable;
+    private final List<SequenceFlowDTO> sequenceFlowDTOList;
+    private final List<QualityCriteria> qualityCriteriaList;
 
     // TODO make a configuration for addting the criteria
     public ProcessAnalysis(Process process, List<SequenceFlowDTO> sequenceFlowDTOList) {

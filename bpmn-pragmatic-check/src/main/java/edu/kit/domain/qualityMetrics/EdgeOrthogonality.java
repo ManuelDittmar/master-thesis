@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EdgeOrthogonality extends QualityCriteria{
 
-    private List<SequenceFlowDTO> sequenceFlowDTOList;
+    private final List<SequenceFlowDTO> sequenceFlowDTOList;
 
     public EdgeOrthogonality(List<SequenceFlowDTO> sequenceFlowDTOList){
         criteriaID = "Edge Orthogonality";

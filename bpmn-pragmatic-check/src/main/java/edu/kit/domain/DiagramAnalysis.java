@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class DiagramAnalysis {
     private int executableProcesses;
-    private List<ProcessAnalysis> processAnalysisList;
+    private final List<ProcessAnalysis> processAnalysisList;
 
     // TODO more than one executable process? Not Good!
 
