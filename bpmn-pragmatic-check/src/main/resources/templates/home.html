@@ -43,112 +43,105 @@
     </style>
 </head>
 <body>
-    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-    <div class="element"></div>
-    <div class="flexbox-row">
-        <div class="flexbox-item"></div>
-        <div class="flexbox-item">
-            <h1>BPMN Pragmatic Check</h1>
-        </div>
-        <div class="flexbox-item">
-            <a href="https://github.com/ManuelDittmar/master-thesis">Github</a>
-        </div>
+<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+<div class="flexbox-row">
+    <div class="flexbox-item"></div>
+    <div class="flexbox-item">
+        <h1>BPMN Pragmatic Check</h1>
     </div>
-    <div class="container introduction">
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-            diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-            takimata sanctus est Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-            diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-            takimata sanctus est Lorem ipsum dolor sit amet.</p>
+    <div class="flexbox-item">
+        <a href="https://github.com/ManuelDittmar/master-thesis">Github</a>
     </div>
-    <div class="container flexbox-row">
-        <form id="analyze" method="post" target="dummyframe" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="file" name="file" class="form-control-file">
-            </div>
-            <button type="submit" class="btn btn-primary">Upload File</button>
-        </form>
-    </div>
-    <div style="height: 500px;" class="container bpmn-container">
-        <div id="canvas"></div>
-    </div>
-    <div class="flexbox-column container">
-        <div class="bpmn-container auto-width">
-            <h1>Process Analysis</h1>
+</div>
+<div class="container introduction">
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+        diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+        takimata sanctus est Lorem ipsum dolor sit amet.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+        diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+        takimata sanctus est Lorem ipsum dolor sit amet.</p>
+</div>
+<div class="container flexbox-row">
+    <form id="analyze" method="post" target="dummyframe" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="file" name="file" class="form-control-file">
         </div>
-        <div class="bpmn-container auto-width">
-            <h1>Process Analysis</h1>
-        </div>
-        <div class="flexbox-column bpmn-container auto-width">
-            <h1>Process Analysis</h1>
-            <div class="flexbox-column bpmn-container auto-width nested">
-                <h1>Category</h1>
+        <button type="submit" class="btn btn-primary">Upload File</button>
+    </form>
+</div>
+<div style="height: 500px;" class="container bpmn-container">
+    <div id="canvas"></div>
+</div>
+<div class="element"></div>
+<script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+<script src="https://unpkg.com/bpmn-js@8.8.3/dist/bpmn-navigated-viewer.development.js"></script>
+<script>
 
-                <div class="flexbox-column bpmn-container auto-width nested">
-                    <h1>Criteria</h1>
-                    <div class="bpmn-container auto-width nested">
-                        <h1>Explanation</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
-    <script src="https://unpkg.com/bpmn-js@8.8.3/dist/bpmn-navigated-viewer.development.js"></script>
-    <script>
-
-        $('#analyze').submit(function(e){
-            e.preventDefault();
-            $.ajax({
-                url: '/analyze',
-                type: 'post',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success:async function(result){
-                   await openDiagram(await this.data.get('file').text())
-                    console.log(result);
-/*                    var newHTML = [];
-                    $.each(result.processAnalysisList, function(index, value) {
-                        newHTML.push('<span>' + value.processKey + '</span>');
+    $('#analyze').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/analyze',
+            type: 'post',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: async function (result) {
+                await openDiagram(await this.data.get('file').text())
+                console.log(result);
+                var processHTML = [];
+                $.each(result.processAnalysisList, function (index, process) {
+                    var criteriaHTML = [];
+                    $.each(process.qualityCriteriaList, function (index, criteria) {
+                        var outlierHTML = [];
+                        outlierHTML.push('<div class="flexbox-column bpmn-container auto-width nested"> <ul>');
+                        $.each(criteria.outliers,function(index, outlier) {
+                           outlierHTML.push('<li>'+ outlier +'</li>');
+                        });
+                        outlierHTML.push('</ul> </div>');
+                        criteriaHTML.push('<div class="flexbox-column bpmn-container auto-width nested">\n' +
+                            '<h1>' + criteria.criteriaID + ': ' + criteria.score + '</h1>' + outlierHTML.join("") + '</div>');
                     });
-                    $(".element").html(newHTML.join(""));
-                    console.log(result.processAnalysisList);*/
-                }
-            });
-        });
-
-        var diagramUrl = 'ApplicationProcess.bpmn';
-
-        // viewer instance
-        var bpmnViewer = new BpmnJS({
-            container: '#canvas'
-        });
-
-        async function openDiagram(bpmnXML) {
-
-            // import diagram
-            try {
-                await bpmnViewer.importXML(bpmnXML);
-
-                // access viewer components
-                var canvas = bpmnViewer.get('canvas');
-                // zoom to fit full viewport
-                canvas.zoom('fit-viewport');
-
-            } catch (err) {
-
-                console.error('could not import BPMN 2.0 diagram', err);
+                    processHTML.push('<div class="flexbox-column container">\n' +
+                        '        <div class="bpmn-container auto-width">\n' +
+                        '            <h1>' + process.processKey + '</h1>' + criteriaHTML.join("") + '</div>');
+                });
+                $(".element").html(processHTML.join(""));
+                console.log(result.processAnalysisList);
             }
+        });
+    });
+
+    var diagramUrl = 'ApplicationProcess.bpmn';
+
+    // viewer instance
+    var bpmnViewer = new BpmnJS({
+        container: '#canvas'
+    });
+
+    async function openDiagram(bpmnXML) {
+
+        // import diagram
+        try {
+            await bpmnViewer.importXML(bpmnXML);
+
+            // access viewer components
+            var canvas = bpmnViewer.get('canvas');
+            // zoom to fit full viewport
+            canvas.zoom('fit-viewport');
+
+        } catch (err) {
+
+            console.error('could not import BPMN 2.0 diagram', err);
         }
-        $.get(diagramUrl, openDiagram, 'text');
-    </script>
+    }
+
+    $.get(diagramUrl, openDiagram, 'text');
+</script>
 </body>
 </html>
