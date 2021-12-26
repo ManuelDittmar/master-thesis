@@ -93,4 +93,10 @@ public class CompleteLabelingTest {
         assertEquals(true,completeLabeling.getOutliers().contains("UnlabeledSequenceFlowORSplitting2"));
         assertEquals(false,completeLabeling.getOutliers().contains("UnlabeledSequenceFlowXORSplittingDefault"));
     }
+
+    @Test
+    public void hasNotOutlierSubprocess() {
+        assertEquals(false,completeLabeling.getOutliers().contains("EventSubprocess"));
+        assertEquals(false,completeLabeling.getOutliers().contains("EventSubprocess"));
+    }
 }

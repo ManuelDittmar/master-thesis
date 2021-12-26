@@ -50,7 +50,7 @@
       <bpmn:outgoing>Flow_0pmsh0b</bpmn:outgoing>
     </bpmn:intermediateThrowEvent>
     <bpmn:sequenceFlow id="Flow_0pmsh0b" sourceRef="UnlabeledIntermediateEvent" targetRef="UnlabeledMergingXOR1" />
-    <bpmn:subProcess id="Activity_0vm987i" triggeredByEvent="true">
+    <bpmn:subProcess id="EventSubprocess" triggeredByEvent="true">
       <bpmn:startEvent id="UnlabeledStartEvent2">
         <bpmn:outgoing>Flow_093nkd0</bpmn:outgoing>
       </bpmn:startEvent>
@@ -240,7 +240,7 @@
       <bpmndi:BPMNShape id="Gateway_02b4udm_di" bpmnElement="UnlabeledMergingXOR1" isMarkerVisible="true">
         <dc:Bounds x="1115" y="152" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1ubf8lm_di" bpmnElement="Activity_0vm987i" isExpanded="true">
+      <bpmndi:BPMNShape id="Activity_1ubf8lm_di" bpmnElement="EventSubprocess" isExpanded="true">
         <dc:Bounds x="300" y="600" width="1150" height="290" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_093nkd0_di" bpmnElement="Flow_093nkd0">

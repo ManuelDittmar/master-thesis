@@ -2,6 +2,7 @@ package edu.kit.domain.qualityMetrics;
 
 import org.camunda.bpm.model.bpmn.instance.BaseElement;
 import org.camunda.bpm.model.bpmn.instance.FlowElement;
+import org.camunda.bpm.model.bpmn.instance.Gateway;
 import org.camunda.bpm.model.bpmn.instance.SubProcess;
 
 import java.util.ArrayList;
@@ -42,6 +43,15 @@ public abstract class QualityCriteria {
                     }
                 });
         return flowElements;
+    }
+
+    public boolean isMergingGateway(BaseElement element) {
+        if (element.getElementType().getTypeName().matches("exclusiveGateway|inclusiveGateway")) {
+            Gateway gateway = (Gateway) element;
+            return (gateway.getSucceedingNodes().list().size() > 1);
+        } else {
+            return false;
+        }
     }
 
 }
