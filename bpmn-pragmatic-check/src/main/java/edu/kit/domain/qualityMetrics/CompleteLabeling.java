@@ -45,6 +45,7 @@ public class CompleteLabeling extends QualityCriteria{
                         Gateway gateway = (Gateway) sequenceFlow.getSource();
                         if(gateway.getSucceedingNodes().list().size() > 1 ) {
                             String defaultSequenceFlow = gateway.getAttributeValue("default");
+                            // default sequence flow needs no label
                             if(defaultSequenceFlow == null || !defaultSequenceFlow.equals(element.getId())){
                                 System.out.println(gateway.getAttributeValue("default"));
                                 outliers.add(element.getId());

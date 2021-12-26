@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_02enata" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="LabelingTest" name="Labeling Test" isExecutable="true">
+    <bpmn:startEvent id="UnlabeledStartEvent1">
+      <bpmn:outgoing>Flow_1ctz669</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="UnlabeledActivity1">
+      <bpmn:incoming>Flow_1ctz669</bpmn:incoming>
+      <bpmn:outgoing>Flow_0c1053y</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1ctz669" sourceRef="UnlabeledStartEvent1" targetRef="UnlabeledActivity1" />
+    <bpmn:exclusiveGateway id="UnlabeledGateWaySplitting" default="UnlabeledSequenceFlowXORSplittingDefault">
+      <bpmn:incoming>Flow_0c1053y</bpmn:incoming>
+      <bpmn:outgoing>UnlabeledSequenceFlowXORSplitting1</bpmn:outgoing>
+      <bpmn:outgoing>UnlabeledSequenceFlowXORSplitting2</bpmn:outgoing>
+      <bpmn:outgoing>UnlabeledSequenceFlowXORSplittingDefault</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0c1053y" sourceRef="UnlabeledActivity1" targetRef="UnlabeledGateWaySplitting" />
+    <bpmn:endEvent id="UnlabeledEndEvent1">
+      <bpmn:incoming>Flow_1y7clqj</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="UnlabeledSequenceFlowXORSplitting1" sourceRef="UnlabeledGateWaySplitting" targetRef="UnlabeledIntermediateEvent" />
+    <bpmn:task id="UnlabeledActivity2">
+      <bpmn:incoming>UnlabeledSequenceFlowXORSplitting2</bpmn:incoming>
+      <bpmn:outgoing>Flow_17icp1s</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="UnlabeledSequenceFlowXORSplitting2" sourceRef="UnlabeledGateWaySplitting" targetRef="UnlabeledActivity2" />
+    <bpmn:sequenceFlow id="Flow_17icp1s" sourceRef="UnlabeledActivity2" targetRef="UnlabeledParallelGateWaySplitting" />
+    <bpmn:parallelGateway id="UnlabeledParallelGateWaySplitting">
+      <bpmn:incoming>Flow_17icp1s</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ot8jkg</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0d5mwrp</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="UnlabeledActivity3">
+      <bpmn:incoming>Flow_0ot8jkg</bpmn:incoming>
+      <bpmn:outgoing>Flow_0acc4ir</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0ot8jkg" sourceRef="UnlabeledParallelGateWaySplitting" targetRef="UnlabeledActivity3" />
+    <bpmn:task id="UnlabeledActivity4">
+      <bpmn:incoming>Flow_0d5mwrp</bpmn:incoming>
+      <bpmn:outgoing>Flow_06ag8ap</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0d5mwrp" sourceRef="UnlabeledParallelGateWaySplitting" targetRef="UnlabeledActivity4" />
+    <bpmn:boundaryEvent id="UnlabeledBoundaryEvent" attachedToRef="UnlabeledActivity1">
+      <bpmn:outgoing>Flow_1nkhfx1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0k8g0dc" />
+    </bpmn:boundaryEvent>
+    <bpmn:intermediateThrowEvent id="UnlabeledIntermediateEvent">
+      <bpmn:incoming>UnlabeledSequenceFlowXORSplitting1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pmsh0b</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_0pmsh0b" sourceRef="UnlabeledIntermediateEvent" targetRef="UnlabeledMergingXOR1" />
+    <bpmn:subProcess id="Activity_0vm987i" triggeredByEvent="true">
+      <bpmn:startEvent id="UnlabeledStartEvent2">
+        <bpmn:outgoing>Flow_093nkd0</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:task id="UnlabeledActivity5">
+        <bpmn:incoming>Flow_093nkd0</bpmn:incoming>
+        <bpmn:outgoing>Flow_0nupq4f</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:sequenceFlow id="Flow_093nkd0" sourceRef="UnlabeledStartEvent2" targetRef="UnlabeledActivity5" />
+      <bpmn:endEvent id="UnlabeledEndEvent2">
+        <bpmn:incoming>Flow_1ax24ps</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0nupq4f" sourceRef="UnlabeledActivity5" targetRef="UnlabeledGatewayInclusiveORSplitting" />
+      <bpmn:sequenceFlow id="UnlabeledSequenceFlowORSplitting2" sourceRef="UnlabeledGatewayInclusiveORSplitting" targetRef="UnlabeledActivity7" />
+      <bpmn:inclusiveGateway id="UnlabeledGatewayInclusiveORSplitting">
+        <bpmn:incoming>Flow_0nupq4f</bpmn:incoming>
+        <bpmn:outgoing>UnlabeledSequenceFlowORSplitting2</bpmn:outgoing>
+        <bpmn:outgoing>UnlabeledSequenceFlowORSplitting1</bpmn:outgoing>
+      </bpmn:inclusiveGateway>
+      <bpmn:task id="UnlabeledActivity6">
+        <bpmn:incoming>UnlabeledSequenceFlowORSplitting1</bpmn:incoming>
+        <bpmn:outgoing>Flow_1hzayi0</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:sequenceFlow id="UnlabeledSequenceFlowORSplitting1" sourceRef="UnlabeledGatewayInclusiveORSplitting" targetRef="UnlabeledActivity6" />
+      <bpmn:task id="UnlabeledActivity7">
+        <bpmn:incoming>UnlabeledSequenceFlowORSplitting2</bpmn:incoming>
+        <bpmn:outgoing>Flow_1yih4pz</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:sequenceFlow id="Flow_1yih4pz" sourceRef="UnlabeledActivity7" targetRef="UnlabeledGatewayInclusiveORSync" />
+      <bpmn:sequenceFlow id="Flow_1a2r2t0" sourceRef="UnlabeledGatewayInclusiveORSync" targetRef="UnlabeledEventBasedGateway" />
+      <bpmn:sequenceFlow id="Flow_1hzayi0" sourceRef="UnlabeledActivity6" targetRef="UnlabeledGatewayInclusiveORSync" />
+      <bpmn:inclusiveGateway id="UnlabeledGatewayInclusiveORSync">
+        <bpmn:incoming>Flow_1yih4pz</bpmn:incoming>
+        <bpmn:incoming>Flow_1hzayi0</bpmn:incoming>
+        <bpmn:outgoing>Flow_1a2r2t0</bpmn:outgoing>
+      </bpmn:inclusiveGateway>
+      <bpmn:eventBasedGateway id="UnlabeledEventBasedGateway">
+        <bpmn:incoming>Flow_1a2r2t0</bpmn:incoming>
+        <bpmn:outgoing>UnlabeledSequenceFlowEventSplitting1</bpmn:outgoing>
+        <bpmn:outgoing>UnlabeledSequenceFlowEventSplitting2</bpmn:outgoing>
+      </bpmn:eventBasedGateway>
+      <bpmn:intermediateCatchEvent id="UnlabeledMessageIntermediateEvent">
+        <bpmn:incoming>UnlabeledSequenceFlowEventSplitting1</bpmn:incoming>
+        <bpmn:outgoing>Flow_1fuxatg</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_1gdw9fh" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="UnlabeledSequenceFlowEventSplitting1" sourceRef="UnlabeledEventBasedGateway" targetRef="UnlabeledMessageIntermediateEvent" />
+      <bpmn:intermediateCatchEvent id="UnlabeledTimerIntermediateEvent">
+        <bpmn:incoming>UnlabeledSequenceFlowEventSplitting2</bpmn:incoming>
+        <bpmn:outgoing>Flow_0sbwuqi</bpmn:outgoing>
+        <bpmn:timerEventDefinition id="TimerEventDefinition_1cq1rbd" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="UnlabeledSequenceFlowEventSplitting2" sourceRef="UnlabeledEventBasedGateway" targetRef="UnlabeledTimerIntermediateEvent" />
+      <bpmn:exclusiveGateway id="UnlabeledMergingXOR2">
+        <bpmn:incoming>Flow_1fuxatg</bpmn:incoming>
+        <bpmn:incoming>Flow_0sbwuqi</bpmn:incoming>
+        <bpmn:outgoing>Flow_1ax24ps</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:sequenceFlow id="Flow_1fuxatg" sourceRef="UnlabeledMessageIntermediateEvent" targetRef="UnlabeledMergingXOR2" />
+      <bpmn:sequenceFlow id="Flow_1ax24ps" sourceRef="UnlabeledMergingXOR2" targetRef="UnlabeledEndEvent2" />
+      <bpmn:sequenceFlow id="Flow_0sbwuqi" sourceRef="UnlabeledTimerIntermediateEvent" targetRef="UnlabeledMergingXOR2" />
+    </bpmn:subProcess>
+    <bpmn:endEvent id="UnlabeledEndEventBoundary">
+      <bpmn:incoming>Flow_1nkhfx1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1nkhfx1" sourceRef="UnlabeledBoundaryEvent" targetRef="UnlabeledEndEventBoundary" />
+    <bpmn:parallelGateway id="UnlabeledParallelGateWaySync">
+      <bpmn:incoming>Flow_06ag8ap</bpmn:incoming>
+      <bpmn:incoming>Flow_0acc4ir</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ufcsx1</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_06ag8ap" sourceRef="UnlabeledActivity4" targetRef="UnlabeledParallelGateWaySync" />
+    <bpmn:sequenceFlow id="Flow_0acc4ir" sourceRef="UnlabeledActivity3" targetRef="UnlabeledParallelGateWaySync" />
+    <bpmn:exclusiveGateway id="UnlabeledMergingXOR1">
+      <bpmn:incoming>Flow_0pmsh0b</bpmn:incoming>
+      <bpmn:incoming>Flow_1ufcsx1</bpmn:incoming>
+      <bpmn:incoming>UnlabeledSequenceFlowXORSplittingDefault</bpmn:incoming>
+      <bpmn:outgoing>Flow_1y7clqj</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1y7clqj" sourceRef="UnlabeledMergingXOR1" targetRef="UnlabeledEndEvent1" />
+    <bpmn:sequenceFlow id="Flow_1ufcsx1" sourceRef="UnlabeledParallelGateWaySync" targetRef="UnlabeledMergingXOR1" />
+    <bpmn:sequenceFlow id="UnlabeledSequenceFlowXORSplittingDefault" sourceRef="UnlabeledGateWaySplitting" targetRef="UnlabeledMergingXOR1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="LabelingTest">
+      <bpmndi:BPMNEdge id="Flow_1ctz669_di" bpmnElement="Flow_1ctz669">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0c1053y_di" bpmnElement="Flow_0c1053y">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="425" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ex15c3_di" bpmnElement="UnlabeledSequenceFlowXORSplitting1">
+        <di:waypoint x="475" y="177" />
+        <di:waypoint x="552" y="177" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="473" y="159" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hkpdta_di" bpmnElement="UnlabeledSequenceFlowXORSplitting2">
+        <di:waypoint x="450" y="202" />
+        <di:waypoint x="450" y="330" />
+        <di:waypoint x="500" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17icp1s_di" bpmnElement="Flow_17icp1s">
+        <di:waypoint x="600" y="330" />
+        <di:waypoint x="675" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ot8jkg_di" bpmnElement="Flow_0ot8jkg">
+        <di:waypoint x="725" y="330" />
+        <di:waypoint x="800" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0d5mwrp_di" bpmnElement="Flow_0d5mwrp">
+        <di:waypoint x="700" y="355" />
+        <di:waypoint x="700" y="440" />
+        <di:waypoint x="800" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pmsh0b_di" bpmnElement="Flow_0pmsh0b">
+        <di:waypoint x="588" y="177" />
+        <di:waypoint x="1115" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nkhfx1_di" bpmnElement="Flow_1nkhfx1">
+        <di:waypoint x="310" y="235" />
+        <di:waypoint x="310" y="300" />
+        <di:waypoint x="382" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06ag8ap_di" bpmnElement="Flow_06ag8ap">
+        <di:waypoint x="900" y="440" />
+        <di:waypoint x="1010" y="440" />
+        <di:waypoint x="1010" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0acc4ir_di" bpmnElement="Flow_0acc4ir">
+        <di:waypoint x="900" y="330" />
+        <di:waypoint x="985" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1y7clqj_di" bpmnElement="Flow_1y7clqj">
+        <di:waypoint x="1165" y="177" />
+        <di:waypoint x="1232" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ufcsx1_di" bpmnElement="Flow_1ufcsx1">
+        <di:waypoint x="1035" y="330" />
+        <di:waypoint x="1140" y="330" />
+        <di:waypoint x="1140" y="202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tc1k2a_di" bpmnElement="UnlabeledSequenceFlowXORSplittingDefault">
+        <di:waypoint x="450" y="152" />
+        <di:waypoint x="450" y="60" />
+        <di:waypoint x="1140" y="60" />
+        <di:waypoint x="1140" y="152" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="751" y="42" width="88" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="UnlabeledStartEvent1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xikd2v_di" bpmnElement="UnlabeledActivity1">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1uzkwa9_di" bpmnElement="UnlabeledGateWaySplitting" isMarkerVisible="true">
+        <dc:Bounds x="425" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l9nwm4_di" bpmnElement="UnlabeledActivity2">
+        <dc:Bounds x="500" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_137c026_di" bpmnElement="UnlabeledParallelGateWaySplitting">
+        <dc:Bounds x="675" y="305" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fmlra8_di" bpmnElement="UnlabeledActivity3">
+        <dc:Bounds x="800" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0eeuz79_di" bpmnElement="UnlabeledActivity4">
+        <dc:Bounds x="800" y="400" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_10k0qu2_di" bpmnElement="UnlabeledIntermediateEvent">
+        <dc:Bounds x="552" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_199pxhl_di" bpmnElement="UnlabeledEndEventBoundary">
+        <dc:Bounds x="382" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0g9x18r_di" bpmnElement="UnlabeledParallelGateWaySync">
+        <dc:Bounds x="985" y="305" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_00on4fe_di" bpmnElement="UnlabeledEndEvent1">
+        <dc:Bounds x="1232" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_02b4udm_di" bpmnElement="UnlabeledMergingXOR1" isMarkerVisible="true">
+        <dc:Bounds x="1115" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ubf8lm_di" bpmnElement="Activity_0vm987i" isExpanded="true">
+        <dc:Bounds x="300" y="600" width="1150" height="290" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_093nkd0_di" bpmnElement="Flow_093nkd0">
+        <di:waypoint x="376" y="740" />
+        <di:waypoint x="430" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nupq4f_di" bpmnElement="Flow_0nupq4f">
+        <di:waypoint x="530" y="740" />
+        <di:waypoint x="575" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ivnt4s_di" bpmnElement="UnlabeledSequenceFlowORSplitting2">
+        <di:waypoint x="600" y="765" />
+        <di:waypoint x="600" y="800" />
+        <di:waypoint x="670" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_059r8xp_di" bpmnElement="UnlabeledSequenceFlowORSplitting1">
+        <di:waypoint x="600" y="715" />
+        <di:waypoint x="600" y="670" />
+        <di:waypoint x="670" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yih4pz_di" bpmnElement="Flow_1yih4pz">
+        <di:waypoint x="770" y="800" />
+        <di:waypoint x="880" y="800" />
+        <di:waypoint x="880" y="765" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a2r2t0_di" bpmnElement="Flow_1a2r2t0">
+        <di:waypoint x="905" y="740" />
+        <di:waypoint x="965" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hzayi0_di" bpmnElement="Flow_1hzayi0">
+        <di:waypoint x="770" y="670" />
+        <di:waypoint x="880" y="670" />
+        <di:waypoint x="880" y="715" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11vak6b_di" bpmnElement="UnlabeledSequenceFlowEventSplitting1">
+        <di:waypoint x="1015" y="740" />
+        <di:waypoint x="1082" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0y8johu_di" bpmnElement="UnlabeledSequenceFlowEventSplitting2">
+        <di:waypoint x="990" y="765" />
+        <di:waypoint x="990" y="850" />
+        <di:waypoint x="1082" y="850" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fuxatg_di" bpmnElement="Flow_1fuxatg">
+        <di:waypoint x="1118" y="740" />
+        <di:waypoint x="1215" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ax24ps_di" bpmnElement="Flow_1ax24ps">
+        <di:waypoint x="1265" y="740" />
+        <di:waypoint x="1352" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0sbwuqi_di" bpmnElement="Flow_0sbwuqi">
+        <di:waypoint x="1118" y="850" />
+        <di:waypoint x="1240" y="850" />
+        <di:waypoint x="1240" y="765" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0gsbgmq_di" bpmnElement="UnlabeledActivity5">
+        <dc:Bounds x="430" y="700" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xrx5mq_di" bpmnElement="UnlabeledStartEvent2">
+        <dc:Bounds x="340" y="722" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_00kdo45_di" bpmnElement="UnlabeledGatewayInclusiveORSplitting">
+        <dc:Bounds x="575" y="715" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1szu3p5_di" bpmnElement="UnlabeledActivity6">
+        <dc:Bounds x="670" y="630" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13lp8iz_di" bpmnElement="UnlabeledActivity7">
+        <dc:Bounds x="670" y="760" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0jt63e9_di" bpmnElement="UnlabeledGatewayInclusiveORSync">
+        <dc:Bounds x="855" y="715" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1p9r89a_di" bpmnElement="UnlabeledEndEvent2">
+        <dc:Bounds x="1352" y="722" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1vivp2g_di" bpmnElement="UnlabeledEventBasedGateway">
+        <dc:Bounds x="965" y="715" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1p96ybk_di" bpmnElement="UnlabeledMessageIntermediateEvent">
+        <dc:Bounds x="1082" y="722" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_06t8qfc_di" bpmnElement="UnlabeledTimerIntermediateEvent">
+        <dc:Bounds x="1082" y="832" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0iyxhxl_di" bpmnElement="UnlabeledMergingXOR2" isMarkerVisible="true">
+        <dc:Bounds x="1215" y="715" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_04npfhz_di" bpmnElement="UnlabeledBoundaryEvent">
+        <dc:Bounds x="292" y="199" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
