@@ -1,6 +1,8 @@
 package edu.kit.domain.qualityMetrics;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +28,8 @@ public class CompleteLabeling extends QualityCriteria {
         List<FlowElement> elementList = new ArrayList<>();
         elementList.addAll(process.getFlowElements());
         if (hasSubProcess(process)) {
-            elementList.addAll(getFlowElementsOfSubprocesses(process));
+            getFlowElementsOfSubprocesses(process, List.of(FlowElement.class));
+            elementList.addAll(getFlowElementsOfSubprocesses(process, List.of(FlowElement.class)));
         }
         double elementsCount = elementList.size();
         outliers = elementList.stream().filter(element -> element.getName() == null)

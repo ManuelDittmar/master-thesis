@@ -1,6 +1,5 @@
 package edu.kit;
 
-import edu.kit.domain.qualityMetrics.CompleteLabeling;
 import edu.kit.domain.qualityMetrics.TaskTypeDefinition;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.instance.Process;

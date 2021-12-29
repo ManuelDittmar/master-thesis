@@ -33,13 +33,15 @@ public abstract class QualityCriteria {
         return baseElement.getChildElementsByType(SubProcess.class).size() > 0;
     }
 
-    public Collection<FlowElement> getFlowElementsOfSubprocesses(BaseElement baseElement) {
+    public Collection<FlowElement> getFlowElementsOfSubprocesses(BaseElement baseElement, Collection<Class> classes) {
         Collection<FlowElement> flowElements = new ArrayList<>();
         baseElement.getChildElementsByType(SubProcess.class)
                 .forEach(subProcess -> {
-                    flowElements.addAll(subProcess.getChildElementsByType(FlowElement.class));
+                    for (Class aClass:classes) {
+                        flowElements.addAll(subProcess.getChildElementsByType(aClass));
+                    }
                     if (hasSubProcess(subProcess)){
-                        flowElements.addAll(getFlowElementsOfSubprocesses(subProcess));
+                        flowElements.addAll(getFlowElementsOfSubprocesses(subProcess,classes));
                     }
                 });
         return flowElements;
