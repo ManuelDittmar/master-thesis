@@ -38,7 +38,7 @@ public class DiagramAnalysisTest {
 
     @Test
     public void hasNameSubProcess() {
-        assertEquals("SubprocessTest",diagramAnalysis.getProcessAnalysisList().get(0).getProcessKey());
+        assertEquals("SubProcessesProcess",diagramAnalysis.getProcessAnalysisList().get(0).getProcessKey());
         assertEquals("SubProcesses",diagramAnalysis.getProcessAnalysisList().get(0).getProcessName());
     }
 
