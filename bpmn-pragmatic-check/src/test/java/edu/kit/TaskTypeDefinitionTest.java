@@ -36,6 +36,12 @@ public class TaskTypeDefinitionTest {
     }
 
     @Test
+    public void hasOutlierNonTypedBoundaryEvent() {
+        assertEquals(true, taskTypeDefinition.getOutliers().contains("NoneTypeBoundaryEvent"));
+        assertEquals(false, taskTypeDefinition.getOutliers().contains("MessageBoundaryEvent"));
+    }
+
+    @Test
     public void hasOutlierScriptTask() {
         assertEquals(true, taskTypeDefinition.getOutliers().contains("ScriptTask"));
     }
