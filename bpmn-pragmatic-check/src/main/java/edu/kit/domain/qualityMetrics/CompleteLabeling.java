@@ -21,8 +21,6 @@ public class CompleteLabeling extends QualityCriteria {
         calculate();
     }
 
-    // TODO does a subprocess need to be labeled?
-
     @Override
     public void calculate() {
         List<FlowElement> elementList = new ArrayList<>();

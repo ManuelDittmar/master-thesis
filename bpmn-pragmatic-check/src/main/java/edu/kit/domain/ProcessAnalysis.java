@@ -27,6 +27,7 @@ public class ProcessAnalysis {
         qualityCriteriaList.add(new EdgeCrossing(sequenceFlowDTOList));
         qualityCriteriaList.add(new EdgeOrthogonality(sequenceFlowDTOList));
         qualityCriteriaList.add(new TaskTypeDefinition(process));
+        qualityCriteriaList.add(new ImplementationVisibility(process));
         qualityCriteriaList.add(new BehavioralErrors(process));
     }
 

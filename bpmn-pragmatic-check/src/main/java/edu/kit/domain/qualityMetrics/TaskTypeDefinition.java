@@ -31,6 +31,8 @@ public class TaskTypeDefinition extends QualityCriteria {
                 .filter(element -> forbiddenTaskTypes.contains(element.getElementType().getTypeName()) || isEmptySubprocess(element) || isNonTypedBoundaryEvent(element) || hasLoopMarker(element))
                 .map(element -> element.getId())
                 .collect(Collectors.toList());
+        double outliersSize =outliers.size();
+        score = (flowElementsList.size() - outliersSize)/ flowElementsList.size();
     }
 
     public boolean isEmptySubprocess(BaseElement baseElement) {
