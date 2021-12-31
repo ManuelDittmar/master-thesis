@@ -6,7 +6,7 @@ public class Outlier {
     private String id;
     private Set reasons;
 
-    public Outlier(String id, Set<String> reasons) {
+    public Outlier(String id, Set reasons) {
         this.id = id;
         this.reasons = reasons;
     }

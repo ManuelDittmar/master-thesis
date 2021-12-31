@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_09ymsj6" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="Process_1po9vy0" isExecutable="true">
+    <bpmn:startEvent id="Normal1StartEvent" name="Normal1">
+      <bpmn:outgoing>Flow_1h69nsm</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="ImplicitSplitTask" name="ImplicitSplit">
+      <bpmn:incoming>Flow_1h69nsm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0la23hr</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0hv0qsc</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1h69nsm" sourceRef="Normal1StartEvent" targetRef="ImplicitSplitTask" />
+    <bpmn:sequenceFlow id="Flow_0la23hr" sourceRef="ImplicitSplitTask" targetRef="NormalTask" />
+    <bpmn:task id="BoundaryEventTask" name="BoundaryEvent">
+      <bpmn:incoming>Flow_0hv0qsc</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ygeal2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0hv0qsc" sourceRef="ImplicitSplitTask" targetRef="BoundaryEventTask" />
+    <bpmn:sequenceFlow id="Flow_0ygeal2" sourceRef="BoundaryEventTask" targetRef="ImplicitXORTask" />
+    <bpmn:sequenceFlow id="Flow_0xkbbwk" sourceRef="NormalTask" targetRef="ImplicitXORTask" />
+    <bpmn:intermediateThrowEvent id="ImplicitXOREvent" name="ImplicitXOR">
+      <bpmn:incoming>Flow_0wctwn9</bpmn:incoming>
+      <bpmn:incoming>Flow_1cgn85k</bpmn:incoming>
+      <bpmn:outgoing>Flow_1b5e4nc</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_0wctwn9" sourceRef="ImplicitXORTask" targetRef="ImplicitXOREvent" />
+    <bpmn:startEvent id="Normal2StartEvent" name="Normal2">
+      <bpmn:outgoing>Flow_1cgn85k</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1cgn85k" sourceRef="Normal2StartEvent" targetRef="ImplicitXOREvent" />
+    <bpmn:intermediateThrowEvent id="ImplicitSplitEvent" name="ImplicitSplit">
+      <bpmn:incoming>Flow_1b5e4nc</bpmn:incoming>
+      <bpmn:outgoing>Flow_1epyper</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0if2bvp</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_1b5e4nc" sourceRef="ImplicitXOREvent" targetRef="ImplicitSplitEvent" />
+    <bpmn:task id="Normal3Task" name="Normal3">
+      <bpmn:incoming>Flow_1epyper</bpmn:incoming>
+      <bpmn:outgoing>Flow_06dzkxh</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1epyper" sourceRef="ImplicitSplitEvent" targetRef="Normal3Task" />
+    <bpmn:sequenceFlow id="Flow_0if2bvp" sourceRef="ImplicitSplitEvent" targetRef="Normal2Task" />
+    <bpmn:subProcess id="ImplicitSubProcess" name="Implicit">
+      <bpmn:incoming>Flow_06dzkxh</bpmn:incoming>
+      <bpmn:incoming>Flow_0e7dok5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0t8unbh</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0cmcuts</bpmn:outgoing>
+      <bpmn:startEvent id="ImplicitSplitStartEvent" name="ImplicitSplit">
+        <bpmn:outgoing>Flow_0lsosxr</bpmn:outgoing>
+        <bpmn:outgoing>Flow_14eutjw</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_0lsosxr" sourceRef="ImplicitSplitStartEvent" targetRef="SubNormalTask" />
+      <bpmn:sequenceFlow id="Flow_14eutjw" sourceRef="ImplicitSplitStartEvent" targetRef="SubNormal2Task" />
+      <bpmn:endEvent id="ImplicitXOREndEvent" name="ImplicitXOR">
+        <bpmn:incoming>Flow_1y8fr2j</bpmn:incoming>
+        <bpmn:incoming>Flow_1iv114z</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_1y8fr2j" sourceRef="SubNormalTask" targetRef="ImplicitXOREndEvent" />
+      <bpmn:sequenceFlow id="Flow_1iv114z" sourceRef="SubNormal2Task" targetRef="ImplicitXOREndEvent" />
+      <bpmn:businessRuleTask id="SubNormalTask" name="SubNormal">
+        <bpmn:incoming>Flow_0lsosxr</bpmn:incoming>
+        <bpmn:outgoing>Flow_1y8fr2j</bpmn:outgoing>
+      </bpmn:businessRuleTask>
+      <bpmn:scriptTask id="SubNormal2Task" name="SubNormal2">
+        <bpmn:incoming>Flow_14eutjw</bpmn:incoming>
+        <bpmn:outgoing>Flow_1iv114z</bpmn:outgoing>
+      </bpmn:scriptTask>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_06dzkxh" sourceRef="Normal3Task" targetRef="ImplicitSubProcess" />
+    <bpmn:sequenceFlow id="Flow_0e7dok5" sourceRef="Normal2Task" targetRef="ImplicitSubProcess" />
+    <bpmn:endEvent id="NormalEndEvent" name="Normal">
+      <bpmn:incoming>Flow_0t8unbh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0t8unbh" sourceRef="ImplicitSubProcess" targetRef="NormalEndEvent" />
+    <bpmn:endEvent id="Normal2EndEvent" name="Normal2">
+      <bpmn:incoming>Flow_0cmcuts</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0cmcuts" sourceRef="ImplicitSubProcess" targetRef="Normal2EndEvent" />
+    <bpmn:boundaryEvent id="Event_0tqym8x" attachedToRef="ImplicitSubProcess">
+      <bpmn:outgoing>Flow_03yq3iw</bpmn:outgoing>
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="Boundary2EndEvent" name="Boundary2">
+      <bpmn:incoming>Flow_03yq3iw</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_03yq3iw" sourceRef="Event_0tqym8x" targetRef="Boundary2EndEvent" />
+    <bpmn:boundaryEvent id="Event_1jxx8wv" attachedToRef="BoundaryEventTask">
+      <bpmn:outgoing>Flow_0mdk2a4</bpmn:outgoing>
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="BoundaryEndEvent" name="Boundary">
+      <bpmn:incoming>Flow_0mdk2a4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0mdk2a4" sourceRef="Event_1jxx8wv" targetRef="BoundaryEndEvent" />
+    <bpmn:serviceTask id="Normal2Task" name="Normal2">
+      <bpmn:incoming>Flow_0if2bvp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0e7dok5</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:callActivity id="NormalTask" name="Normal">
+      <bpmn:incoming>Flow_0la23hr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xkbbwk</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:sendTask id="ImplicitXORTask" name="ImplicitXOR">
+      <bpmn:incoming>Flow_0ygeal2</bpmn:incoming>
+      <bpmn:incoming>Flow_0xkbbwk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wctwn9</bpmn:outgoing>
+    </bpmn:sendTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1po9vy0">
+      <bpmndi:BPMNEdge id="Flow_1h69nsm_di" bpmnElement="Flow_1h69nsm">
+        <di:waypoint x="215" y="237" />
+        <di:waypoint x="270" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0la23hr_di" bpmnElement="Flow_0la23hr">
+        <di:waypoint x="370" y="237" />
+        <di:waypoint x="430" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hv0qsc_di" bpmnElement="Flow_0hv0qsc">
+        <di:waypoint x="370" y="250" />
+        <di:waypoint x="400" y="250" />
+        <di:waypoint x="400" y="370" />
+        <di:waypoint x="430" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ygeal2_di" bpmnElement="Flow_0ygeal2">
+        <di:waypoint x="530" y="370" />
+        <di:waypoint x="585" y="370" />
+        <di:waypoint x="585" y="260" />
+        <di:waypoint x="640" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xkbbwk_di" bpmnElement="Flow_0xkbbwk">
+        <di:waypoint x="530" y="237" />
+        <di:waypoint x="640" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wctwn9_di" bpmnElement="Flow_0wctwn9">
+        <di:waypoint x="740" y="237" />
+        <di:waypoint x="822" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cgn85k_di" bpmnElement="Flow_1cgn85k">
+        <di:waypoint x="708" y="120" />
+        <di:waypoint x="765" y="120" />
+        <di:waypoint x="765" y="220" />
+        <di:waypoint x="834" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1b5e4nc_di" bpmnElement="Flow_1b5e4nc">
+        <di:waypoint x="858" y="237" />
+        <di:waypoint x="942" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1epyper_di" bpmnElement="Flow_1epyper">
+        <di:waypoint x="978" y="237" />
+        <di:waypoint x="1070" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0if2bvp_di" bpmnElement="Flow_0if2bvp">
+        <di:waypoint x="960" y="255" />
+        <di:waypoint x="960" y="350" />
+        <di:waypoint x="1070" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06dzkxh_di" bpmnElement="Flow_06dzkxh">
+        <di:waypoint x="1170" y="237" />
+        <di:waypoint x="1290" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0e7dok5_di" bpmnElement="Flow_0e7dok5">
+        <di:waypoint x="1170" y="350" />
+        <di:waypoint x="1290" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0t8unbh_di" bpmnElement="Flow_0t8unbh">
+        <di:waypoint x="1640" y="280" />
+        <di:waypoint x="1762" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cmcuts_di" bpmnElement="Flow_0cmcuts">
+        <di:waypoint x="1640" y="390" />
+        <di:waypoint x="1762" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03yq3iw_di" bpmnElement="Flow_03yq3iw">
+        <di:waypoint x="1450" y="162" />
+        <di:waypoint x="1450" y="100" />
+        <di:waypoint x="1522" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mdk2a4_di" bpmnElement="Flow_0mdk2a4">
+        <di:waypoint x="490" y="428" />
+        <di:waypoint x="490" y="490" />
+        <di:waypoint x="562" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="Normal1StartEvent">
+        <dc:Bounds x="179" y="219" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="176" y="262" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ur8nnn_di" bpmnElement="ImplicitSplitTask">
+        <dc:Bounds x="270" y="197" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16btck1_di" bpmnElement="BoundaryEventTask">
+        <dc:Bounds x="430" y="330" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0f8nkbq_di" bpmnElement="ImplicitXOREvent">
+        <dc:Bounds x="822" y="219" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="811" y="262" width="59" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03iwcb5_di" bpmnElement="Normal2StartEvent">
+        <dc:Bounds x="672" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="669" y="145" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jhp1ta_di" bpmnElement="ImplicitSplitEvent">
+        <dc:Bounds x="942" y="219" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="932" y="189" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vyg0yn_di" bpmnElement="Normal3Task">
+        <dc:Bounds x="1070" y="197" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1xoi0zt_di" bpmnElement="NormalEndEvent">
+        <dc:Bounds x="1762" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1762" y="305" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0yermyr_di" bpmnElement="Normal2EndEvent">
+        <dc:Bounds x="1762" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1759" y="415" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ed3gdd_di" bpmnElement="Boundary2EndEvent">
+        <dc:Bounds x="1522" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1513" y="125" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_05qtree_di" bpmnElement="BoundaryEndEvent">
+        <dc:Bounds x="562" y="472" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="556" y="515" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0s3uqx3_di" bpmnElement="Normal2Task">
+        <dc:Bounds x="1070" y="310" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ri8ngo_di" bpmnElement="NormalTask">
+        <dc:Bounds x="430" y="197" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xkb7rj_di" bpmnElement="ImplicitXORTask">
+        <dc:Bounds x="640" y="197" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1onda8k_di" bpmnElement="ImplicitSubProcess" isExpanded="true">
+        <dc:Bounds x="1290" y="180" width="350" height="310" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0lsosxr_di" bpmnElement="Flow_0lsosxr">
+        <di:waypoint x="1366" y="280" />
+        <di:waypoint x="1420" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14eutjw_di" bpmnElement="Flow_14eutjw">
+        <di:waypoint x="1366" y="280" />
+        <di:waypoint x="1390" y="280" />
+        <di:waypoint x="1390" y="390" />
+        <di:waypoint x="1420" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1y8fr2j_di" bpmnElement="Flow_1y8fr2j">
+        <di:waypoint x="1520" y="280" />
+        <di:waypoint x="1582" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iv114z_di" bpmnElement="Flow_1iv114z">
+        <di:waypoint x="1520" y="390" />
+        <di:waypoint x="1551" y="390" />
+        <di:waypoint x="1551" y="280" />
+        <di:waypoint x="1582" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0yhlb3x_di" bpmnElement="ImplicitSplitStartEvent">
+        <dc:Bounds x="1330" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1320" y="305" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0mud8pb_di" bpmnElement="ImplicitXOREndEvent">
+        <dc:Bounds x="1582" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1571" y="305" width="59" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_077nrbv_di" bpmnElement="SubNormalTask">
+        <dc:Bounds x="1420" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0i2lle2_di" bpmnElement="SubNormal2Task">
+        <dc:Bounds x="1420" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_17lljpy_di" bpmnElement="Event_1jxx8wv">
+        <dc:Bounds x="472" y="392" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_16j87rf_di" bpmnElement="Event_0tqym8x">
+        <dc:Bounds x="1432" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

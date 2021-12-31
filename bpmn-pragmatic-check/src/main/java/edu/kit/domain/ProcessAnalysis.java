@@ -28,6 +28,7 @@ public class ProcessAnalysis {
         qualityCriteriaList.add(new EdgeOrthogonality(sequenceFlowDTOList));
         qualityCriteriaList.add(new TaskTypeDefinition(process));
         qualityCriteriaList.add(new ImplementationVisibility(process));
+        qualityCriteriaList.add(new Explicitness(process));
         qualityCriteriaList.add(new BehavioralErrors(process));
     }
 

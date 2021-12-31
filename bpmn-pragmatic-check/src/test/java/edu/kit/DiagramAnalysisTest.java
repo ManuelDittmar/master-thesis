@@ -32,7 +32,7 @@ public class DiagramAnalysisTest {
     }
 
     @Test
-    public void hasOnlyOneExecutableProcess() throws FileNotFoundException {
+    public void hasOnlyOneExecutableProcess() {
         assertEquals(1,diagramAnalysis.getExecutableProcesses());
     }
 

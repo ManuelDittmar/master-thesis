@@ -13,6 +13,7 @@ public class TaskTypeDefinition extends QualityCriteria {
     List<String> forbiddenTaskTypes;
 
     // TODO allow to modify allowedSymbols
+    // TODO Check Process Execution Conformance
     public TaskTypeDefinition(Process process) {
         criteriaID = "Task Type Definition";
         this.process = process;
