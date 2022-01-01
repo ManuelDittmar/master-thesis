@@ -21,10 +21,7 @@ public class Explicitness extends QualityCriteria{
     }
     @Override
     public void calculate() {
-        List<FlowElement> flowElements = new ArrayList<>(process.getFlowElements());
-        if(hasSubProcess(process)) {
-            flowElements.addAll(getFlowElementsOfSubprocesses(process,List.of(FlowElement.class)));
-        }
+        List<FlowElement> flowElements = getAllFlowElements(process);
 
         List<FlowNode> flowNodes = flowElements.stream()
                 .filter(flowElement -> !flowElement.getElementType().getInstanceType().equals(SequenceFlow.class))
