@@ -3,6 +3,7 @@ package edu.kit.domain.qualityMetrics;
 import org.camunda.bpm.model.bpmn.instance.BaseElement;
 import org.camunda.bpm.model.bpmn.instance.FlowElement;
 import org.camunda.bpm.model.bpmn.instance.Gateway;
+import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.SubProcess;
 
 import java.util.ArrayList;
@@ -54,6 +55,14 @@ public abstract class QualityCriteria {
         } else {
             return false;
         }
+    }
+
+    public List<FlowElement> getAllFlowElements(Process process) {
+        List<FlowElement> flowElements = new ArrayList<>(process.getFlowElements());
+        if(hasSubProcess(process)) {
+            flowElements.addAll(getFlowElementsOfSubprocesses(process,List.of(FlowElement.class)));
+        }
+        return flowElements;
     }
 
 }
