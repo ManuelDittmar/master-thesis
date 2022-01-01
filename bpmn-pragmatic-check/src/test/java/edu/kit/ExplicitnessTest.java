@@ -2,7 +2,6 @@ package edu.kit;
 
 import edu.kit.domain.qualityMetrics.Explicitness;
 import edu.kit.domain.qualityMetrics.Outlier;
-import edu.kit.domain.qualityMetrics.TaskTypeDefinition;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.xml.ModelInstance;
