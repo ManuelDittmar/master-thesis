@@ -30,6 +30,7 @@ public class ProcessAnalysis {
         qualityCriteriaList.add(new ImplementationVisibility(process));
         qualityCriteriaList.add(new Explicitness(process));
         qualityCriteriaList.add(new BehavioralErrors(process));
+        qualityCriteriaList.add(new HumanTaskAssignment(process));
     }
 
     public String getProcessKey() {

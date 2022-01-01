@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_15ye8m7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="HumanTaskAssignment" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0qefcqn</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0qefcqn" sourceRef="StartEvent_1" targetRef="WithoutAssignmentTask" />
+    <bpmn:userTask id="WithoutAssignmentTask" name="Without Assignment">
+      <bpmn:incoming>Flow_0qefcqn</bpmn:incoming>
+      <bpmn:outgoing>Flow_02hrwna</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_02hrwna" sourceRef="WithoutAssignmentTask" targetRef="WithAssigneeTask" />
+    <bpmn:userTask id="WithAssigneeTask" name="With Assignee" camunda:assignee="assignee">
+      <bpmn:incoming>Flow_02hrwna</bpmn:incoming>
+      <bpmn:outgoing>Flow_1m8cw0w</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1m8cw0w" sourceRef="WithAssigneeTask" targetRef="CandidateUsersTask" />
+    <bpmn:userTask id="CandidateUsersTask" name="Candidate Users" camunda:candidateUsers="candidateUsers">
+      <bpmn:incoming>Flow_1m8cw0w</bpmn:incoming>
+      <bpmn:outgoing>Flow_1o9siz1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1o9siz1" sourceRef="CandidateUsersTask" targetRef="CandidateGroupTask" />
+    <bpmn:userTask id="CandidateGroupTask" name="Candidate Group" camunda:candidateGroups="candidateGroup">
+      <bpmn:incoming>Flow_1o9siz1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wx02ap</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:subProcess id="Activity_153jqj9">
+      <bpmn:incoming>Flow_1wx02ap</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tv3c9k</bpmn:outgoing>
+      <bpmn:startEvent id="Event_06fnfv1">
+        <bpmn:outgoing>Flow_01aynpu</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_01aynpu" sourceRef="Event_06fnfv1" targetRef="WithoutAssignmentSubTask" />
+      <bpmn:userTask id="WithoutAssignmentSubTask" name="Without Assignment Sub">
+        <bpmn:incoming>Flow_01aynpu</bpmn:incoming>
+        <bpmn:outgoing>Flow_1bqlbkg</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:endEvent id="Event_0i7yno1">
+        <bpmn:incoming>Flow_1bqlbkg</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_1bqlbkg" sourceRef="WithoutAssignmentSubTask" targetRef="Event_0i7yno1" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_1wx02ap" sourceRef="CandidateGroupTask" targetRef="Activity_153jqj9" />
+    <bpmn:endEvent id="Event_0n4cjc4">
+      <bpmn:incoming>Flow_0tv3c9k</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0tv3c9k" sourceRef="Activity_153jqj9" targetRef="Event_0n4cjc4" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="HumanTaskAssignment">
+      <bpmndi:BPMNEdge id="Flow_0qefcqn_di" bpmnElement="Flow_0qefcqn">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02hrwna_di" bpmnElement="Flow_02hrwna">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="430" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1m8cw0w_di" bpmnElement="Flow_1m8cw0w">
+        <di:waypoint x="530" y="177" />
+        <di:waypoint x="590" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1o9siz1_di" bpmnElement="Flow_1o9siz1">
+        <di:waypoint x="690" y="177" />
+        <di:waypoint x="750" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wx02ap_di" bpmnElement="Flow_1wx02ap">
+        <di:waypoint x="850" y="177" />
+        <di:waypoint x="910" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tv3c9k_di" bpmnElement="Flow_0tv3c9k">
+        <di:waypoint x="1260" y="177" />
+        <di:waypoint x="1322" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_149lh2s_di" bpmnElement="WithoutAssignmentTask">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_144a1oa_di" bpmnElement="WithAssigneeTask">
+        <dc:Bounds x="430" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jyrzhj_di" bpmnElement="CandidateUsersTask">
+        <dc:Bounds x="590" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0kss0bo_di" bpmnElement="CandidateGroupTask">
+        <dc:Bounds x="750" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0n4cjc4_di" bpmnElement="Event_0n4cjc4">
+        <dc:Bounds x="1322" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_153jqj9_di" bpmnElement="Activity_153jqj9" isExpanded="true">
+        <dc:Bounds x="910" y="77" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_01aynpu_di" bpmnElement="Flow_01aynpu">
+        <di:waypoint x="986" y="177" />
+        <di:waypoint x="1040" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bqlbkg_di" bpmnElement="Flow_1bqlbkg">
+        <di:waypoint x="1140" y="177" />
+        <di:waypoint x="1202" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_06fnfv1_di" bpmnElement="Event_06fnfv1">
+        <dc:Bounds x="950" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mid95v_di" bpmnElement="WithoutAssignmentSubTask">
+        <dc:Bounds x="1040" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0i7yno1_di" bpmnElement="Event_0i7yno1">
+        <dc:Bounds x="1202" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
