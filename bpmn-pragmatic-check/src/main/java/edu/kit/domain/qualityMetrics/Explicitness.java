@@ -19,10 +19,9 @@ public class Explicitness extends QualityCriteria{
     public void calculate() {
         List<FlowElement> flowElements = getAllFlowElements(process);
 
-        // TODO Ignore Gateways!
-
         List<FlowNode> flowNodes = flowElements.stream()
                 .filter(flowElement -> !flowElement.getElementType().getInstanceType().equals(SequenceFlow.class))
+                .filter(flowElement -> !flowElement.getElementType().getBaseType().getInstanceType().equals(Gateway.class))
                 .map(flowElement -> (FlowNode) flowElement)
                 .collect(Collectors.toList());
 
