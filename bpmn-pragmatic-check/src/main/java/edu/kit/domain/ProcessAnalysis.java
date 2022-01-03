@@ -11,21 +11,19 @@ public class ProcessAnalysis {
     private final String processKey;
     private final String processName;
     private final boolean isExecutable;
-    private final List<SequenceFlowDTO> sequenceFlowDTOList;
     private final List<QualityCriteria> qualityCriteriaList;
 
     // TODO make a configuration for addting the criteria
-    public ProcessAnalysis(Process process, List<SequenceFlowDTO> sequenceFlowDTOList) {
+    public ProcessAnalysis(Process process) {
         this.processName = process.getName();
         this.processKey = process.getId();
         this.isExecutable = process.isExecutable();
-        this.sequenceFlowDTOList = sequenceFlowDTOList;
         this.qualityCriteriaList = new ArrayList<>();
         // Here you can add the criterias you want to include in your process analysis
-        qualityCriteriaList.add(new RightwardFlowDirection(sequenceFlowDTOList));
+        qualityCriteriaList.add(new RightwardFlowDirection(process));
         qualityCriteriaList.add(new CompleteLabeling(process));
-        qualityCriteriaList.add(new EdgeCrossing(sequenceFlowDTOList));
-        qualityCriteriaList.add(new EdgeOrthogonality(sequenceFlowDTOList));
+        qualityCriteriaList.add(new EdgeCrossing(process));
+        qualityCriteriaList.add(new EdgeOrthogonality(process));
         qualityCriteriaList.add(new TaskTypeDefinition(process));
         qualityCriteriaList.add(new ImplementationVisibility(process));
         qualityCriteriaList.add(new Explicitness(process));

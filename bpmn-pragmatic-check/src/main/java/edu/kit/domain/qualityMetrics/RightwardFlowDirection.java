@@ -2,6 +2,7 @@ package edu.kit.domain.qualityMetrics;
 
 import edu.kit.domain.FlowDirection;
 import edu.kit.domain.SequenceFlowDTO;
+import org.camunda.bpm.model.bpmn.instance.Process;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +11,10 @@ import java.util.List;
 
 // TODO: just upwards
 
-public class RightwardFlowDirection extends QualityCriteria {
+public class RightwardFlowDirection extends FlowQualityCriteria {
 
-    private final List<SequenceFlowDTO> sequenceFlowDTOList;
-
-    public RightwardFlowDirection(List<SequenceFlowDTO> sequenceFlowDTOList) {
-        criteriaID = "Rightward Flow Direction";
-        this.sequenceFlowDTOList = sequenceFlowDTOList;
+    public RightwardFlowDirection(Process process) {
+        super(process);
         calculate();
     }
 

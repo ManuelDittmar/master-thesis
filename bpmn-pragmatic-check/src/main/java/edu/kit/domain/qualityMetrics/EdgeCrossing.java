@@ -1,20 +1,17 @@
 package edu.kit.domain.qualityMetrics;
 
 import edu.kit.domain.SequenceFlowDTO;
+import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
-import java.util.List;
 
-public class EdgeCrossing extends QualityCriteria{
+public class EdgeCrossing extends FlowQualityCriteria{
 
-    private final List<SequenceFlowDTO> sequenceFlowDTOList;
-
-    public EdgeCrossing(List<SequenceFlowDTO> sequenceFlowDTOList){
-        criteriaID = "Edge Crossing";
-        this.sequenceFlowDTOList = sequenceFlowDTOList;
+    public EdgeCrossing(Process process){
+        super(process);
         this.outliers = new ArrayList<>();
         calculate();
     }

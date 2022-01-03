@@ -6,15 +6,11 @@ import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Flow;
 
 public class TransactionBoundaries extends QualityCriteria{
 
-    private final Process process;
-
     public TransactionBoundaries(Process process){
-        criteriaID = "Transaction Boundaries";
-        this.process = process;
+        super(process);
         this.outliers = new ArrayList<Outlier>();
         calculate();
     }
@@ -53,8 +49,9 @@ public class TransactionBoundaries extends QualityCriteria{
         });
     }
 
+    // TODO Event based gateway
     public boolean isNaturalWaitState(Class<? extends ModelElementInstance> instanceType) {
-        return instanceType.equals(UserTask.class) || instanceType.equals(IntermediateCatchEvent.class) || instanceType.equals(ReceiveTask.class) || instanceType.equals(EventBasedGateway.class)
+        return instanceType.equals(UserTask.class) || instanceType.equals(IntermediateCatchEvent.class) || instanceType.equals(ReceiveTask.class);
     }
 
     public boolean hasCorrectBoundaries(StartEvent startEvent){

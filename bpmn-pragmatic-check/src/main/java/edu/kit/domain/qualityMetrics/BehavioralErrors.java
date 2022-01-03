@@ -4,15 +4,14 @@ import org.camunda.bpm.model.bpmn.instance.FlowElement;
 import org.camunda.bpm.model.bpmn.instance.FlowNode;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.StartEvent;
+import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
 
 import java.util.ArrayList;
 
 public class BehavioralErrors extends QualityCriteria{
 
-    Process process;
-
     public BehavioralErrors(Process process) {
-        criteriaID = "Behavioral Errors";
+        super(process);criteriaID = "Behavioral Errors";
         this.process = process;
         outliers = new ArrayList<String>();
         calculate();
@@ -24,6 +23,7 @@ public class BehavioralErrors extends QualityCriteria{
     public void calculate() {
         for (FlowElement element: process.getChildElementsByType(StartEvent.class)) {
             StartEvent startEvent = (StartEvent) element;
+            process.getModelInstance().getModelElementsByType(BpmnEdge.class).forEach(edge -> System.out.println(edge.getId()));
             for (FlowNode node :startEvent.getSucceedingNodes().list()) {
             }
         }

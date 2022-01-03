@@ -9,11 +9,8 @@ import org.camunda.bpm.model.bpmn.instance.Process;
 
 public class CompleteLabeling extends QualityCriteria {
 
-    Process process;
-
     public CompleteLabeling(Process process) {
-        criteriaID = "Complete Labeling";
-        this.process = process;
+        super(process);
         outliers = new ArrayList<String>();
         calculate();
     }

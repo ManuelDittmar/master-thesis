@@ -9,14 +9,12 @@ import java.util.stream.Collectors;
 
 public class TaskTypeDefinition extends QualityCriteria {
 
-    Process process;
     List<String> forbiddenTaskTypes;
 
     // TODO allow to modify allowedSymbols
     // TODO Check Process Execution Conformance
     public TaskTypeDefinition(Process process) {
-        criteriaID = "Task Type Definition";
-        this.process = process;
+        super(process);
         outliers = new ArrayList<String>();
         forbiddenTaskTypes = List.of("manualTask", "task", "scriptTask");
         calculate();

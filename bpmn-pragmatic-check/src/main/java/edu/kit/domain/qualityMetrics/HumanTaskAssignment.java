@@ -9,11 +9,8 @@ import java.util.stream.Collectors;
 
 public class HumanTaskAssignment extends QualityCriteria{
 
-    private Process process;
-
     public HumanTaskAssignment(Process process) {
-        criteriaID = "Human Task Assignment";
-        this.process = process;
+        super(process);
         outliers = new ArrayList();
         calculate();
     }

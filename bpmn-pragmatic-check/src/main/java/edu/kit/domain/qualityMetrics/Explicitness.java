@@ -11,17 +11,16 @@ import java.util.stream.Collectors;
 
 public class Explicitness extends QualityCriteria{
 
-    private Process process;
-
     public Explicitness(Process process) {
-        criteriaID = "Explicitness";
-        this.process = process;
+        super(process);
         outliers = new ArrayList();
         calculate();
     }
     @Override
     public void calculate() {
         List<FlowElement> flowElements = getAllFlowElements(process);
+
+        // TODO Ignore Gateways!
 
         List<FlowNode> flowNodes = flowElements.stream()
                 .filter(flowElement -> !flowElement.getElementType().getInstanceType().equals(SequenceFlow.class))

@@ -14,11 +14,8 @@ import java.util.Set;
 
 public class ImplementationVisibility extends QualityCriteria {
 
-    private final Process process;
-
     public ImplementationVisibility(Process process){
-        criteriaID = "Implementation Visibility";
-        this.process = process;
+        super(process);
         this.outliers = new ArrayList<Outlier>();
         calculate();
     }

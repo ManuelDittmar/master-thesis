@@ -13,8 +13,14 @@ import java.util.List;
 public abstract class QualityCriteria {
     
     String criteriaID;
+    Process process;
     double score;
     List outliers;
+
+    public QualityCriteria(Process process){
+        criteriaID = this.getClass().getSimpleName();
+        this.process = process;
+    }
 
     public abstract void calculate();
 

@@ -1,19 +1,17 @@
 package edu.kit.domain.qualityMetrics;
 
 import edu.kit.domain.SequenceFlowDTO;
+import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
-public class EdgeOrthogonality extends QualityCriteria{
+public class EdgeOrthogonality extends FlowQualityCriteria{
 
-    private final List<SequenceFlowDTO> sequenceFlowDTOList;
 
-    public EdgeOrthogonality(List<SequenceFlowDTO> sequenceFlowDTOList){
-        criteriaID = "Edge Orthogonality";
-        this.sequenceFlowDTOList = sequenceFlowDTOList;
+    public EdgeOrthogonality(Process process){
+        super(process);
         this.outliers = new ArrayList<>();
         calculate();
     }

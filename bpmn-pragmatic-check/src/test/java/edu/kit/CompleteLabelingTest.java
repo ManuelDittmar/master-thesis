@@ -31,7 +31,7 @@ public class CompleteLabelingTest {
 
     @Test
     public void hasCriteriaID() {
-        assertEquals("Complete Labeling",completeLabeling.getCriteriaID());
+        assertEquals("CompleteLabeling",completeLabeling.getCriteriaID());
     }
 
     @Test
