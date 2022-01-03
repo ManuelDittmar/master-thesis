@@ -12,7 +12,6 @@ public class EdgeOrthogonality extends FlowQualityCriteria{
 
     public EdgeOrthogonality(Process process){
         super(process);
-        this.outliers = new ArrayList<>();
         calculate();
     }
     @Override

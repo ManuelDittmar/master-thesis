@@ -12,7 +12,6 @@ public class EdgeCrossing extends FlowQualityCriteria{
 
     public EdgeCrossing(Process process){
         super(process);
-        this.outliers = new ArrayList<>();
         calculate();
     }
 

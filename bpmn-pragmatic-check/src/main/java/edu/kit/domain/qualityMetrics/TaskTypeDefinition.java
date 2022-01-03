@@ -15,7 +15,6 @@ public class TaskTypeDefinition extends QualityCriteria {
     // TODO Check Process Execution Conformance
     public TaskTypeDefinition(Process process) {
         super(process);
-        outliers = new ArrayList<String>();
         forbiddenTaskTypes = List.of("manualTask", "task", "scriptTask");
         calculate();
     }

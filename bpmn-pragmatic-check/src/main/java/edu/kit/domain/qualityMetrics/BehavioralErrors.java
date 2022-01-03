@@ -6,14 +6,11 @@ import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.StartEvent;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
 
-import java.util.ArrayList;
 
 public class BehavioralErrors extends QualityCriteria{
 
     public BehavioralErrors(Process process) {
-        super(process);criteriaID = "Behavioral Errors";
-        this.process = process;
-        outliers = new ArrayList<String>();
+        super(process);
         calculate();
     }
 

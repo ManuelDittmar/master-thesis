@@ -27,8 +27,7 @@ public abstract class FlowQualityCriteria extends QualityCriteria{
             String sequenceFlowId = bpmnEdge.getBpmnElement().getId();
             sequenceFlowsCoordinates.put(sequenceFlowId,bpmnEdge.getWaypoints());
         }
-        // Get Sequence Flows to get coordinates
-        List<FlowElement> flowElements = process.getFlowElements().stream()
+        List<FlowElement> flowElements = getAllFlowElements(process).stream()
                 .filter(flowElement -> flowElement.getClass().equals(SequenceFlowImpl.class))
                 .collect(Collectors.toList());
         // Safe all Sequence Flows

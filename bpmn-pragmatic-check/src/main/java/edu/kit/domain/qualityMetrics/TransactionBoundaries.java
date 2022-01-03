@@ -11,7 +11,6 @@ public class TransactionBoundaries extends QualityCriteria{
 
     public TransactionBoundaries(Process process){
         super(process);
-        this.outliers = new ArrayList<Outlier>();
         calculate();
     }
 

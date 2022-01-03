@@ -20,6 +20,7 @@ public abstract class QualityCriteria {
     public QualityCriteria(Process process){
         criteriaID = this.getClass().getSimpleName();
         this.process = process;
+        outliers = new ArrayList();
     }
 
     public abstract void calculate();

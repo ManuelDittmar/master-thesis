@@ -11,18 +11,12 @@ public class CompleteLabeling extends QualityCriteria {
 
     public CompleteLabeling(Process process) {
         super(process);
-        outliers = new ArrayList<String>();
         calculate();
     }
 
     @Override
     public void calculate() {
-        List<FlowElement> elementList = new ArrayList<>();
-        elementList.addAll(process.getFlowElements());
-        if (hasSubProcess(process)) {
-            getFlowElementsOfSubprocesses(process, List.of(FlowElement.class));
-            elementList.addAll(getFlowElementsOfSubprocesses(process, List.of(FlowElement.class)));
-        }
+        List<FlowElement> elementList = getAllFlowElements(process);
         double elementsCount = elementList.size();
         outliers = elementList.stream().filter(element -> element.getName() == null)
                 .filter(element -> needsLabel(element))

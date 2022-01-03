@@ -16,16 +16,11 @@ public class ImplementationVisibility extends QualityCriteria {
 
     public ImplementationVisibility(Process process){
         super(process);
-        this.outliers = new ArrayList<Outlier>();
         calculate();
     }
     @Override
     public void calculate() {
-        List<FlowElement> flowElements = new ArrayList<>(process.getFlowElements());
-        if(hasSubProcess(process)){
-            flowElements.addAll(getFlowElementsOfSubprocesses(process,List.of(FlowElement.class)));
-        }
-
+        List<FlowElement> flowElements = getAllFlowElements(process);
 
         flowElements.stream().filter(flowElement -> flowElement.getChildElementsByType(ExtensionElements.class).size()> 0)
                 .forEach(flowElement -> {

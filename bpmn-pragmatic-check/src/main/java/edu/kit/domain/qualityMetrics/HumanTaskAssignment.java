@@ -11,7 +11,6 @@ public class HumanTaskAssignment extends QualityCriteria{
 
     public HumanTaskAssignment(Process process) {
         super(process);
-        outliers = new ArrayList();
         calculate();
     }
 
