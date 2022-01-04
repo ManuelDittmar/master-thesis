@@ -5,9 +5,14 @@ import java.util.stream.Collectors;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConditionalOnProperty(
+        value="pragmatic.completeLabeling.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class CompleteLabeling extends QualityCriteria {
 
     public CompleteLabeling(Process process) {

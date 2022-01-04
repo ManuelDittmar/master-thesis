@@ -3,12 +3,17 @@ package edu.kit.domain.qualityMetrics;
 import edu.kit.domain.SequenceFlowDTO;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
 
 @Component
+@ConditionalOnProperty(
+        value="pragmatic.edgeCrossing.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class EdgeCrossing extends FlowQualityCriteria{
 
     public EdgeCrossing() {

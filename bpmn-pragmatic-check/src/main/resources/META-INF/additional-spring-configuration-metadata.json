@@ -1,0 +1,33 @@
+{
+  "properties": [
+    {
+      "name": "pragmatic.completeLabeling.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Complete Labeling for Pragmatic Analysis."
+    },
+
+    {
+      "name": "pragmatic.edgeCrossing.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Edge Crossing for Pragmatic Analysis."
+    },
+
+    {
+      "name": "pragmatic.sourcesAndSinks.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Sources and Sinks for Pragmatic Analysis."
+    },
+
+    {
+      "name": "pragmatic.sourcesAndSinks.maxStartEvents",
+      "type": "java.lang.Integer",
+      "description": "Configures the maximum allowed amount of StartEvents."
+    },
+
+    {
+      "name": "pragmatic.sourcesAndSinks.maxEndEvents",
+      "type": "java.lang.Integer",
+      "description": "Configures the maximum allowed amount of EndEvents."
+    }
+
+  ] }
