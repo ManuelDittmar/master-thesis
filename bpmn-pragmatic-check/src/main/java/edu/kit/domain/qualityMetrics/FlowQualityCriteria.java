@@ -15,6 +15,10 @@ public abstract class FlowQualityCriteria extends QualityCriteria{
 
     List<SequenceFlowDTO> sequenceFlowDTOList;
 
+    public FlowQualityCriteria() {
+        super();
+    }
+
     public FlowQualityCriteria(Process process) {
         super(process);
         this.sequenceFlowDTOList = initSequenceFlowDTOs();
@@ -39,5 +43,9 @@ public abstract class FlowQualityCriteria extends QualityCriteria{
             sequenceFlowDTOList.add(new SequenceFlowDTO(sequenceFlow, waypointList));
         }
         return sequenceFlowDTOList;
+    }
+
+    public void setSequenceFlowDTOList(List<SequenceFlowDTO> sequenceFlowDTOList) {
+        this.sequenceFlowDTOList = sequenceFlowDTOList;
     }
 }

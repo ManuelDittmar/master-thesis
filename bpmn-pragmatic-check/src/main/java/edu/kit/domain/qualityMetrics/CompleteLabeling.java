@@ -1,17 +1,22 @@
 package edu.kit.domain.qualityMetrics;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CompleteLabeling extends QualityCriteria {
 
     public CompleteLabeling(Process process) {
         super(process);
         calculate();
+    }
+
+    public CompleteLabeling() {
+        super();
     }
 
     @Override

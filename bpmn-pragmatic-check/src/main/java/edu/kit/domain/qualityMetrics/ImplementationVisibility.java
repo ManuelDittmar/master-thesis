@@ -6,18 +6,24 @@ import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.UserTask;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaExecutionListener;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaTaskListener;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Component
 public class ImplementationVisibility extends QualityCriteria {
 
     public ImplementationVisibility(Process process){
         super(process);
         calculate();
     }
+
+    public ImplementationVisibility(){
+        super();
+    }
+
     @Override
     public void calculate() {
         List<FlowElement> flowElements = getAllFlowElements(process);

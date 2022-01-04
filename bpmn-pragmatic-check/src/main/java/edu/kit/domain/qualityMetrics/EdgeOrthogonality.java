@@ -3,19 +3,21 @@ package edu.kit.domain.qualityMetrics;
 import edu.kit.domain.SequenceFlowDTO;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
+import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.util.ArrayList;
 
+@Component
 public class EdgeOrthogonality extends FlowQualityCriteria{
 
 
-    public EdgeOrthogonality(Process process){
-        super(process);
-        calculate();
+    public EdgeOrthogonality(){
+        super();
     }
     @Override
     public void calculate() {
+        this.sequenceFlowDTOList =initSequenceFlowDTOs();
         for (SequenceFlowDTO sequenceFlow:sequenceFlowDTOList) {
             for (int i = 0; i < sequenceFlow.getWaypoints().size() -1; i++) {
                 Waypoint waypointStart = sequenceFlow.getWaypoints().get(i);

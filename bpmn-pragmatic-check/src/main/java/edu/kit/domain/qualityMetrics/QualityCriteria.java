@@ -17,6 +17,11 @@ public abstract class QualityCriteria {
     double score;
     List outliers;
 
+    public QualityCriteria(){
+        criteriaID = this.getClass().getSimpleName();
+        outliers = new ArrayList();
+    }
+
     public QualityCriteria(Process process){
         criteriaID = this.getClass().getSimpleName();
         this.process = process;
@@ -24,6 +29,10 @@ public abstract class QualityCriteria {
     }
 
     public abstract void calculate();
+
+    public void setProcess(Process process) {
+        this.process = process;
+    }
 
     public List getOutliers() {
         return outliers;

@@ -3,10 +3,11 @@ package edu.kit.domain.qualityMetrics;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TransactionBoundaries extends QualityCriteria{
 
     public TransactionBoundaries(Process process){
@@ -14,12 +15,15 @@ public class TransactionBoundaries extends QualityCriteria{
         calculate();
     }
 
+    public TransactionBoundaries(){
+        super();
+    }
+
     @Override
     public void calculate() {
         List<FlowElement> flowElements = getAllFlowElements(process);
         flowElements.forEach(flowElement -> {
             Class<? extends ModelElementInstance> instanceType = flowElement.getElementType().getInstanceType();
-            System.out.println(instanceType);
             instanceType.cast(flowElement);
             boolean hasCorrectBoundaries = true;
             if(instanceType.equals(StartEvent.class)){

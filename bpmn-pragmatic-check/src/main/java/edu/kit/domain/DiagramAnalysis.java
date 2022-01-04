@@ -1,29 +1,26 @@
 package edu.kit.domain;
 
-import org.camunda.bpm.model.bpmn.instance.Process;
-import org.camunda.bpm.model.xml.ModelInstance;
+import java.util.List;
 
-import java.util.*;
 
 public class DiagramAnalysis {
+
     private int executableProcesses;
-    private final List<ProcessAnalysis> processAnalysisList;
+    private List<ProcessAnalysis> processAnalysisList;
+
+    public DiagramAnalysis(List<ProcessAnalysis> processAnalysisList, int executableProcesses) {
+        this.executableProcesses = executableProcesses;
+        this.processAnalysisList = processAnalysisList;
+    }
 
     // TODO more than one executable process? Not Good!
 
-    public DiagramAnalysis(ModelInstance modelInstance) {
-        this.processAnalysisList = new ArrayList<>();
-        this.executableProcesses = 0;
+    public void setExecutableProcesses(int executableProcesses) {
+        this.executableProcesses = executableProcesses;
+    }
 
-        List<Process> processes = (List<Process>) modelInstance.getModelElementsByType(Process.class);
-        for (Process process:processes) {
-            ProcessAnalysis processAnalysis = new ProcessAnalysis(process);
-            processAnalysisList.add(processAnalysis);
-            // add count to exectuable Processes
-            if(processAnalysis.isExecutable()) {
-                this.executableProcesses++;
-            }
-        }
+    public void setProcessAnalysisList(List<ProcessAnalysis> processAnalysisList) {
+        this.processAnalysisList = processAnalysisList;
     }
 
     public int getExecutableProcesses() {

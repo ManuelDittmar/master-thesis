@@ -2,14 +2,19 @@ package edu.kit.domain.qualityMetrics;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class Explicitness extends QualityCriteria{
+
+    public Explicitness() {
+        super();
+    }
 
     public Explicitness(Process process) {
         super(process);
@@ -46,5 +51,10 @@ public class Explicitness extends QualityCriteria{
                 });
         double flowNodesCount = flowNodes.size();
         score = (flowNodesCount - outliers.size())/flowNodesCount;
+    }
+
+    public void calculate(Process process) {
+        this.process = process;
+        calculate();
     }
 }

@@ -3,6 +3,7 @@ package edu.kit.domain.qualityMetrics;
 import edu.kit.domain.FlowDirection;
 import edu.kit.domain.SequenceFlowDTO;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 
 // TODO: just upwards
 
+@Component
 public class RightwardFlowDirection extends FlowQualityCriteria {
 
     public RightwardFlowDirection(Process process) {
@@ -18,8 +20,13 @@ public class RightwardFlowDirection extends FlowQualityCriteria {
         calculate();
     }
 
+    public RightwardFlowDirection() {
+        super();
+    }
+
     @Override
     public void calculate() {
+        this.sequenceFlowDTOList = initSequenceFlowDTOs();
         double sequenceFlowsCount = sequenceFlowDTOList.size();
         List<String> outliers = new ArrayList<>();
         for (SequenceFlowDTO sequenceFlowDTO:this.sequenceFlowDTOList) {
