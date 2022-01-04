@@ -1,0 +1,9 @@
+pragmatic:
+  completeLabeling:
+    enabled: true
+  edgeCrossing:
+    enabled: true
+  sourcesAndSinks:
+    enabled: true
+    maxStartEvents: 1
+    maxEndEvents: 1
