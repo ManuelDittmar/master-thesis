@@ -50,6 +50,12 @@ public abstract class QualityCriteria {
         return baseElement.getChildElementsByType(SubProcess.class).size() > 0;
     }
 
+    public void reset() {
+        outliers = new ArrayList();
+        process = null;
+        score = 0;
+    }
+
     public Collection<FlowElement> getFlowElementsOfSubprocesses(BaseElement baseElement, Collection<Class> classes) {
         Collection<FlowElement> flowElements = new ArrayList<>();
         baseElement.getChildElementsByType(SubProcess.class)

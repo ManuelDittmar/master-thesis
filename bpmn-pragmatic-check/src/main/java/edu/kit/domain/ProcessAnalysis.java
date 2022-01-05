@@ -2,8 +2,6 @@ package edu.kit.domain;
 
 import edu.kit.domain.qualityMetrics.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 
 import java.util.List;
 
@@ -22,6 +20,7 @@ public class ProcessAnalysis {
         this.isExecutable = process.isExecutable();
         this.qualityCriteriaList = qualityCriteriaList;
         qualityCriteriaList.forEach(qualityCriteria -> {
+            qualityCriteria.reset();
             qualityCriteria.setProcess(process);
             qualityCriteria.calculate();
         });
