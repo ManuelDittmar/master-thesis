@@ -18,7 +18,6 @@ public class Explicitness extends QualityCriteria{
 
     public Explicitness(Process process) {
         super(process);
-        calculate();
     }
     @Override
     public void calculate() {

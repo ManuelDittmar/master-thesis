@@ -15,6 +15,11 @@ public class EdgeOrthogonality extends FlowQualityCriteria{
     public EdgeOrthogonality(){
         super();
     }
+
+    public EdgeOrthogonality(Process process){
+        super(process);
+    }
+
     @Override
     public void calculate() {
         this.sequenceFlowDTOList =initSequenceFlowDTOs();

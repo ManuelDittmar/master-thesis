@@ -7,3 +7,5 @@ pragmatic:
     enabled: true
     maxStartEvents: 1
     maxEndEvents: 1
+  taskTypeDefinition:
+    forbiddenTaskTypes: manualTask,task,scriptTask

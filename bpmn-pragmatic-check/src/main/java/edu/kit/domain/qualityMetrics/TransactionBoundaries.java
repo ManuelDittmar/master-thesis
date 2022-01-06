@@ -13,7 +13,6 @@ public class TransactionBoundaries extends QualityCriteria {
 
     public TransactionBoundaries(Process process) {
         super(process);
-        calculate();
     }
 
     public TransactionBoundaries() {

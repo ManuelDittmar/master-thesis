@@ -22,7 +22,6 @@ public class EdgeCrossing extends FlowQualityCriteria{
 
     public EdgeCrossing(Process process){
         super(process);
-        calculate();
     }
 
     @Override

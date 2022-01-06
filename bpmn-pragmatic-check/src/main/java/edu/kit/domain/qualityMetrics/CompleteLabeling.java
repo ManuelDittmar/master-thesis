@@ -17,7 +17,6 @@ public class CompleteLabeling extends QualityCriteria {
 
     public CompleteLabeling(Process process) {
         super(process);
-        calculate();
     }
 
     public CompleteLabeling() {
@@ -35,6 +34,7 @@ public class CompleteLabeling extends QualityCriteria {
         double outliersCount = outliers.size();
         this.score = (elementsCount - outliersCount) / elementsCount;
     }
+
 
     public boolean needsLabel(BaseElement element){
         return isMergingGateway(element ) || sequenceFlowNeedsLabel(element) || needsToBeLabeledBasedOnType(element);

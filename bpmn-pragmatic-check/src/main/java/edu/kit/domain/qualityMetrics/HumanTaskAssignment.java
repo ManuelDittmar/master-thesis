@@ -13,7 +13,6 @@ public class HumanTaskAssignment extends QualityCriteria{
 
     public HumanTaskAssignment(Process process) {
         super(process);
-        calculate();
     }
 
     public HumanTaskAssignment() {

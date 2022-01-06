@@ -1,6 +1,7 @@
 package edu.kit.domain.qualityMetrics;
 
 import org.camunda.bpm.model.bpmn.instance.EndEvent;
+import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.StartEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -11,16 +12,16 @@ import org.springframework.stereotype.Component;
         value="pragmatic.sourcesAndSinks.enabled",
         havingValue = "true",
         matchIfMissing = true)
-public class SourcesAndSinks extends QualityCriteria {
-
-    @Value("${pragmatic.sourcesAndSinks.maxStartEvents:2}")
-    int maxStartEvents;
-    @Value("${pragmatic.sourcesAndSinks.maxEndEvents:4}")
-    int maxEndEvents;
+public class SourcesAndSinks extends SourcesAndSinksAbstract {
 
     public SourcesAndSinks() {
         super();
     }
+
+    public SourcesAndSinks(Process process) {
+        super(process);
+    }
+
     @Override
     public void calculate() {
         int startEventCount = process.getChildElementsByType(StartEvent.class).size();

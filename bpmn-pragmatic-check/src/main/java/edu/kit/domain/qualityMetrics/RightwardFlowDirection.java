@@ -17,7 +17,6 @@ public class RightwardFlowDirection extends FlowQualityCriteria {
 
     public RightwardFlowDirection(Process process) {
         super(process);
-        calculate();
     }
 
     public RightwardFlowDirection() {

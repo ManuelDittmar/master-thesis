@@ -2,6 +2,7 @@ package edu.kit.domain.qualityMetrics;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,21 +10,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class TaskTypeDefinition extends QualityCriteria {
+public class TaskTypeDefinition extends TaskTypeDefinitionAbstract {
 
-    List<String> forbiddenTaskTypes;
-
-    // TODO allow to modify allowedSymbols
     // TODO Check Process Execution Conformance
     public TaskTypeDefinition(Process process) {
         super(process);
-        forbiddenTaskTypes = List.of("manualTask", "task", "scriptTask");
-        calculate();
     }
 
     public TaskTypeDefinition() {
         super();
-        forbiddenTaskTypes = List.of("manualTask", "task", "scriptTask");
     }
 
     @Override
@@ -68,7 +63,4 @@ public class TaskTypeDefinition extends QualityCriteria {
         return false;
     }
 
-    public void setForbiddenTaskTypes(List<String> forbiddenTaskTypes) {
-        this.forbiddenTaskTypes = forbiddenTaskTypes;
-    }
 }

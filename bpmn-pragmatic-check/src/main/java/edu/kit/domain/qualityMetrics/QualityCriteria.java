@@ -26,9 +26,19 @@ public abstract class QualityCriteria {
         criteriaID = this.getClass().getSimpleName();
         this.process = process;
         outliers = new ArrayList();
+        calculate();
     }
 
     public abstract void calculate();
+
+    public <T extends QualityCriteria> T createInstance(Process process) {
+        try {
+            return (T) this.getClass().getConstructor(Process.class).newInstance(process);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not create Instance of " + this, e);
+        }
+
+    }
 
     public void setProcess(Process process) {
         this.process = process;
@@ -48,12 +58,6 @@ public abstract class QualityCriteria {
 
     public boolean hasSubProcess(BaseElement baseElement) {
         return baseElement.getChildElementsByType(SubProcess.class).size() > 0;
-    }
-
-    public void reset() {
-        outliers = new ArrayList();
-        process = null;
-        score = 0;
     }
 
     public Collection<FlowElement> getFlowElementsOfSubprocesses(BaseElement baseElement, Collection<Class> classes) {

@@ -8,7 +8,6 @@ public class BehavioralErrors extends QualityCriteria{
 
     public BehavioralErrors(Process process) {
         super(process);
-        calculate();
     }
 
     // TODO Check if Start Events in Subprocess will also be taken into account

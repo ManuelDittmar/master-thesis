@@ -3,6 +3,7 @@ package edu.kit.domain;
 import edu.kit.domain.qualityMetrics.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessAnalysis {
@@ -18,11 +19,9 @@ public class ProcessAnalysis {
         this.processName = process.getName();
         this.processKey = process.getId();
         this.isExecutable = process.isExecutable();
-        this.qualityCriteriaList = qualityCriteriaList;
+        this.qualityCriteriaList = new ArrayList<>();
         qualityCriteriaList.forEach(qualityCriteria -> {
-            qualityCriteria.reset();
-            qualityCriteria.setProcess(process);
-            qualityCriteria.calculate();
+            this.qualityCriteriaList.add(qualityCriteria.createInstance(process));
         });
     }
 
@@ -41,4 +40,5 @@ public class ProcessAnalysis {
     public List<QualityCriteria> getQualityCriteriaList() {
         return qualityCriteriaList;
     }
+
 }

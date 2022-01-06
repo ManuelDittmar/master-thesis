@@ -48,4 +48,5 @@ public abstract class FlowQualityCriteria extends QualityCriteria{
     public void setSequenceFlowDTOList(List<SequenceFlowDTO> sequenceFlowDTOList) {
         this.sequenceFlowDTOList = sequenceFlowDTOList;
     }
+
 }

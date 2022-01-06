@@ -17,7 +17,6 @@ public class ImplementationVisibility extends QualityCriteria {
 
     public ImplementationVisibility(Process process){
         super(process);
-        calculate();
     }
 
     public ImplementationVisibility(){
