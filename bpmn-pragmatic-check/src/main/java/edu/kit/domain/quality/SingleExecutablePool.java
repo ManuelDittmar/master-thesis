@@ -16,6 +16,7 @@ public class SingleExecutablePool extends DiagramQualityCriteria {
 
     public SingleExecutablePool(ModelInstance modelInstance) {
         super(modelInstance);
+        criteriaType = CriteriaType.MANDATORY;
     }
 
     @Override
