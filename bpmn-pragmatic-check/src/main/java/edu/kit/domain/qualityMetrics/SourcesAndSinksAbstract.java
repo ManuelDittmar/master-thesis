@@ -3,7 +3,7 @@ package edu.kit.domain.qualityMetrics;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.springframework.beans.factory.annotation.Value;
 
-public abstract class SourcesAndSinksAbstract extends ConfigurableQualityCriteria {
+public abstract class SourcesAndSinksAbstract extends ConfigurableProcessQualityCriteria {
 
     @Value("${pragmatic.sourcesAndSinks.maxStartEvents:2}")
     public int maxStartEvents;
@@ -18,7 +18,7 @@ public abstract class SourcesAndSinksAbstract extends ConfigurableQualityCriteri
     }
 
     @Override
-    public <T extends QualityCriteria> T createInstance(Process process) {
+    public <T extends ProcessQualityCriteria> T createInstance(Process process) {
         SourcesAndSinksAbstract qualityCriteria =  super.createInstance(process);
         qualityCriteria.setMaxStartEvents(this.maxStartEvents);
         qualityCriteria.setMaxEndEvents(this.maxEndEvents);

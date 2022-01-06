@@ -11,17 +11,17 @@ public class ProcessAnalysis {
     private String processKey;
     private String processName;
     private boolean isExecutable;
-    private  List<QualityCriteria> qualityCriteriaList;
+    private  List<ProcessQualityCriteria> processQualityCriteriaList;
 
     // TODO make a configuration for addting the criteria
-    public ProcessAnalysis(Process process, List<QualityCriteria> qualityCriteriaList) {
+    public ProcessAnalysis(Process process, List<ProcessQualityCriteria> processQualityCriteriaList) {
         this.process = process;
         this.processName = process.getName();
         this.processKey = process.getId();
         this.isExecutable = process.isExecutable();
-        this.qualityCriteriaList = new ArrayList<>();
-        qualityCriteriaList.forEach(qualityCriteria -> {
-            this.qualityCriteriaList.add(qualityCriteria.createInstance(process));
+        this.processQualityCriteriaList = new ArrayList<>();
+        processQualityCriteriaList.forEach(qualityCriteria -> {
+            this.processQualityCriteriaList.add(qualityCriteria.createInstance(process));
         });
     }
 
@@ -37,8 +37,8 @@ public class ProcessAnalysis {
         return isExecutable;
     }
 
-    public List<QualityCriteria> getQualityCriteriaList() {
-        return qualityCriteriaList;
+    public List<ProcessQualityCriteria> getQualityCriteriaList() {
+        return processQualityCriteriaList;
     }
 
 }

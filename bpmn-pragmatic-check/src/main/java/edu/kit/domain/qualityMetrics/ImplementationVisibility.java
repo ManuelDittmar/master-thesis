@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class ImplementationVisibility extends QualityCriteria {
+public class ImplementationVisibility extends ProcessQualityCriteria {
 
     public ImplementationVisibility(Process process){
         super(process);

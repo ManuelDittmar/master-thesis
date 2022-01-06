@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class TransactionBoundaries extends QualityCriteria {
+public class TransactionBoundaries extends ProcessQualityCriteria {
 
     public TransactionBoundaries(Process process) {
         super(process);

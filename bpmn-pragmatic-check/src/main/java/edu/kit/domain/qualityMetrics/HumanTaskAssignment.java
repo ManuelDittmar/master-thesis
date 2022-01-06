@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class HumanTaskAssignment extends QualityCriteria{
+public class HumanTaskAssignment extends ProcessQualityCriteria {
 
     public HumanTaskAssignment(Process process) {
         super(process);

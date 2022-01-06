@@ -1,6 +1,6 @@
 package edu.kit.domain;
 
-import edu.kit.domain.qualityMetrics.QualityCriteria;
+import edu.kit.domain.qualityMetrics.ProcessQualityCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,16 +12,16 @@ import java.util.List;
 public class QualityCriteriaConfiguration {
 
     @Autowired
-    List<QualityCriteria> qualityCriteriaList;
+    List<ProcessQualityCriteria> processQualityCriteriaList;
 
     @Bean
-    public List<QualityCriteria> qualityCriteriaList() {
-        return this.qualityCriteriaList;
+    public List<ProcessQualityCriteria> qualityCriteriaList() {
+        return this.processQualityCriteriaList;
     }
 
     @PostConstruct
     public void init() {
-        System.out.println(qualityCriteriaList.size() + " Criteria!");
+        System.out.println(processQualityCriteriaList.size() + " Criteria!");
     }
 
 

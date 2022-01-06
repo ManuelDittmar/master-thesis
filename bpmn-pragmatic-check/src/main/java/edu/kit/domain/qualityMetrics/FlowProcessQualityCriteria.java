@@ -11,15 +11,15 @@ import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class FlowQualityCriteria extends QualityCriteria{
+public abstract class FlowProcessQualityCriteria extends ProcessQualityCriteria {
 
     List<SequenceFlowDTO> sequenceFlowDTOList;
 
-    public FlowQualityCriteria() {
+    public FlowProcessQualityCriteria() {
         super();
     }
 
-    public FlowQualityCriteria(Process process) {
+    public FlowProcessQualityCriteria(Process process) {
         super(process);
         this.sequenceFlowDTOList = initSequenceFlowDTOs();
     }

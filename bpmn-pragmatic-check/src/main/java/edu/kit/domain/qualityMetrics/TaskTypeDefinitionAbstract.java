@@ -3,10 +3,9 @@ package edu.kit.domain.qualityMetrics;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TaskTypeDefinitionAbstract extends ConfigurableQualityCriteria {
+public abstract class TaskTypeDefinitionAbstract extends ConfigurableProcessQualityCriteria {
 
     @Value("#{'${pragmatic.taskTypeDefinition.forbiddenTaskTypes:manualTask,task,scriptTask}'.split(',')}")
     public List<String> forbiddenTaskTypes;
@@ -20,7 +19,7 @@ public abstract class TaskTypeDefinitionAbstract extends ConfigurableQualityCrit
     }
 
     @Override
-    public <T extends QualityCriteria> T createInstance(Process process) {
+    public <T extends ProcessQualityCriteria> T createInstance(Process process) {
         TaskTypeDefinitionAbstract qualityCriteria =  super.createInstance(process);
         qualityCriteria.setForbiddenTaskTypes(this.forbiddenTaskTypes);
         qualityCriteria.calculate();

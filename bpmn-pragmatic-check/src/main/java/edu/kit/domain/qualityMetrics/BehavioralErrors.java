@@ -4,7 +4,7 @@ import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 
 
-public class BehavioralErrors extends QualityCriteria{
+public class BehavioralErrors extends ProcessQualityCriteria {
 
     public BehavioralErrors(Process process) {
         super(process);

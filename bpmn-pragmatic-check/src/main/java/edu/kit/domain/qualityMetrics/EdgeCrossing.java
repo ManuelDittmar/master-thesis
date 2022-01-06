@@ -14,7 +14,7 @@ import java.awt.geom.Line2D;
         value="pragmatic.edgeCrossing.enabled",
         havingValue = "true",
         matchIfMissing = true)
-public class EdgeCrossing extends FlowQualityCriteria{
+public class EdgeCrossing extends FlowProcessQualityCriteria {
 
     public EdgeCrossing() {
         super();

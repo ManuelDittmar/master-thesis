@@ -6,10 +6,9 @@ import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 @Component
-public class EdgeOrthogonality extends FlowQualityCriteria{
+public class EdgeOrthogonality extends FlowProcessQualityCriteria {
 
 
     public EdgeOrthogonality(){

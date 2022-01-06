@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
         value="pragmatic.completeLabeling.enabled",
         havingValue = "true",
         matchIfMissing = true)
-public class CompleteLabeling extends QualityCriteria {
+public class CompleteLabeling extends ProcessQualityCriteria {
 
     public CompleteLabeling(Process process) {
         super(process);

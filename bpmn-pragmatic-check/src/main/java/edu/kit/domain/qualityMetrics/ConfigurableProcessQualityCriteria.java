@@ -4,13 +4,13 @@ import org.camunda.bpm.model.bpmn.instance.Process;
 
 import java.util.ArrayList;
 
-public abstract class ConfigurableQualityCriteria extends QualityCriteria {
+public abstract class ConfigurableProcessQualityCriteria extends ProcessQualityCriteria {
 
-    public ConfigurableQualityCriteria() {
+    public ConfigurableProcessQualityCriteria() {
         super();
     }
 
-    public ConfigurableQualityCriteria(Process process) {
+    public ConfigurableProcessQualityCriteria(Process process) {
         criteriaID = this.getClass().getSimpleName();
         this.process = process;
         outliers = new ArrayList();

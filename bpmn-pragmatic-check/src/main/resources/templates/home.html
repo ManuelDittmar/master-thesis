@@ -97,7 +97,7 @@
                 var processHTML = [];
                 $.each(result.processAnalysisList, function (index, process) {
                     var criteriaHTML = [];
-                    $.each(process.qualityCriteriaList, function (index, criteria) {
+                    $.each(process.processQualityCriteriaList, function (index, criteria) {
                         var outlierHTML = [];
                         outlierHTML.push('<div class="flexbox-column bpmn-container auto-width nested"> <ul>');
                         $.each(criteria.outliers,function(index, outlier) {

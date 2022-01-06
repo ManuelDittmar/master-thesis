@@ -13,7 +13,7 @@ import java.util.List;
 // TODO: just upwards
 
 @Component
-public class RightwardFlowDirection extends FlowQualityCriteria {
+public class RightwardFlowDirection extends FlowProcessQualityCriteria {
 
     public RightwardFlowDirection(Process process) {
         super(process);
