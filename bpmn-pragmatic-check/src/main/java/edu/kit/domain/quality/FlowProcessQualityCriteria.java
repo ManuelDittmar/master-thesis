@@ -25,11 +25,11 @@ public abstract class FlowProcessQualityCriteria extends ProcessQualityCriteria 
     }
 
     public List<SequenceFlowDTO> initSequenceFlowDTOs() {
-        List <BpmnEdge> bpmnEdgeList = (List<BpmnEdge>) process.getModelInstance().getModelElementsByType(BpmnEdge.class);
+        List<BpmnEdge> bpmnEdgeList = (List<BpmnEdge>) process.getModelInstance().getModelElementsByType(BpmnEdge.class);
         Map<String, Collection<Waypoint>> sequenceFlowsCoordinates = new HashMap<>();
-        for (BpmnEdge bpmnEdge:bpmnEdgeList) {
+        for (BpmnEdge bpmnEdge : bpmnEdgeList) {
             String sequenceFlowId = bpmnEdge.getBpmnElement().getId();
-            sequenceFlowsCoordinates.put(sequenceFlowId,bpmnEdge.getWaypoints());
+            sequenceFlowsCoordinates.put(sequenceFlowId, bpmnEdge.getWaypoints());
         }
         List<FlowElement> flowElements = getAllFlowElements(process).stream()
                 .filter(flowElement -> flowElement.getClass().equals(SequenceFlowImpl.class))

@@ -24,17 +24,13 @@ public class RightwardFlowDirection extends FlowProcessQualityCriteria {
     }
 
     @Override
-    public void calculate() {
+    public void init() {
         this.sequenceFlowDTOList = initSequenceFlowDTOs();
-        double sequenceFlowsCount = sequenceFlowDTOList.size();
-        List<String> outliers = new ArrayList<>();
-        for (SequenceFlowDTO sequenceFlowDTO:this.sequenceFlowDTOList) {
-            if(!(sequenceFlowDTO.getFlowDirectionGlobal().contains(FlowDirection.RIGHT)) || sequenceFlowDTO.getArrowHeadDirection().contains(FlowDirection.LEFT)){
-                outliers.add(sequenceFlowDTO.getSequenceFlowId());
+        for (SequenceFlowDTO sequenceFlowDTO : this.sequenceFlowDTOList) {
+            if (!(sequenceFlowDTO.getFlowDirectionGlobal().contains(FlowDirection.RIGHT)) || sequenceFlowDTO.getArrowHeadDirection().contains(FlowDirection.LEFT)) {
+                this.outliers.add(sequenceFlowDTO.getSequenceFlowId());
             }
         }
-        double outliersCount = outliers.size();
-        this.score = (sequenceFlowsCount - outliersCount)/sequenceFlowsCount;
-        this.outliers = outliers;
+        setCalculatedScore(sequenceFlowDTOList.size());
     }
 }

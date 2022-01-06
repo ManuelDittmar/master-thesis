@@ -12,7 +12,7 @@ public abstract class DiagramQualityCriteria extends QualityCriteria {
 
     public DiagramQualityCriteria(ModelInstance modelInstance) {
         this.modelInstance = modelInstance;
-        calculate();
+        init();
     }
 
     public <T extends DiagramQualityCriteria> T createInstance(ModelInstance modelInstance) {

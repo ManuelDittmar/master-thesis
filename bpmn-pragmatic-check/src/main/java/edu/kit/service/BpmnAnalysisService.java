@@ -18,7 +18,7 @@ public class BpmnAnalysisService {
         // Read File
         BpmnModelInstance modelInstance = Bpmn.readModelFromStream(file);
         // Analyze Model
-       return diagramAnalysisService.analyseDiagram(modelInstance);
+        return diagramAnalysisService.analyseDiagram(modelInstance);
 
     }
 

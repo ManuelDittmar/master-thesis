@@ -19,15 +19,15 @@ public class SingleExecutablePool extends DiagramQualityCriteria {
     }
 
     @Override
-    public void calculate() {
+    public void init() {
         List<String> executableProcesses = new ArrayList<>();
         List<Process> processes = (List<Process>) modelInstance.getModelElementsByType(Process.class);
-        for (Process process:processes) {
-            if(process.isExecutable()) {
+        for (Process process : processes) {
+            if (process.isExecutable()) {
                 executableProcesses.add(process.getId());
             }
         }
-        if(executableProcesses.size() == 1) {
+        if (executableProcesses.size() == 1) {
             score = 1;
         } else {
             score = 0;

@@ -31,5 +31,9 @@ public abstract class QualityCriteria {
         return criteriaType;
     }
 
-    public abstract void calculate();
+    public void setCalculatedScore(double denominator) {
+        score = (denominator - outliers.size()) / denominator;
+    }
+
+    public abstract void init();
 }

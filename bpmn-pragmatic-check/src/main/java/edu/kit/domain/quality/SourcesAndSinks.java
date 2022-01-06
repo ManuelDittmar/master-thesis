@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(
-        value="pragmatic.sourcesAndSinks.enabled",
+        value = "pragmatic.sourcesAndSinks.enabled",
         havingValue = "true",
         matchIfMissing = true)
 public class SourcesAndSinks extends SourcesAndSinksAbstract {
@@ -22,7 +22,7 @@ public class SourcesAndSinks extends SourcesAndSinksAbstract {
     }
 
     @Override
-    public void calculate() {
+    public void init() {
         int startEventCount = process.getChildElementsByType(StartEvent.class).size();
         int endEventCount = process.getChildElementsByType(EndEvent.class).size();
         boolean tooManyStartEvents = startEventCount > maxStartEvents;
@@ -32,17 +32,16 @@ public class SourcesAndSinks extends SourcesAndSinksAbstract {
             outliers.add("StartEvents > Max StartEvents (" + maxStartEvents + ")");
         }
 
-        if(tooManyEndEvents) {
+        if (tooManyEndEvents) {
             outliers.add("EndEvents > Max EndEvents (" + maxEndEvents + ")");
         }
 
-        if(tooManyStartEvents && tooManyEndEvents) {
+        if (tooManyStartEvents && tooManyEndEvents) {
             score = 0;
-        } else if(tooManyStartEvents || tooManyEndEvents) {
+        } else if (tooManyStartEvents || tooManyEndEvents) {
             score = 0.5;
         } else {
             score = 1;
         }
-
     }
 }

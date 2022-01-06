@@ -20,8 +20,9 @@ public class Explicitness extends ProcessQualityCriteria {
     public Explicitness(Process process) {
         super(process);
     }
+
     @Override
-    public void calculate() {
+    public void init() {
         List<FlowElement> flowElements = getAllFlowElements(process);
 
         List<FlowNode> flowNodes = flowElements.stream()
@@ -47,14 +48,13 @@ public class Explicitness extends ProcessQualityCriteria {
                                         .map(sequenceFlow -> sequenceFlow.getId())
                                         .collect(Collectors.toList()));
                     }
-                    outliers.add(new Outlier(flowNode.getId(),sequenceFlows));
+                    outliers.add(new Outlier(flowNode.getId(), sequenceFlows));
                 });
-        double flowNodesCount = flowNodes.size();
-        score = (flowNodesCount - outliers.size())/flowNodesCount;
+        setCalculatedScore(flowNodes.size());
     }
 
     public void calculate(Process process) {
         this.process = process;
-        calculate();
+        init();
     }
 }

@@ -12,11 +12,11 @@ import java.util.*;
 public class DiagramAnalysisService {
 
     private List<DiagramQualityCriteria> diagramQualityCriteriaList;
-    private  ProcessAnalysisService processAnalysisService;
+    private ProcessAnalysisService processAnalysisService;
 
     public DiagramAnalysis analyseDiagram(ModelInstance modelInstance) {
 
-        return new DiagramAnalysis(modelInstance,processAnalysisService,diagramQualityCriteriaList);
+        return new DiagramAnalysis(modelInstance, processAnalysisService, diagramQualityCriteriaList);
     }
 
     @Autowired

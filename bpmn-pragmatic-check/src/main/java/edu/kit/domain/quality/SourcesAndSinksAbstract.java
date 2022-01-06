@@ -19,10 +19,10 @@ public abstract class SourcesAndSinksAbstract extends ConfigurableProcessQuality
 
     @Override
     public <T extends ProcessQualityCriteria> T createInstance(Process process) {
-        SourcesAndSinksAbstract qualityCriteria =  super.createInstance(process);
+        SourcesAndSinksAbstract qualityCriteria = super.createInstance(process);
         qualityCriteria.setMaxStartEvents(this.maxStartEvents);
         qualityCriteria.setMaxEndEvents(this.maxEndEvents);
-        qualityCriteria.calculate();
+        qualityCriteria.init();
         return (T) qualityCriteria;
     }
 

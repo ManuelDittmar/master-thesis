@@ -28,7 +28,7 @@ public class TaskTypeDefinitionTest {
         List<Process> processList = new ArrayList(modelInstance.getModelElementsByType(Process.class));
         taskTypeDefinition = new TaskTypeDefinition(processList.get(0));
         taskTypeDefinition.setForbiddenTaskTypes(List.of("manualTask","task","scriptTask"));
-        taskTypeDefinition.calculate();
+        taskTypeDefinition.init();
     }
 
     @Test

@@ -21,47 +21,46 @@ public class TransactionBoundaries extends ProcessQualityCriteria {
     }
 
     @Override
-    public void calculate() {
+    public void init() {
         List<FlowElement> flowElements = getAllFlowElements(process);
         flowElements.forEach(flowElement -> {
-                    Class<? extends ModelElementInstance> instanceType = flowElement.getElementType().getInstanceType();
-                    instanceType.cast(flowElement);
-                    boolean hasCorrectBoundaries = true;
-                    String reason = null;
-                    if (instanceType.equals(StartEvent.class)) {
-                        hasCorrectBoundaries = hasCorrectBoundaries((StartEvent) flowElement);
-                        reason = "Add Transaction Boundary Before. Ensure persistence of process instance";
-                    }
+            Class<? extends ModelElementInstance> instanceType = flowElement.getElementType().getInstanceType();
+            instanceType.cast(flowElement);
+            boolean hasCorrectBoundaries = true;
+            String reason = null;
+            if (instanceType.equals(StartEvent.class)) {
+                hasCorrectBoundaries = hasCorrectBoundaries((StartEvent) flowElement);
+                reason = "Add Transaction Boundary Before. Ensure persistence of process instance";
+            }
 
-                    if (isNaturalWaitState(instanceType)) {
-                        hasCorrectBoundaries = hasCorrectBoundaries((FlowNode) flowElement);
-                        reason = "Remove Transaction Boundary Before OR Add Transaction Boundary After. Avoid Overhead, due to natural wait state";
-                    }
-                    if (instanceType.equals(ExclusiveGateway.class)) {
-                        hasCorrectBoundaries = hasCorrectBoundaries((ExclusiveGateway) flowElement);
-                        reason = "Avoid Overhead, no error prone operation";
-                    }
+            if (isNaturalWaitState(instanceType)) {
+                hasCorrectBoundaries = hasCorrectBoundaries((FlowNode) flowElement);
+                reason = "Remove Transaction Boundary Before OR Add Transaction Boundary After. Avoid Overhead, due to natural wait state";
+            }
+            if (instanceType.equals(ExclusiveGateway.class)) {
+                hasCorrectBoundaries = hasCorrectBoundaries((ExclusiveGateway) flowElement);
+                reason = "Avoid Overhead, no error prone operation";
+            }
 
-                    if (instanceType.equals(ParallelGateway.class)) {
-                        hasCorrectBoundaries = hasCorrectBoundaries((ParallelGateway) flowElement);
-                        reason = "Add Transaction Boundary Before. Optimistic locking exception";
-                    }
+            if (instanceType.equals(ParallelGateway.class)) {
+                hasCorrectBoundaries = hasCorrectBoundaries((ParallelGateway) flowElement);
+                reason = "Add Transaction Boundary Before. Optimistic locking exception";
+            }
 
-                    if (instanceType.equals(InclusiveGateway.class)) {
-                        hasCorrectBoundaries = hasCorrectBoundaries((InclusiveGateway) flowElement);
-                        reason = "Add Transaction Boundary Before. Optimistic locking exception";
-                    }
+            if (instanceType.equals(InclusiveGateway.class)) {
+                hasCorrectBoundaries = hasCorrectBoundaries((InclusiveGateway) flowElement);
+                reason = "Add Transaction Boundary Before. Optimistic locking exception";
+            }
 
-                    // TODO Optimize Code
+            // TODO Optimize Code
 
-                    if (!hasCorrectBoundaries) {
-                        // System.out.println(flowElement.getId() + " : has wrong TransactionBoundaries");
-                        outliers.add(new Outlier(flowElement.getId(), Set.of(reason)));
-                    }
+            if (!hasCorrectBoundaries) {
+                // System.out.println(flowElement.getId() + " : has wrong TransactionBoundaries");
+                outliers.add(new Outlier(flowElement.getId(), Set.of(reason)));
+            }
 
-                });
-        double outlierCount = outliers.size();
-        score = (flowElements.size() - outlierCount) / flowElements.size();
+        });
+        setCalculatedScore(flowElements.size());
     }
 
     // TODO Event based gateway

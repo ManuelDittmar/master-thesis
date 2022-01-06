@@ -10,18 +10,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class ProcessQualityCriteria extends QualityCriteria{
+public abstract class ProcessQualityCriteria extends QualityCriteria {
 
     Process process;
 
-    public ProcessQualityCriteria(){
+    public ProcessQualityCriteria() {
         super();
     }
 
-    public ProcessQualityCriteria(Process process){
+    public ProcessQualityCriteria(Process process) {
         super();
         this.process = process;
-        calculate();
+        init();
     }
 
     public <T extends ProcessQualityCriteria> T createInstance(Process process) {
@@ -45,11 +45,11 @@ public abstract class ProcessQualityCriteria extends QualityCriteria{
         Collection<FlowElement> flowElements = new ArrayList<>();
         baseElement.getChildElementsByType(SubProcess.class)
                 .forEach(subProcess -> {
-                    for (Class aClass:classes) {
+                    for (Class aClass : classes) {
                         flowElements.addAll(subProcess.getChildElementsByType(aClass));
                     }
-                    if (hasSubProcess(subProcess)){
-                        flowElements.addAll(getFlowElementsOfSubprocesses(subProcess,classes));
+                    if (hasSubProcess(subProcess)) {
+                        flowElements.addAll(getFlowElementsOfSubprocesses(subProcess, classes));
                     }
                 });
         return flowElements;
@@ -66,8 +66,8 @@ public abstract class ProcessQualityCriteria extends QualityCriteria{
 
     public List<FlowElement> getAllFlowElements(Process process) {
         List<FlowElement> flowElements = new ArrayList<>(process.getFlowElements());
-        if(hasSubProcess(process)) {
-            flowElements.addAll(getFlowElementsOfSubprocesses(process,List.of(FlowElement.class)));
+        if (hasSubProcess(process)) {
+            flowElements.addAll(getFlowElementsOfSubprocesses(process, List.of(FlowElement.class)));
         }
         return flowElements;
     }

@@ -14,6 +14,7 @@ public class TaskTypeDefinition extends TaskTypeDefinitionAbstract {
     // TODO Check Process Execution Conformance
     public TaskTypeDefinition(Process process) {
         super(process);
+        criteriaType = CriteriaType.BLOCKER;
     }
 
     public TaskTypeDefinition() {
@@ -21,7 +22,7 @@ public class TaskTypeDefinition extends TaskTypeDefinitionAbstract {
     }
 
     @Override
-    public void calculate() {
+    public void init() {
         List<FlowElement> flowElementsList = new ArrayList<>();
         flowElementsList.addAll(process.getChildElementsByType(Activity.class));
         flowElementsList.addAll(process.getChildElementsByType(Event.class));
@@ -30,8 +31,7 @@ public class TaskTypeDefinition extends TaskTypeDefinitionAbstract {
                 .filter(element -> forbiddenTaskTypes.contains(element.getElementType().getTypeName()) || isEmptySubprocess(element) || isNonTypedBoundaryEvent(element) || hasLoopMarker(element))
                 .map(element -> element.getId())
                 .collect(Collectors.toList());
-        double outliersSize =outliers.size();
-        score = (flowElementsList.size() - outliersSize)/ flowElementsList.size();
+        setCalculatedScore(flowElementsList.size());
     }
 
     public boolean isEmptySubprocess(BaseElement baseElement) {

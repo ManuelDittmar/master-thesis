@@ -20,17 +20,17 @@ public class ProcessAnalysisController {
     BpmnAnalysisService bpmnAnalysisService;
 
     @GetMapping("/")
-    public String homepage(){
+    public String homepage() {
         return "home";
     }
 
-    @PostMapping(value = "/analyze",consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/analyze", consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public DiagramAnalysis analyzeProcess(@RequestParam("file") MultipartFile file) throws IOException {
         return bpmnAnalysisService.analyseBpmnFile(file.getInputStream());
     }
 
-    @PostMapping(value = "/analyzePage",consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/analyzePage", consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
     public String analyzeProcessPage(@RequestParam("file") MultipartFile file) throws IOException {
         DiagramAnalysis analysis = bpmnAnalysisService.analyseBpmnFile(file.getInputStream());
         System.out.println(analysis.getProcessAnalysisList().get(0).getProcessKey());

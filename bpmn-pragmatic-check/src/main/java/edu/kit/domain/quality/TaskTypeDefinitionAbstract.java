@@ -20,9 +20,9 @@ public abstract class TaskTypeDefinitionAbstract extends ConfigurableProcessQual
 
     @Override
     public <T extends ProcessQualityCriteria> T createInstance(Process process) {
-        TaskTypeDefinitionAbstract qualityCriteria =  super.createInstance(process);
+        TaskTypeDefinitionAbstract qualityCriteria = super.createInstance(process);
         qualityCriteria.setForbiddenTaskTypes(this.forbiddenTaskTypes);
-        qualityCriteria.calculate();
+        qualityCriteria.init();
         return (T) qualityCriteria;
     }
 

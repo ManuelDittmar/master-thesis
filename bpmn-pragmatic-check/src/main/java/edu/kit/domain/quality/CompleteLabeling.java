@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(
-        value="pragmatic.completeLabeling.enabled",
+        value = "pragmatic.completeLabeling.enabled",
         havingValue = "true",
         matchIfMissing = true)
 public class CompleteLabeling extends ProcessQualityCriteria {
@@ -24,7 +24,7 @@ public class CompleteLabeling extends ProcessQualityCriteria {
     }
 
     @Override
-    public void calculate() {
+    public void init() {
         List<FlowElement> elementList = getAllFlowElements(process);
         double elementsCount = elementList.size();
         outliers = elementList.stream().filter(element -> element.getName() == null)
@@ -32,15 +32,15 @@ public class CompleteLabeling extends ProcessQualityCriteria {
                 .map(element -> element.getId())
                 .collect(Collectors.toList());
         double outliersCount = outliers.size();
-        this.score = (elementsCount - outliersCount) / elementsCount;
+        setCalculatedScore(elementsCount);
     }
 
 
-    public boolean needsLabel(BaseElement element){
-        return isMergingGateway(element ) || sequenceFlowNeedsLabel(element) || needsToBeLabeledBasedOnType(element);
+    public boolean needsLabel(BaseElement element) {
+        return isMergingGateway(element) || sequenceFlowNeedsLabel(element) || needsToBeLabeledBasedOnType(element);
     }
 
-    public boolean needsToBeLabeledBasedOnType(BaseElement element){
+    public boolean needsToBeLabeledBasedOnType(BaseElement element) {
         return element.getElementType().getBaseType().getTypeName().matches("activity|task|throwEvent|catchEvent")
                 && !element.getElementType().getInstanceType().equals(SubProcess.class);
     }

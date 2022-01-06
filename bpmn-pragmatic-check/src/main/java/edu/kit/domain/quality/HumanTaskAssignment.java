@@ -20,10 +20,10 @@ public class HumanTaskAssignment extends ProcessQualityCriteria {
     }
 
     @Override
-    public void calculate() {
+    public void init() {
         List<UserTask> userTasks = new ArrayList<>(process.getChildElementsByType(UserTask.class));
-        if(hasSubProcess(process)) {
-            List<UserTask> subUserTasks = getFlowElementsOfSubprocesses(process,List.of(UserTask.class))
+        if (hasSubProcess(process)) {
+            List<UserTask> subUserTasks = getFlowElementsOfSubprocesses(process, List.of(UserTask.class))
                     .stream().map(flowElement -> (UserTask) flowElement)
                     .collect(Collectors.toList());
             userTasks.addAll(subUserTasks);
@@ -33,7 +33,6 @@ public class HumanTaskAssignment extends ProcessQualityCriteria {
                 outliers.add(userTask.getId());
             }
         });
-        double outlierSize = outliers.size();
-        score = (userTasks.size() - outlierSize)/ userTasks.size();
+        setCalculatedScore(userTasks.size());
     }
 }

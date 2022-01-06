@@ -16,19 +16,19 @@ import java.util.Set;
 @Component
 public class ImplementationVisibility extends ProcessQualityCriteria {
 
-    public ImplementationVisibility(Process process){
+    public ImplementationVisibility(Process process) {
         super(process);
     }
 
-    public ImplementationVisibility(){
+    public ImplementationVisibility() {
         super();
     }
 
     @Override
-    public void calculate() {
+    public void init() {
         List<FlowElement> flowElements = getAllFlowElements(process);
 
-        flowElements.stream().filter(flowElement -> flowElement.getChildElementsByType(ExtensionElements.class).size()> 0)
+        flowElements.stream().filter(flowElement -> flowElement.getChildElementsByType(ExtensionElements.class).size() > 0)
                 .forEach(flowElement -> {
                     Set<String> events = new HashSet<>();
                     flowElement
@@ -36,14 +36,13 @@ public class ImplementationVisibility extends ProcessQualityCriteria {
                             .forEach(child -> {
                                 child.getChildElementsByType(CamundaExecutionListener.class)
                                         .forEach(listener -> events.add(listener.getCamundaEvent()));
-                                if(flowElement.getElementType().getInstanceType().equals(UserTask.class)) {
+                                if (flowElement.getElementType().getInstanceType().equals(UserTask.class)) {
                                     child.getChildElementsByType(CamundaTaskListener.class)
                                             .forEach(listener -> events.add(listener.getCamundaEvent()));
                                 }
                             });
-                    outliers.add(new Outlier(flowElement.getId(),events));
+                    outliers.add(new Outlier(flowElement.getId(), events));
                 });
-        double outliersSize =outliers.size();
-        score = (flowElements.size() - outliersSize)/ flowElements.size();
+        setCalculatedScore(flowElements.size());
     }
 }

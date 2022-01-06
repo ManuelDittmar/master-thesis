@@ -21,7 +21,7 @@ public class DiagramAnalysis {
 
         List<Process> processes = (List<Process>) modelInstance.getModelElementsByType(Process.class);
         this.processAnalysisList = new ArrayList<>();
-        for (Process process:processes) {
+        for (Process process : processes) {
             ProcessAnalysis processAnalysis = processAnalysisService.analyseProcess(process);
             this.processAnalysisList.add(processAnalysis);
         }
