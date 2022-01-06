@@ -6,6 +6,7 @@ import java.util.List;
 public abstract class QualityCriteria {
 
     String criteriaID;
+    CriteriaType criteriaType = CriteriaType.SCORE;
     double score;
     List outliers;
 
@@ -24,6 +25,10 @@ public abstract class QualityCriteria {
 
     public double getScore() {
         return score;
+    }
+
+    public CriteriaType getCriteriaType() {
+        return criteriaType;
     }
 
     public abstract void calculate();
