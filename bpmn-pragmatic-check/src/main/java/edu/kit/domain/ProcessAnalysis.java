@@ -1,17 +1,17 @@
 package edu.kit.domain;
 
-import edu.kit.domain.qualityMetrics.*;
+import edu.kit.domain.quality.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessAnalysis {
-    private Process process;
-    private String processKey;
-    private String processName;
-    private boolean isExecutable;
-    private  List<ProcessQualityCriteria> processQualityCriteriaList;
+    private final Process process;
+    private final String processKey;
+    private final String processName;
+    private final boolean isExecutable;
+    private final List<ProcessQualityCriteria> processQualityCriteriaList;
 
     // TODO make a configuration for addting the criteria
     public ProcessAnalysis(Process process, List<ProcessQualityCriteria> processQualityCriteriaList) {
