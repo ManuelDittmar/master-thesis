@@ -93,6 +93,4 @@ public class TransactionBoundaries extends ProcessQualityCriteria {
         }
         return !inclusiveGateway.isCamundaAsyncAfter() && !inclusiveGateway.isCamundaAsyncBefore();
     }
-
-
 }
