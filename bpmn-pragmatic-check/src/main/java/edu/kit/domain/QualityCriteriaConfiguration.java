@@ -1,9 +1,7 @@
 package edu.kit.domain;
 
-import edu.kit.domain.qualityMetrics.DiagramQualityCriteria;
-import edu.kit.domain.qualityMetrics.ProcessQualityCriteria;
+import edu.kit.domain.quality.ProcessQualityCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;

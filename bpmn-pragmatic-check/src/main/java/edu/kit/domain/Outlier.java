@@ -1,4 +1,4 @@
-package edu.kit.domain.qualityMetrics;
+package edu.kit.domain;
 
 import java.util.Set;
 

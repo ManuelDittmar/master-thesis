@@ -1,8 +1,7 @@
-package edu.kit.domain.qualityMetrics;
+package edu.kit.domain.quality;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -55,9 +54,7 @@ public class TaskTypeDefinition extends TaskTypeDefinitionAbstract {
         if (baseElement.getElementType().getInstanceType().equals(ServiceTask.class)) {
             ServiceTask serviceTask = (ServiceTask) baseElement;
             if (serviceTask.getDomElement().getChildElements().size() > 0) {
-                if (serviceTask.getDomElement().getChildElements().get(0).getLocalName().equals("standardLoopCharacteristics")) {
-                    return true;
-                }
+                return serviceTask.getDomElement().getChildElements().get(0).getLocalName().equals("standardLoopCharacteristics");
             }
         }
         return false;

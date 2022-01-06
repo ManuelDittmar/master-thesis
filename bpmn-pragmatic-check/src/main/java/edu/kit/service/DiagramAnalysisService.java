@@ -1,10 +1,7 @@
 package edu.kit.service;
 
 import edu.kit.domain.DiagramAnalysis;
-import edu.kit.domain.ProcessAnalysis;
-import edu.kit.domain.qualityMetrics.DiagramQualityCriteria;
-import edu.kit.service.ProcessAnalysisService;
-import org.camunda.bpm.model.bpmn.instance.Process;
+import edu.kit.domain.quality.DiagramQualityCriteria;
 import org.camunda.bpm.model.xml.ModelInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,5 +1,6 @@
-package edu.kit.domain.qualityMetrics;
+package edu.kit.domain.quality;
 
+import edu.kit.domain.Outlier;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;

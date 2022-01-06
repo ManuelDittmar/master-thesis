@@ -1,4 +1,4 @@
-package edu.kit.domain.qualityMetrics;
+package edu.kit.domain.quality;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,9 +54,7 @@ public class CompleteLabeling extends ProcessQualityCriteria {
                 if (gateway.getSucceedingNodes().list().size() > 1) {
                     String defaultSequenceFlow = gateway.getAttributeValue("default");
                     // default sequence flow needs no label
-                    if (defaultSequenceFlow == null || !defaultSequenceFlow.equals(element.getId())) {
-                        return true;
-                    }
+                    return defaultSequenceFlow == null || !defaultSequenceFlow.equals(element.getId());
                 }
             }
         }

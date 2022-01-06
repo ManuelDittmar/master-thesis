@@ -1,4 +1,4 @@
-package edu.kit.domain.qualityMetrics;
+package edu.kit.domain.quality;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;

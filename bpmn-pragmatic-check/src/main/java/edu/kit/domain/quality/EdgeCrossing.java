@@ -1,4 +1,4 @@
-package edu.kit.domain.qualityMetrics;
+package edu.kit.domain.quality;
 
 import edu.kit.domain.SequenceFlowDTO;
 import org.camunda.bpm.model.bpmn.instance.Process;

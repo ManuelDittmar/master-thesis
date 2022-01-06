@@ -1,7 +1,7 @@
 package edu.kit.service;
 
 import edu.kit.domain.ProcessAnalysis;
-import edu.kit.domain.qualityMetrics.ProcessQualityCriteria;
+import edu.kit.domain.quality.ProcessQualityCriteria;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package edu.kit;
 
-import edu.kit.domain.qualityMetrics.CompleteLabeling;
+import edu.kit.domain.quality.CompleteLabeling;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.xml.ModelInstance;
