@@ -32,7 +32,11 @@ public abstract class QualityCriteria {
     }
 
     public void setCalculatedScore(double denominator) {
-        score = (denominator - outliers.size()) / denominator;
+        if (denominator != 0) {
+            score = (denominator - outliers.size()) / denominator;
+        } else {
+            score = 1;
+        }
     }
 
     public abstract void init();
