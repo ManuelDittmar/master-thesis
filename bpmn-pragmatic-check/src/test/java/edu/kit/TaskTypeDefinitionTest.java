@@ -27,6 +27,8 @@ public class TaskTypeDefinitionTest {
         ModelInstance modelInstance = Bpmn.readModelFromStream(new FileInputStream(resourcePath +"\\TaskTypeDefinitionTest.bpmn"));
         List<Process> processList = new ArrayList(modelInstance.getModelElementsByType(Process.class));
         taskTypeDefinition = new TaskTypeDefinition(processList.get(0));
+        taskTypeDefinition.setForbiddenTaskTypes(List.of("manualTask","task","scriptTask"));
+        taskTypeDefinition.calculate();
     }
 
     @Test
