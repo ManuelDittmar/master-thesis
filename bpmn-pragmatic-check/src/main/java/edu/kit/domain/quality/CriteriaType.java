@@ -1,7 +1,7 @@
 package edu.kit.domain.quality;
 
 public enum CriteriaType {
-    SOFT,
+    MANDATORY,
     SCORE,
-    BLOCKER
+    SOFT
 }
