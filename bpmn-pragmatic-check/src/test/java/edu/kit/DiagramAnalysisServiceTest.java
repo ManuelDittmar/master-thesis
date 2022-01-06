@@ -34,7 +34,7 @@ public class DiagramAnalysisServiceTest {
 
     //@Test
     public void hasOnlyOneExecutableProcess() {
-        assertEquals(1, diagramAnalysis.getExecutableProcesses());
+      //  assertEquals(1, diagramAnalysis.getExecutableProcesses());
     }
 
     //@Test

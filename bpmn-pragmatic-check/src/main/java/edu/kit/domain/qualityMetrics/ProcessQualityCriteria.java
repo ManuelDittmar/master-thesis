@@ -10,26 +10,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class ProcessQualityCriteria {
-    
-    String criteriaID;
+public abstract class ProcessQualityCriteria extends QualityCriteria{
+
     Process process;
-    double score;
-    List outliers;
 
     public ProcessQualityCriteria(){
-        criteriaID = this.getClass().getSimpleName();
-        outliers = new ArrayList();
+        super();
     }
 
     public ProcessQualityCriteria(Process process){
-        criteriaID = this.getClass().getSimpleName();
+        super();
         this.process = process;
-        outliers = new ArrayList();
         calculate();
     }
-
-    public abstract void calculate();
 
     public <T extends ProcessQualityCriteria> T createInstance(Process process) {
         try {
@@ -42,18 +35,6 @@ public abstract class ProcessQualityCriteria {
 
     public void setProcess(Process process) {
         this.process = process;
-    }
-
-    public List getOutliers() {
-        return outliers;
-    }
-
-    public String getCriteriaID() {
-        return criteriaID;
-    }
-
-    public double getScore() {
-        return score;
     }
 
     public boolean hasSubProcess(BaseElement baseElement) {
