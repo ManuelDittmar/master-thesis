@@ -4,6 +4,7 @@ import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.xml.ModelInstance;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -19,17 +20,18 @@ public class SingleExecutablePool extends DiagramQualityCriteria {
 
     @Override
     public void calculate() {
-        int executableProcesses = 0;
+        List<String> executableProcesses = new ArrayList<>();
         List<Process> processes = (List<Process>) modelInstance.getModelElementsByType(Process.class);
         for (Process process:processes) {
             if(process.isExecutable()) {
-                executableProcesses++;
+                executableProcesses.add(process.getId());
             }
         }
-        if(executableProcesses == 1) {
+        if(executableProcesses.size() == 1) {
             score = 1;
         } else {
             score = 0;
+            outliers = executableProcesses;
         }
     }
 }
