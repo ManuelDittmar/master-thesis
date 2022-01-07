@@ -1,6 +1,7 @@
 package edu.kit.domain;
 
 
+import org.camunda.bpm.model.bpmn.instance.FlowNode;
 import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 
@@ -15,6 +16,8 @@ public class SequenceFlowDTO {
     List<Waypoint> waypoints;
     Point start;
     Point end;
+    FlowNode source;
+    FlowNode target;
     String sourceId;
     String targetId;
     List<FlowDirection> flowDirectionGlobal;
@@ -23,6 +26,8 @@ public class SequenceFlowDTO {
 
     public SequenceFlowDTO(SequenceFlow sequenceFlow, List<Waypoint> waypoints) {
         this.sequenceFlowId = sequenceFlow.getId();
+        this.source = sequenceFlow.getSource();
+        this.target = sequenceFlow.getTarget();
         this.waypoints = waypoints;
         this.flowDirectionGlobal = new ArrayList<>();
         int start_x = Integer.parseInt(waypoints.get(0).getAttributeValue("x"));
@@ -61,6 +66,22 @@ public class SequenceFlowDTO {
 
         return list;
         // TODO Overlapping start and end!
+    }
+
+    public FlowNode getSource() {
+        return source;
+    }
+
+    public FlowNode getTarget() {
+        return target;
+    }
+
+    public String getSourceId() {
+        return sourceId;
+    }
+
+    public String getTargetId() {
+        return targetId;
     }
 
     public List<FlowDirection> getFlowDirectionGlobal() {
