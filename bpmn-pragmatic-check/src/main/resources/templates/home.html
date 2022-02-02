@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <title>Pragmatic Quality Check</title>
     <style>
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f1f1f1;
+        }
         .flexbox-row {
             display: flex;
             justify-content: space-around;
@@ -58,14 +81,7 @@
         dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
         clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
         consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-        diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-        takimata sanctus est Lorem ipsum dolor sit amet.
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-        diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-        takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea .</p>
 </div>
 <div class="container flexbox-row">
     <form id="analyze" method="post" target="dummyframe" enctype="multipart/form-data">
@@ -75,13 +91,98 @@
         <button type="submit" class="btn btn-primary">Upload File</button>
     </form>
 </div>
-<div style="height: 500px;" class="container bpmn-container">
+<div style="height: 200px;" class="container bpmn-container">
     <div id="canvas"></div>
 </div>
 <div class="element"></div>
+<template id="process-template">
+    <div class="flexbox-column container">
+        <div class="bpmn-container auto-width">
+            <h1 class="process-name"></h1>
+            <div class="criterias">
+            </div>
+        </div>
+    </div>
+</template>
+<template id="criteria-template">
+    <div class="flexbox-column bpmn-container auto-width nested">
+        <button class="collapsible criteria-id" onclick="showContent(event)"></button>
+        <div class="content">
+            <h2 class="score"></h2>
+            <div class="outlier">
+                <ul class="outlier-list"></ul>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="outlier-template">
+    <li>
+        <div class="outlier-name"></div>
+        <ul class="outlier-reasons"></ul>
+    </li>
+</template>
 <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
 <script src="https://unpkg.com/bpmn-js@8.8.3/dist/bpmn-navigated-viewer.development.js"></script>
 <script>
+
+    class ProcessSummary extends HTMLElement {
+        constructor(process) {
+            super();
+            const templateContent = document
+                .getElementById('process-template')
+                .content
+                .cloneNode(true);
+            this.appendChild(templateContent);
+            this.querySelector('.process-name').innerHTML = process.processKey;
+            process.qualityCriteriaList.forEach(criteria => {
+                this.querySelector('.criterias').append(new QualityCriteria(criteria));
+            })
+        }
+    }
+
+    class QualityCriteria extends HTMLElement {
+        constructor(criteria) {
+            super();
+            const templateContent = document
+                .getElementById('criteria-template')
+                .content
+                .cloneNode(true);
+            this.appendChild(templateContent);
+            this.querySelector('.criteria-id').innerHTML = criteria.criteriaID;
+            this.querySelector('.score').innerHTML = parseFloat(criteria.score).toFixed(2);
+            if(criteria.outliers.length > 0) {
+                criteria.outliers.forEach(outlier=> {
+                    this.querySelector('.outlier-list').append(new Outlier(outlier));
+                })
+            }
+        }
+    }
+
+    class Outlier extends HTMLElement {
+        constructor(outlier) {
+            super();
+            const templateContent = document
+                .getElementById('outlier-template')
+                .content
+                .cloneNode(true);
+            this.appendChild(templateContent);
+            if (outlier.id != null) {
+                this.querySelector('.outlier-name').innerHTML = outlier.id;
+                outlier.reasons.forEach(reason => {
+                    var li = document.createElement("li");
+                    li.append(document.createTextNode(reason));
+                    this.querySelector('.outlier-reasons').append(li);
+                })
+            }
+            else {
+                this.querySelector('.outlier-name').innerHTML = outlier;
+            }
+        }
+    }
+
+    customElements.define('process-element', ProcessSummary);
+    customElements.define('criteria-element', QualityCriteria);
+    customElements.define('outlier-element', Outlier);
 
     $('#analyze').submit(function (e) {
         e.preventDefault();
@@ -94,24 +195,10 @@
             success: async function (result) {
                 await openDiagram(await this.data.get('file').text())
                 console.log(result);
-                var processHTML = [];
                 $.each(result.processAnalysisList, function (index, process) {
-                    var criteriaHTML = [];
-                    $.each(process.processQualityCriteriaList, function (index, criteria) {
-                        var outlierHTML = [];
-                        outlierHTML.push('<div class="flexbox-column bpmn-container auto-width nested"> <ul>');
-                        $.each(criteria.outliers,function(index, outlier) {
-                           outlierHTML.push('<li>'+ outlier +'</li>');
-                        });
-                        outlierHTML.push('</ul> </div>');
-                        criteriaHTML.push('<div class="flexbox-column bpmn-container auto-width nested">\n' +
-                            '<h1>' + criteria.criteriaID + ': ' + criteria.score + '</h1>' + outlierHTML.join("") + '</div>');
-                    });
-                    processHTML.push('<div class="flexbox-column container">\n' +
-                        '        <div class="bpmn-container auto-width">\n' +
-                        '            <h1>' + process.processKey + '</h1>' + criteriaHTML.join("") + '</div>');
+                    console.log(process);
+                    $(".element").html(new ProcessSummary(process));
                 });
-                $(".element").html(processHTML.join(""));
                 console.log(result.processAnalysisList);
             }
         });
@@ -142,6 +229,16 @@
     }
 
     $.get(diagramUrl, openDiagram, 'text');
+
+    function showContent(e) {
+        e.target.classList.toggle("active");
+        var content = e.target.nextElementSibling;
+        if (content.style.maxHeight){
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    }
 </script>
 </body>
 </html>
