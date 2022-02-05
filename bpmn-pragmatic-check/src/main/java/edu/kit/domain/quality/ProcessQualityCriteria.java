@@ -1,10 +1,7 @@
 package edu.kit.domain.quality;
 
-import org.camunda.bpm.model.bpmn.instance.BaseElement;
-import org.camunda.bpm.model.bpmn.instance.FlowElement;
-import org.camunda.bpm.model.bpmn.instance.Gateway;
+import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
-import org.camunda.bpm.model.bpmn.instance.SubProcess;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -70,6 +67,31 @@ public abstract class ProcessQualityCriteria extends QualityCriteria {
             flowElements.addAll(getFlowElementsOfSubprocesses(process, List.of(FlowElement.class)));
         }
         return flowElements;
+    }
+
+    public boolean needsLabel(BaseElement element) {
+        return isMergingGateway(element) || sequenceFlowNeedsLabel(element) || needsToBeLabeledBasedOnType(element);
+    }
+
+    public boolean needsToBeLabeledBasedOnType(BaseElement element) {
+        return element.getElementType().getBaseType().getTypeName().matches("activity|task|throwEvent|catchEvent")
+                && !element.getElementType().getInstanceType().equals(SubProcess.class);
+    }
+
+    public boolean sequenceFlowNeedsLabel(BaseElement element) {
+        if (element.getElementType().getInstanceType().equals(SequenceFlow.class)) {
+            SequenceFlow sequenceFlow = (SequenceFlow) element;
+            String sourceType = sequenceFlow.getSource().getElementType().getTypeName();
+            if (sourceType.matches("exclusiveGateway|inclusiveGateway")) {
+                Gateway gateway = (Gateway) sequenceFlow.getSource();
+                if (gateway.getSucceedingNodes().list().size() > 1) {
+                    String defaultSequenceFlow = gateway.getAttributeValue("default");
+                    // default sequence flow needs no label
+                    return defaultSequenceFlow == null || !defaultSequenceFlow.equals(element.getId());
+                }
+            }
+        }
+        return false;
     }
 
 }

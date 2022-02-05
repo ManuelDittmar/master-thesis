@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
         matchIfMissing = true)
 public class CompleteLabeling extends ProcessQualityCriteria {
 
+    // TODO Complete Labeling Pools and Lanes, maybe a Diagram level criteria?
+
     public CompleteLabeling(Process process) {
         super(process);
     }
@@ -31,33 +33,7 @@ public class CompleteLabeling extends ProcessQualityCriteria {
                 .filter(element -> needsLabel(element))
                 .map(element -> element.getId())
                 .collect(Collectors.toList());
-        double outliersCount = outliers.size();
         setCalculatedScore(elementsCount);
     }
 
-
-    public boolean needsLabel(BaseElement element) {
-        return isMergingGateway(element) || sequenceFlowNeedsLabel(element) || needsToBeLabeledBasedOnType(element);
-    }
-
-    public boolean needsToBeLabeledBasedOnType(BaseElement element) {
-        return element.getElementType().getBaseType().getTypeName().matches("activity|task|throwEvent|catchEvent")
-                && !element.getElementType().getInstanceType().equals(SubProcess.class);
-    }
-
-    public boolean sequenceFlowNeedsLabel(BaseElement element) {
-        if (element.getElementType().getInstanceType().equals(SequenceFlow.class)) {
-            SequenceFlow sequenceFlow = (SequenceFlow) element;
-            String sourceType = sequenceFlow.getSource().getElementType().getTypeName();
-            if (sourceType.matches("exclusiveGateway|inclusiveGateway")) {
-                Gateway gateway = (Gateway) sequenceFlow.getSource();
-                if (gateway.getSucceedingNodes().list().size() > 1) {
-                    String defaultSequenceFlow = gateway.getAttributeValue("default");
-                    // default sequence flow needs no label
-                    return defaultSequenceFlow == null || !defaultSequenceFlow.equals(element.getId());
-                }
-            }
-        }
-        return false;
-    }
 }
