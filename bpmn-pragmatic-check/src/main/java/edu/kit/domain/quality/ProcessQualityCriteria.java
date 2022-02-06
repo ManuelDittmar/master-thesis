@@ -94,4 +94,23 @@ public abstract class ProcessQualityCriteria extends QualityCriteria {
         return false;
     }
 
+    public List<FlowNode> getAllPreviousFlowNodes(FlowNode flowNode) {
+        List<FlowNode> flowNodes = new ArrayList<>();
+        return getAllPreviousFlowNodes(flowNode,flowNodes);
+    }
+
+    public List<FlowNode> getAllPreviousFlowNodes(FlowNode flowNode, List<FlowNode> flowNodes) {
+        List<FlowNode> previousFlowNodes = flowNode.getPreviousNodes().list();
+        for (FlowNode node: previousFlowNodes) {
+            if(!flowNodes.contains(node)) {
+                System.out.println("Adding Node " + flowNode.getId());
+                flowNodes.add(node);
+                if (!node.getElementType().getInstanceType().getSimpleName().equals("StartEvent")) {
+                    flowNodes.addAll(getAllPreviousFlowNodes(node, flowNodes));
+                }
+            }
+        }
+        return flowNodes;
+    }
+
 }

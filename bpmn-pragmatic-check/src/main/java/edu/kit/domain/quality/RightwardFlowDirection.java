@@ -2,9 +2,12 @@ package edu.kit.domain.quality;
 
 import edu.kit.domain.FlowDirection;
 import edu.kit.domain.SequenceFlowDTO;
+import org.camunda.bpm.model.bpmn.instance.FlowNode;
 import org.camunda.bpm.model.bpmn.instance.Gateway;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 // TODO Ok that loops are just allowed if they are coming from gateway? Maybe boundary events as well?
 
@@ -33,6 +36,12 @@ public class RightwardFlowDirection extends FlowProcessQualityCriteria {
     }
 
     boolean isOutlier(SequenceFlowDTO sequenceFlow) {
+        List<FlowNode> previousNodes = getAllPreviousFlowNodes(sequenceFlow.getSource());
+        // Loop
+        if(previousNodes.contains(sequenceFlow.getTarget())) {
+            return false;
+        }
+
         if ( sequenceFlow.getArrowHeadDirection().contains(FlowDirection.LEFT)) {
             return true;
         }

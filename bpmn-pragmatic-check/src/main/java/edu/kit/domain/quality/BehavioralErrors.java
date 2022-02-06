@@ -1,10 +1,14 @@
 package edu.kit.domain.quality;
 
-import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 
 
+
+//@Component
 public class BehavioralErrors extends ProcessQualityCriteria {
+
+    public BehavioralErrors() {
+    }
 
     public BehavioralErrors(Process process) {
         super(process);
@@ -14,9 +18,7 @@ public class BehavioralErrors extends ProcessQualityCriteria {
 
     @Override
     public void init() {
-        for (FlowElement element : process.getFlowElements()) {
-            System.out.println(element.getElementType().getBaseType().getInstanceType());
 
-        }
     }
+
 }
