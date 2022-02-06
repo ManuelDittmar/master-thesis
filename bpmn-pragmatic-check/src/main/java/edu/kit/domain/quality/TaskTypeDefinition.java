@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 @Component
 public class TaskTypeDefinition extends TaskTypeDefinitionAbstract {
 
-    // TODO Check Process Execution Conformance
     public TaskTypeDefinition(Process process) {
         super(process);
         criteriaType = CriteriaType.MANDATORY;

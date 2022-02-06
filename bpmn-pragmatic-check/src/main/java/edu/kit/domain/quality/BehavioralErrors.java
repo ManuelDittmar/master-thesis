@@ -16,10 +16,12 @@ import java.util.stream.Collectors;
 public class BehavioralErrors extends ProcessQualityCriteria {
 
     public BehavioralErrors() {
+        criteriaType = CriteriaType.SOFT;
     }
 
     public BehavioralErrors(Process process) {
         super(process);
+        criteriaType = CriteriaType.SOFT;
     }
 
 

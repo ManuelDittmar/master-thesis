@@ -55,7 +55,6 @@ public class TransactionBoundaries extends ProcessQualityCriteria {
             // TODO Optimize Code
 
             if (!hasCorrectBoundaries) {
-                // System.out.println(flowElement.getId() + " : has wrong TransactionBoundaries");
                 outliers.add(new Outlier(flowElement.getId(), Set.of(reason)));
             }
 

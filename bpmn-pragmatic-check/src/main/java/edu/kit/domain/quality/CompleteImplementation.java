@@ -20,7 +20,6 @@ public class CompleteImplementation extends ProcessQualityCriteria{
         super(process);
     }
 
-    // TODO For each Task and Sequence Flow where required
     @Override
     public void init() {
         List<FlowElement> flowElementList =getAllFlowElements(process).stream().filter(element -> needsLabel(element)).collect(Collectors.toList());
