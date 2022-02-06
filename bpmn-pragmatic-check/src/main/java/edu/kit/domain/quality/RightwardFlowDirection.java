@@ -9,10 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-// TODO Ok that loops are just allowed if they are coming from gateway? Maybe boundary events as well?
-
-// TODO What if part of a loop?
-
 @Component
 public class RightwardFlowDirection extends FlowProcessQualityCriteria {
 
