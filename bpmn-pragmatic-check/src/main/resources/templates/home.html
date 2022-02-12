@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <title>Pragmatic Quality Check</title>
     <style>
+        * {
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
         .collapsible {
-            background-color: #777;
             color: white;
             cursor: pointer;
             padding: 18px;
             width: 100%;
-            border: none;
             text-align: left;
             outline: none;
+            border: none;
+            border-radius: 9px;
             font-size: 15px;
         }
 
+        .score {
+            float: right;
+            font-weight: bold;
+            font-size: 20px;
+            padding-right: 18px;
+        }
+
         .active, .collapsible:hover {
-            background-color: #555;
+            background-color: #E6E7E8;
         }
 
         .content {
@@ -25,6 +35,8 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.2s ease-out;
+            border: none;
+            border-radius: 9px;
             background-color: #f1f1f1;
         }
         .flexbox-row {
@@ -36,7 +48,6 @@
         .flexbox-column {
             display: flex;
             flex-direction: column;
-            gap: 10px;
         }
 
         .container {
@@ -48,7 +59,8 @@
         }
 
         .bpmn-container {
-            border: 1px solid black;
+            border: 1px;
+            border-radius: 12px;
         }
 
         .auto-width {
@@ -60,7 +72,24 @@
         }
 
         #canvas {
-            height: 100%
+            height: 100%;
+            border: 1px solid rgba(230, 231, 233, 1);
+            border-radius: 9px;
+        }
+
+        #error-message{
+            color: #FF4700;
+            display: flex;
+            justify-content: center;
+        }
+
+        .process-name {
+            padding-left: 18px;
+        }
+
+        hr.solid {
+            border-top: 3px solid #bbb;
+            margin-top: 18px;
         }
 
     </style>
@@ -91,9 +120,10 @@
         <button type="submit" class="btn btn-primary">Upload File</button>
     </form>
 </div>
-<div style="height: 200px;" class="container bpmn-container">
+<div style="height: 300px;" class="container bpmn-container">
     <div id="canvas"></div>
 </div>
+<div id="error-message"></div>
 <div class="element"></div>
 <template id="process-template">
     <div class="flexbox-column container">
@@ -101,14 +131,17 @@
             <h1 class="process-name"></h1>
             <div class="criterias">
             </div>
+            <hr class="solid">
         </div>
     </div>
 </template>
 <template id="criteria-template">
     <div class="flexbox-column bpmn-container auto-width nested">
-        <button class="collapsible criteria-id" onclick="showContent(event)"></button>
+        <button class="collapsible" onclick="showContent(event)">
+            <span class="criteria-id"></span>
+            <span class="score"></span>
+        </button>
         <div class="content">
-            <h2 class="score"></h2>
             <div class="outlier">
                 <ul class="outlier-list"></ul>
             </div>
@@ -140,6 +173,21 @@
         }
     }
 
+    class DiagramSummary extends HTMLElement {
+        constructor(criteriaList) {
+            super();
+            const templateContent = document
+                .getElementById('process-template')
+                .content
+                .cloneNode(true);
+            this.appendChild(templateContent);
+            this.querySelector('.process-name').innerHTML = "Diagram Criteria";
+            criteriaList.forEach(criteria => {
+                this.querySelector('.criterias').append(new QualityCriteria(criteria));
+            })
+        }
+    }
+
     class QualityCriteria extends HTMLElement {
         constructor(criteria) {
             super();
@@ -147,9 +195,19 @@
                 .getElementById('criteria-template')
                 .content
                 .cloneNode(true);
+            var score = criteria.score;
+            var color = "#14d890";
+            if(score < 0.8 && score > 0.5) {
+                color = "#FF8B00";
+            }
+            if(score < 0.5 || (score < 1.0 && criteria.criteriaType=="MANDATORY" )) {
+                color = "#FF4700";
+            }
             this.appendChild(templateContent);
-            this.querySelector('.criteria-id').innerHTML = criteria.criteriaID;
-            this.querySelector('.score').innerHTML = parseFloat(criteria.score).toFixed(2);
+            this.querySelector('.collapsible').style.backgroundColor = color;
+            var label = criteria.criteriaID + " (" + criteria.criteriaType + ")";
+            this.querySelector('.criteria-id').innerHTML = label;
+            this.querySelector('.score').innerHTML = parseFloat(score).toFixed(2);
             if(criteria.outliers.length > 0) {
                 criteria.outliers.forEach(outlier=> {
                     this.querySelector('.outlier-list').append(new Outlier(outlier));
@@ -181,6 +239,7 @@
     }
 
     customElements.define('process-element', ProcessSummary);
+    customElements.define('diagram-element', DiagramSummary);
     customElements.define('criteria-element', QualityCriteria);
     customElements.define('outlier-element', Outlier);
 
@@ -194,10 +253,22 @@
             contentType: false,
             success: async function (result) {
                 await openDiagram(await this.data.get('file').text())
+                $(".element").empty();
+                $("#error-message").empty();
+                $("#canvas").css({"border":"1px solid rgba(230, 231, 233, 1)"});
+
+                if(result.mandatoryCriteriaNotMet) {
+                    $("#canvas").css({"border":"5px solid #FF4700"});
+                    $("#error-message").html("<h3> Diagram violates Mandatory Quality Criteria! </h3>")
+                }
+                if(result.diagramQualityCriteriaList.length > 0) {
+                    $(".element").append(new DiagramSummary(result.diagramQualityCriteriaList));
+                };
                 console.log(result);
                 $.each(result.processAnalysisList, function (index, process) {
-                    console.log(process);
-                    $(".element").html(new ProcessSummary(process));
+                    if(process.executable) {
+                        $(".element").append(new ProcessSummary(process));
+                    }
                 });
                 console.log(result.processAnalysisList);
             }
