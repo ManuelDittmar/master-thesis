@@ -92,35 +92,95 @@
             margin-top: 18px;
         }
 
+        .buttons{
+            color: black;
+            background-color: #14d890;
+            border: none;
+            font-weight: bold;
+            font-size: 18px;
+            padding-top: 9px;
+            padding-bottom: 9px;
+            margin: 8px;
+            text-align: center;
+            display: inline-block;
+            width: 200px;
+        }
+
+        .buttons:hover {
+            color: white;
+            background-color: black;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .header{
+            background-color: #FF4700;
+            color: white;
+            min-height: 120px;
+        }
+
+        .fa {
+            color: white;
+            text-decoration: none;
+        }
+
+        .fa:hover {
+            opacity: 0.7;
+        }
+
+        .overlay {
+            background-color: #FF4700;
+            border-radius: 4px;
+        }
+
+        .highlight-overlay {
+            background-color: #FF4700;
+            border-radius: 6px;
+            opacity: 0.4;
+            pointer-events: none; /* no pointer events, allows clicking through onto the element */
+        }
+
     </style>
 </head>
 <body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-<div class="flexbox-row">
-    <div class="flexbox-item"></div>
-    <div class="flexbox-item">
-        <h1>BPMN Pragmatic Check</h1>
-    </div>
-    <div class="flexbox-item">
-        <a href="https://github.com/ManuelDittmar/master-thesis">Github</a>
+<div class="header">
+    <div class="flexbox-row">
+        <div class="flexbox-item"></div>
+        <div class="flexbox-item">
+            <h1>BPMN Pragmatic Check</h1>
+        </div>
+        <div class="flexbox-item">
+            <a href="https://github.com/ManuelDittmar/master-thesis" class="fa fa-github fa-3x"></a>
+        </div>
     </div>
 </div>
 <div class="container introduction">
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-        diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea .</p>
+    <p>Score ∈[0;1], where a score of 1 means that no violations of the criteria rules for this quality criteria have occurred in the process model. An evaluation is only carried out per quality criteria and not for the entire model, as the individual weighting of the criteria can be determined differently.
+        Instead, each quality criteria can be assigned to one of three categories: Mandatory, Evaluative, or Optional.
+    </p>
+    <ul>
+        <li><strong>Mandatory </strong>quality criteria must be met entirely, otherwise the model will not be considered complete or will not be accepted by the organization. For executable models, these quality criteria can be used to decide whether the process model can be deployed to a process engine.</li>
+        <li><strong>Evaluative </strong>quality criteria serve as an indicator to assess the quality of the model, but do not necessarily have to be fully met before the process model may be used in an executable context.</li>
+        <li><strong>Optional </strong>quality criteria are used when certain modeling constructs are potentially indicative of poor modeling practices, but cannot be clearly determined based solely on the process model, without knowledge of the semantics of the process.</li>
+
+    </ul>
 </div>
 <div class="container flexbox-row">
     <form id="analyze" method="post" target="dummyframe" enctype="multipart/form-data">
         <div class="form-group">
+            <label class="buttons">
             <input type="file" name="file" class="form-control-file">
+                Select File
+            </label>
         </div>
-        <button type="submit" class="btn btn-primary">Upload File</button>
+        <button type="submit" class="buttons">Analyze BPMN</button>
     </form>
 </div>
-<div style="height: 300px;" class="container bpmn-container">
+<div style="height: 400px;" class="container bpmn-container">
     <div id="canvas"></div>
 </div>
 <div id="error-message"></div>
@@ -200,7 +260,7 @@
             if(score < 0.8 && score > 0.5) {
                 color = "#FF8B00";
             }
-            if(score < 0.5 || (score < 1.0 && criteria.criteriaType=="MANDATORY" )) {
+            if(score <= 0.5 || (score < 1.0 && criteria.criteriaType=="MANDATORY" )) {
                 color = "#FF4700";
             }
             this.appendChild(templateContent);
@@ -224,6 +284,7 @@
                 .content
                 .cloneNode(true);
             this.appendChild(templateContent);
+            var outlierId;
             if (outlier.id != null) {
                 this.querySelector('.outlier-name').innerHTML = outlier.id;
                 outlier.reasons.forEach(reason => {
@@ -301,14 +362,64 @@
 
     $.get(diagramUrl, openDiagram, 'text');
 
+    function addOverlay(outlierId) {
+        var overlayHtml = $('<div class="overlay">' + outlierId + '</div>');
+        var elementRegistry = bpmnViewer.get('elementRegistry');
+        var shape = elementRegistry.get(outlierId);
+
+        var coloringHtml =  $('<div class="highlight-overlay">')
+            .css({
+                width: shape.width,
+                height: shape.height
+            });
+
+        bpmnViewer.get('overlays').add(outlierId, {
+            position: {
+                bottom: 0,
+                right: 0
+            },
+            html: overlayHtml
+        });
+        bpmnViewer.get('overlays').add(outlierId, {
+            position: {
+                top: 0,
+                left: 0
+            },
+            html: coloringHtml
+        });
+    }
+
+    function removeOverlay(outlierId) {
+        bpmnViewer.get('overlays').remove({element: outlierId});
+    }
+
     function showContent(e) {
+        console.log(e.target.nextElementSibling.getElementsByClassName("outlier-name"));
+        outliers = e.target.nextElementSibling.getElementsByClassName("outlier-name");
         e.target.classList.toggle("active");
         var content = e.target.nextElementSibling;
         if (content.style.maxHeight){
             content.style.maxHeight = null;
+            for (var i = 0; i < outliers.length; i++) {
+                try {
+                    removeOverlay(outliers[i].innerHTML)
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            }
         } else {
             content.style.maxHeight = content.scrollHeight + "px";
+            for (var i = 0; i < outliers.length; i++) {
+                try {
+                    addOverlay(outliers[i].innerHTML)
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            }
         }
+
     }
 </script>
 </body>
