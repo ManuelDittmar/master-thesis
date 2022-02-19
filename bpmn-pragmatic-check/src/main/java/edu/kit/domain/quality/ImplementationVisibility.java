@@ -41,7 +41,9 @@ public class ImplementationVisibility extends ProcessQualityCriteria {
                                             .forEach(listener -> events.add(listener.getCamundaEvent()));
                                 }
                             });
-                    outliers.add(new Outlier(flowElement.getId(), events));
+                    if(events.size() > 0) {
+                        outliers.add(new Outlier(flowElement.getId(), events));
+                    }
                 });
         setCalculatedScore(flowElements.size());
     }
