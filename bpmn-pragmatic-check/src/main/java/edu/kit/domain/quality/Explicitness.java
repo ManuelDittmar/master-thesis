@@ -3,6 +3,7 @@ package edu.kit.domain.quality;
 import edu.kit.domain.Outlier;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -11,6 +12,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
+@ConditionalOnProperty(
+        value = "pragmatic.explicitness.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class Explicitness extends ProcessQualityCriteria {
 
     // TODO Without StartEvent / EndEvent?

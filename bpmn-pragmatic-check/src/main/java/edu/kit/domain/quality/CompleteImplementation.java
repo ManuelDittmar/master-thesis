@@ -2,15 +2,18 @@ package edu.kit.domain.quality;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
-import org.camunda.bpm.model.xml.type.ModelElementType;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@ConditionalOnProperty(
+        value = "pragmatic.completeImplementation.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class CompleteImplementation extends ProcessQualityCriteria{
 
     public CompleteImplementation() {

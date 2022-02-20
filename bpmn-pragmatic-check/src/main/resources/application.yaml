@@ -1,11 +1,28 @@
 pragmatic:
   completeLabeling:
     enabled: true
+  completeImplementation:
+    enabled: true
   edgeCrossing:
+    enabled: true
+  edgeOrthogonality:
+    enabled: true
+  explicitness:
+    enabled: true
+  humanTaskAssignment:
+    enabled: true
+  implementationVisibility:
+    enabled: true
+  rightwardFlowDirection:
     enabled: true
   sourcesAndSinks:
     enabled: true
-    maxStartEvents: 1
-    maxEndEvents: 1
+    maxStartEvents: 2
+    maxEndEvents: 4
   taskTypeDefinition:
+    enabled: true
     forbiddenTaskTypes: manualTask,task,scriptTask
+  transactionBoundaries:
+    enabled: true
+  singleExecutablePool:
+    enabled: true

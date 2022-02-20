@@ -4,12 +4,17 @@ import edu.kit.domain.Outlier;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
 
 @Component
+@ConditionalOnProperty(
+        value = "pragmatic.transactionBoundaries.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class TransactionBoundaries extends ProcessQualityCriteria {
 
     public TransactionBoundaries(Process process) {

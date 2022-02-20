@@ -5,29 +5,74 @@
       "type": "java.lang.Boolean",
       "description": "Enables The Quality Criteria Complete Labeling for Pragmatic Analysis."
     },
-
     {
       "name": "pragmatic.edgeCrossing.enabled",
       "type": "java.lang.Boolean",
       "description": "Enables The Quality Criteria Edge Crossing for Pragmatic Analysis."
     },
-
     {
       "name": "pragmatic.sourcesAndSinks.enabled",
       "type": "java.lang.Boolean",
       "description": "Enables The Quality Criteria Sources and Sinks for Pragmatic Analysis."
     },
-
+    {
+      "name": "pragmatic.completeImplementation.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Complete Implementation for Pragmatic Analysis."
+    },
+    {
+      "name": "pragmatic.edgeOrthogonality.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Edge Orthogonality for Pragmatic Analysis."
+    },
+    {
+      "name": "pragmatic.explicitness.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Explicitness for Pragmatic Analysis."
+    },
+    {
+      "name": "pragmatic.humanTaskAssignment.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Human Task Assignment for Pragmatic Analysis."
+    },
+    {
+      "name": "pragmatic.implementationVisibility.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Implementation Visibility for Pragmatic Analysis."
+    },
+    {
+      "name": "pragmatic.rightwardFlowDirection.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Rightward Flow Direction for Pragmatic Analysis."
+    },
+    {
+      "name": "pragmatic.transactionBoundaries.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Transaction Boundaries for Pragmatic Analysis."
+    },
+    {
+      "name": "pragmatic.singleExecutablePool.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Single Executable Pool for Pragmatic Analysis."
+    },
     {
       "name": "pragmatic.sourcesAndSinks.maxStartEvents",
       "type": "java.lang.Integer",
       "description": "Configures the maximum allowed amount of StartEvents."
     },
-
     {
       "name": "pragmatic.sourcesAndSinks.maxEndEvents",
       "type": "java.lang.Integer",
       "description": "Configures the maximum allowed amount of EndEvents."
+    },
+    {
+      "name": "pragmatic.taskTypeDefinition.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables The Quality Criteria Task Type Definition for Pragmatic Analysis."
+    },
+    {
+      "name": "pragmatic.taskTypeDefinition.forbiddenTaskTypes",
+      "type": "java.lang.String",
+      "description": "Description for pragmatic.taskTypeDefinition.forbiddenTaskTypes."
     }
-
   ] }

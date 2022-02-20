@@ -19,13 +19,15 @@ public class DiagramAnalysis {
     public DiagramAnalysis(ModelInstance modelInstance, ProcessAnalysisService processAnalysisService, List<DiagramQualityCriteria> diagramQualityCriteriaList) {
         this.diagramQualityCriteriaList = new ArrayList<>();
         this.mandatoryCriteriaNotMet = false;
-        diagramQualityCriteriaList.forEach(diagramCriteria -> {
-            DiagramQualityCriteria criteria = diagramCriteria.createInstance(modelInstance);
-            this.diagramQualityCriteriaList.add(criteria);
-            if(criteria.getCriteriaType().equals(CriteriaType.MANDATORY) && criteria.getScore() < 1.0) {
-                this.mandatoryCriteriaNotMet = true;
-            }
-        });
+        if(diagramQualityCriteriaList!=null) {
+            diagramQualityCriteriaList.forEach(diagramCriteria -> {
+                DiagramQualityCriteria criteria = diagramCriteria.createInstance(modelInstance);
+                this.diagramQualityCriteriaList.add(criteria);
+                if(criteria.getCriteriaType().equals(CriteriaType.MANDATORY) && criteria.getScore() < 1.0) {
+                    this.mandatoryCriteriaNotMet = true;
+                }
+            });
+        }
 
         List<Process> processes = (List<Process>) modelInstance.getModelElementsByType(Process.class);
         this.processAnalysisList = new ArrayList<>();

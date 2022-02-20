@@ -3,11 +3,16 @@ package edu.kit.domain.quality;
 import edu.kit.domain.SequenceFlowDTO;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
 
 @Component
+@ConditionalOnProperty(
+        value = "pragmatic.edgeOrthogonality.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class EdgeOrthogonality extends FlowProcessQualityCriteria {
 
 

@@ -5,11 +5,16 @@ import edu.kit.domain.SequenceFlowDTO;
 import org.camunda.bpm.model.bpmn.instance.FlowNode;
 import org.camunda.bpm.model.bpmn.instance.Gateway;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@ConditionalOnProperty(
+        value = "pragmatic.rightwardFlowDirection.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class RightwardFlowDirection extends FlowProcessQualityCriteria {
 
     public RightwardFlowDirection(Process process) {

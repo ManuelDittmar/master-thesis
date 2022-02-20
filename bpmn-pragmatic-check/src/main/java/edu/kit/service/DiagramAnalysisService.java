@@ -24,7 +24,7 @@ public class DiagramAnalysisService {
         this.processAnalysisService = processAnalysisService;
     }
 
-    @Autowired
+    @Autowired(required = false)
     public void setDiagramQualityCriteriaList(List<DiagramQualityCriteria> diagramQualityCriteriaList) {
         this.diagramQualityCriteriaList = diagramQualityCriteriaList;
     }

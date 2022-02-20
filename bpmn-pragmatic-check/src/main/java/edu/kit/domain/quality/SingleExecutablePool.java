@@ -2,12 +2,17 @@ package edu.kit.domain.quality;
 
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.xml.ModelInstance;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@ConditionalOnProperty(
+        value = "pragmatic.singleExecutablePool.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class SingleExecutablePool extends DiagramQualityCriteria {
 
     public SingleExecutablePool() {

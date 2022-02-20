@@ -2,6 +2,7 @@ package edu.kit.domain.quality;
 
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@ConditionalOnProperty(
+        value = "pragmatic.taskTypeDefinition.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class TaskTypeDefinition extends TaskTypeDefinitionAbstract {
 
     public TaskTypeDefinition(Process process) {

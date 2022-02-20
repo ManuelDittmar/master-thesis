@@ -7,6 +7,7 @@ import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.UserTask;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaExecutionListener;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaTaskListener;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -14,6 +15,10 @@ import java.util.List;
 import java.util.Set;
 
 @Component
+@ConditionalOnProperty(
+        value = "pragmatic.implementationVisibility.enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 public class ImplementationVisibility extends ProcessQualityCriteria {
 
     public ImplementationVisibility(Process process) {
