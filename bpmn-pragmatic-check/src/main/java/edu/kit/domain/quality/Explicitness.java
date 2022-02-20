@@ -29,6 +29,9 @@ public class Explicitness extends ProcessQualityCriteria {
 
         List<FlowNode> flowNodes = flowElements.stream()
                 .filter(flowElement -> !flowElement.getElementType().getInstanceType().equals(SequenceFlow.class))
+                .filter(flowElement -> !flowElement.getElementType().getInstanceType().equals(DataStoreReference.class))
+                .filter(flowElement -> !flowElement.getElementType().getInstanceType().equals(DataObjectReference.class))
+                .filter(flowElement -> !flowElement.getElementType().getInstanceType().equals(DataObject.class))
                 .filter(flowElement -> !flowElement.getElementType().getBaseType().getInstanceType().equals(Gateway.class))
                 .map(flowElement -> (FlowNode) flowElement)
                 .collect(Collectors.toList());
