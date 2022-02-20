@@ -41,7 +41,7 @@ public class RightwardFlowDirection extends FlowProcessQualityCriteria {
         if ( sequenceFlow.getArrowHeadDirection().contains(FlowDirection.LEFT)) {
             return true;
         }
-        if(!sequenceFlow.getSource().getElementType().getBaseType().getInstanceType().equals(Gateway.class) && !sequenceFlow.getArrowHeadDirection().contains(FlowDirection.RIGHT)) {
+        if(!sequenceFlow.getSource().getElementType().getBaseType().getInstanceType().equals(Gateway.class) && !sequenceFlow.getTarget().getElementType().getBaseType().getInstanceType().equals(Gateway.class) && !sequenceFlow.getArrowHeadDirection().contains(FlowDirection.RIGHT)) {
             return true;
         }
         return false;
