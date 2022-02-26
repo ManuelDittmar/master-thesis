@@ -1,6 +1,6 @@
 package edu.kit.domain.quality;
 
-import edu.kit.domain.SequenceFlowDTO;
+import edu.kit.domain.common.SequenceFlowDTO;
 import org.camunda.bpm.model.bpmn.impl.instance.SequenceFlowImpl;
 import org.camunda.bpm.model.bpmn.instance.FlowElement;
 import org.camunda.bpm.model.bpmn.instance.Process;

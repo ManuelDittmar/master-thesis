@@ -1,6 +1,7 @@
 package edu.kit.domain.quality;
 
-import edu.kit.domain.Outlier;
+import edu.kit.domain.common.CriteriaType;
+import edu.kit.domain.common.Outlier;
 import org.camunda.bpm.model.bpmn.instance.FlowNode;
 import org.camunda.bpm.model.bpmn.instance.ParallelGateway;
 import org.camunda.bpm.model.bpmn.instance.Process;
@@ -16,12 +17,12 @@ import java.util.stream.Collectors;
 public class BehavioralErrors extends ProcessQualityCriteria {
 
     public BehavioralErrors() {
-        criteriaType = CriteriaType.SOFT;
+        criteriaType = CriteriaType.OPTIONAL;
     }
 
     public BehavioralErrors(Process process) {
         super(process);
-        criteriaType = CriteriaType.SOFT;
+        criteriaType = CriteriaType.OPTIONAL;
     }
 
 

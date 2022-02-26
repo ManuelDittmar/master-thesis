@@ -1,7 +1,7 @@
 package edu.kit.domain.quality;
 
-import edu.kit.domain.FlowDirection;
-import edu.kit.domain.SequenceFlowDTO;
+import edu.kit.domain.common.FlowDirection;
+import edu.kit.domain.common.SequenceFlowDTO;
 import org.camunda.bpm.model.bpmn.instance.FlowNode;
 import org.camunda.bpm.model.bpmn.instance.Gateway;
 import org.camunda.bpm.model.bpmn.instance.Process;

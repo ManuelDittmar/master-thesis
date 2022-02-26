@@ -1,12 +1,14 @@
 package edu.kit.domain.quality;
 
+import edu.kit.domain.common.CriteriaType;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class QualityCriteria {
 
     String criteriaID;
-    CriteriaType criteriaType = CriteriaType.SCORE;
+    CriteriaType criteriaType = CriteriaType.EVALUATIVE;
     double score;
     List outliers;
 

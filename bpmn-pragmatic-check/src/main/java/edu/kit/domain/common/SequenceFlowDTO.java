@@ -1,4 +1,4 @@
-package edu.kit.domain;
+package edu.kit.domain.common;
 
 
 import org.camunda.bpm.model.bpmn.instance.FlowNode;

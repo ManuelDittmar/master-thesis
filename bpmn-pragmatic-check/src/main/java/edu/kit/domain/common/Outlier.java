@@ -1,4 +1,4 @@
-package edu.kit.domain;
+package edu.kit.domain.common;
 
 import java.util.Set;
 

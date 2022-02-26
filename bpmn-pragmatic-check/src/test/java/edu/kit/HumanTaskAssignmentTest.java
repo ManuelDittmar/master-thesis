@@ -1,7 +1,7 @@
 package edu.kit;
 
 import edu.kit.domain.quality.HumanTaskAssignment;
-import edu.kit.domain.Outlier;
+import edu.kit.domain.common.Outlier;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.xml.ModelInstance;

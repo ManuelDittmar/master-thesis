@@ -320,7 +320,7 @@
 
                 if(result.mandatoryCriteriaNotMet) {
                     $("#canvas").css({"border":"5px solid #FF4700"});
-                    $("#error-message").html("<h3> Diagram violates Mandatory Quality Criteria! </h3>")
+                    $("#error-message").html("<h3> Diagram violates mandatory quality criteria! </h3>")
                 }
                 if(result.diagramQualityCriteriaList.length > 0) {
                     $(".element").append(new DiagramSummary(result.diagramQualityCriteriaList));

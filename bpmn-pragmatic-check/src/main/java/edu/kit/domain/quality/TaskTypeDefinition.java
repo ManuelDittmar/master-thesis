@@ -1,5 +1,6 @@
 package edu.kit.domain.quality;
 
+import edu.kit.domain.common.CriteriaType;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

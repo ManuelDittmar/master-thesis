@@ -1,6 +1,6 @@
 package edu.kit.domain.quality;
 
-import edu.kit.domain.Outlier;
+import edu.kit.domain.common.Outlier;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

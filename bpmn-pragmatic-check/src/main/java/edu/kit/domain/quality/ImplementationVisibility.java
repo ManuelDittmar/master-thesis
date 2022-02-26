@@ -1,6 +1,6 @@
 package edu.kit.domain.quality;
 
-import edu.kit.domain.Outlier;
+import edu.kit.domain.common.Outlier;
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
 import org.camunda.bpm.model.bpmn.instance.FlowElement;
 import org.camunda.bpm.model.bpmn.instance.Process;

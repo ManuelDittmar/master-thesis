@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
         matchIfMissing = true)
 public class CompleteLabeling extends ProcessQualityCriteria {
 
-    // TODO Complete Labeling Pools and Lanes, maybe a Diagram level criteria?
-
     public CompleteLabeling(Process process) {
         super(process);
     }

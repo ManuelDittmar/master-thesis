@@ -1,6 +1,6 @@
 package edu.kit.domain.quality;
 
-import edu.kit.domain.SequenceFlowDTO;
+import edu.kit.domain.common.SequenceFlowDTO;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

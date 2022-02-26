@@ -1,6 +1,6 @@
 package edu.kit.domain;
 
-import edu.kit.domain.quality.CriteriaType;
+import edu.kit.domain.common.CriteriaType;
 import edu.kit.domain.quality.DiagramQualityCriteria;
 import edu.kit.service.ProcessAnalysisService;
 import org.camunda.bpm.model.bpmn.instance.Process;
