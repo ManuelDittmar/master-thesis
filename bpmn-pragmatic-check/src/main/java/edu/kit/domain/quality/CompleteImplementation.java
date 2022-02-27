@@ -1,5 +1,6 @@
 package edu.kit.domain.quality;
 
+import edu.kit.domain.common.CriteriaType;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,10 +18,12 @@ import java.util.stream.Collectors;
 public class CompleteImplementation extends ProcessQualityCriteria{
 
     public CompleteImplementation() {
+        criteriaType = CriteriaType.MANDATORY;
     }
 
     public CompleteImplementation(Process process) {
         super(process);
+        criteriaType = CriteriaType.MANDATORY;
     }
 
     @Override
