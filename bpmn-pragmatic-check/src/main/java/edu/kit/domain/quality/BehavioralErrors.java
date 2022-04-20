@@ -5,6 +5,7 @@ import edu.kit.domain.common.Outlier;
 import org.camunda.bpm.model.bpmn.instance.FlowNode;
 import org.camunda.bpm.model.bpmn.instance.ParallelGateway;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,6 +15,10 @@ import java.util.stream.Collectors;
 
 
 @Component
+@ConditionalOnProperty(
+    value = "pragmatic.behavioralErrors.enabled",
+    havingValue = "true",
+    matchIfMissing = true)
 public class BehavioralErrors extends ProcessQualityCriteria {
 
     public BehavioralErrors() {

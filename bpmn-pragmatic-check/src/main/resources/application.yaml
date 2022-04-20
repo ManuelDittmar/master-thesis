@@ -26,3 +26,5 @@ pragmatic:
     enabled: true
   singleExecutablePool:
     enabled: true
+  behavioralErrors:
+    enabled: true
