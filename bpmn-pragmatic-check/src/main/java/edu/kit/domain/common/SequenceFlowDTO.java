@@ -9,6 +9,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//DTO for SequenceFlows to make parameters easily accessible for Flow related Quality Criteria
+
 
 public class SequenceFlowDTO {
 
@@ -65,7 +67,6 @@ public class SequenceFlowDTO {
         }
 
         return list;
-        // TODO Overlapping start and end!
     }
 
     public FlowNode getSource() {

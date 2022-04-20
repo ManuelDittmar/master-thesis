@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
         matchIfMissing = true)
 public class Explicitness extends ProcessQualityCriteria {
 
-    // TODO Without StartEvent / EndEvent?
-
     public Explicitness() {
         super();
     }

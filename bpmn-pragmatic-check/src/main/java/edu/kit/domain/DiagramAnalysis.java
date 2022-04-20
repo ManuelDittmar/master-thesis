@@ -9,6 +9,11 @@ import org.camunda.bpm.model.xml.ModelInstance;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Diagram Analysis consists of Diagram Quality Criteria &
+ * ProcessAnalysis for each Pool
+ */
+
 
 public class DiagramAnalysis {
 

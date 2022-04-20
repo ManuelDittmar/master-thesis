@@ -57,8 +57,6 @@ public class TransactionBoundaries extends ProcessQualityCriteria {
                 reason = "Add Transaction Boundary Before. Optimistic locking exception";
             }
 
-            // TODO Optimize Code
-
             if (!hasCorrectBoundaries) {
                 outliers.add(new Outlier(flowElement.getId(), Set.of(reason)));
             }
@@ -67,7 +65,6 @@ public class TransactionBoundaries extends ProcessQualityCriteria {
         setCalculatedScore(flowElements.size());
     }
 
-    // TODO Event based gateway
     public boolean isNaturalWaitState(Class<? extends ModelElementInstance> instanceType) {
         return instanceType.equals(UserTask.class) || instanceType.equals(IntermediateCatchEvent.class) || instanceType.equals(ReceiveTask.class);
     }
