@@ -27,11 +27,13 @@ public class EdgeCrossing extends FlowProcessQualityCriteria {
     @Override
     public void init() {
         this.sequenceFlowDTOList = initSequenceFlowDTOs();
+        // Loop through all Sequence Flows
         for (int i = 0; i < sequenceFlowDTOList.size(); i++) {
             SequenceFlowDTO sequenceFlowA = sequenceFlowDTOList.get(i);
+            // Loop through the remaining sequence flows
             for (int j = i + 1; j < sequenceFlowDTOList.size(); j++) {
-                SequenceFlowDTO sequenceFlowB = sequenceFlowDTOList.get(j);
                 boolean crossingFound = false;
+                SequenceFlowDTO sequenceFlowB = sequenceFlowDTOList.get(j);
                 for (int k = 0; k < sequenceFlowA.getWaypoints().size() - 1; k++) {
                     if (!crossingFound) {
                         Waypoint waypointStartA = sequenceFlowA.getWaypoints().get(k);
@@ -74,8 +76,6 @@ public class EdgeCrossing extends FlowProcessQualityCriteria {
                                 }
                             }
                         }
-                    } else {
-                        break;
                     }
                 }
             }
