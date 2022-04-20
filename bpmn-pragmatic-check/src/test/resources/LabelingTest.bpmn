@@ -4,10 +4,6 @@
     <bpmn:startEvent id="UnlabeledStartEvent1">
       <bpmn:outgoing>Flow_1ctz669</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:task id="UnlabeledActivity1">
-      <bpmn:incoming>Flow_1ctz669</bpmn:incoming>
-      <bpmn:outgoing>Flow_0c1053y</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="Flow_1ctz669" sourceRef="UnlabeledStartEvent1" targetRef="UnlabeledActivity1" />
     <bpmn:exclusiveGateway id="UnlabeledGateWaySplitting" default="UnlabeledSequenceFlowXORSplittingDefault">
       <bpmn:incoming>Flow_0c1053y</bpmn:incoming>
@@ -20,10 +16,6 @@
       <bpmn:incoming>Flow_1y7clqj</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="UnlabeledSequenceFlowXORSplitting1" sourceRef="UnlabeledGateWaySplitting" targetRef="UnlabeledIntermediateEvent" />
-    <bpmn:task id="UnlabeledActivity2">
-      <bpmn:incoming>UnlabeledSequenceFlowXORSplitting2</bpmn:incoming>
-      <bpmn:outgoing>Flow_17icp1s</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="UnlabeledSequenceFlowXORSplitting2" sourceRef="UnlabeledGateWaySplitting" targetRef="UnlabeledActivity2" />
     <bpmn:sequenceFlow id="Flow_17icp1s" sourceRef="UnlabeledActivity2" targetRef="UnlabeledParallelGateWaySplitting" />
     <bpmn:parallelGateway id="UnlabeledParallelGateWaySplitting">
@@ -31,15 +23,7 @@
       <bpmn:outgoing>Flow_0ot8jkg</bpmn:outgoing>
       <bpmn:outgoing>Flow_0d5mwrp</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:task id="UnlabeledActivity3">
-      <bpmn:incoming>Flow_0ot8jkg</bpmn:incoming>
-      <bpmn:outgoing>Flow_0acc4ir</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="Flow_0ot8jkg" sourceRef="UnlabeledParallelGateWaySplitting" targetRef="UnlabeledActivity3" />
-    <bpmn:task id="UnlabeledActivity4">
-      <bpmn:incoming>Flow_0d5mwrp</bpmn:incoming>
-      <bpmn:outgoing>Flow_06ag8ap</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="Flow_0d5mwrp" sourceRef="UnlabeledParallelGateWaySplitting" targetRef="UnlabeledActivity4" />
     <bpmn:boundaryEvent id="UnlabeledBoundaryEvent" attachedToRef="UnlabeledActivity1">
       <bpmn:outgoing>Flow_1nkhfx1</bpmn:outgoing>
@@ -132,69 +116,25 @@
     <bpmn:sequenceFlow id="Flow_1y7clqj" sourceRef="UnlabeledMergingXOR1" targetRef="UnlabeledEndEvent1" />
     <bpmn:sequenceFlow id="Flow_1ufcsx1" sourceRef="UnlabeledParallelGateWaySync" targetRef="UnlabeledMergingXOR1" />
     <bpmn:sequenceFlow id="UnlabeledSequenceFlowXORSplittingDefault" sourceRef="UnlabeledGateWaySplitting" targetRef="UnlabeledMergingXOR1" />
+    <bpmn:serviceTask id="UnlabeledActivity2">
+      <bpmn:incoming>UnlabeledSequenceFlowXORSplitting2</bpmn:incoming>
+      <bpmn:outgoing>Flow_17icp1s</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:scriptTask id="UnlabeledActivity3">
+      <bpmn:incoming>Flow_0ot8jkg</bpmn:incoming>
+      <bpmn:outgoing>Flow_0acc4ir</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:businessRuleTask id="UnlabeledActivity4">
+      <bpmn:incoming>Flow_0d5mwrp</bpmn:incoming>
+      <bpmn:outgoing>Flow_06ag8ap</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sendTask id="UnlabeledActivity1">
+      <bpmn:incoming>Flow_1ctz669</bpmn:incoming>
+      <bpmn:outgoing>Flow_0c1053y</bpmn:outgoing>
+    </bpmn:sendTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="LabelingTest">
-      <bpmndi:BPMNEdge id="Flow_1ctz669_di" bpmnElement="Flow_1ctz669">
-        <di:waypoint x="215" y="177" />
-        <di:waypoint x="270" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0c1053y_di" bpmnElement="Flow_0c1053y">
-        <di:waypoint x="370" y="177" />
-        <di:waypoint x="425" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ex15c3_di" bpmnElement="UnlabeledSequenceFlowXORSplitting1">
-        <di:waypoint x="475" y="177" />
-        <di:waypoint x="552" y="177" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="473" y="159" width="82" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1hkpdta_di" bpmnElement="UnlabeledSequenceFlowXORSplitting2">
-        <di:waypoint x="450" y="202" />
-        <di:waypoint x="450" y="330" />
-        <di:waypoint x="500" y="330" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_17icp1s_di" bpmnElement="Flow_17icp1s">
-        <di:waypoint x="600" y="330" />
-        <di:waypoint x="675" y="330" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ot8jkg_di" bpmnElement="Flow_0ot8jkg">
-        <di:waypoint x="725" y="330" />
-        <di:waypoint x="800" y="330" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0d5mwrp_di" bpmnElement="Flow_0d5mwrp">
-        <di:waypoint x="700" y="355" />
-        <di:waypoint x="700" y="440" />
-        <di:waypoint x="800" y="440" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0pmsh0b_di" bpmnElement="Flow_0pmsh0b">
-        <di:waypoint x="588" y="177" />
-        <di:waypoint x="1115" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1nkhfx1_di" bpmnElement="Flow_1nkhfx1">
-        <di:waypoint x="310" y="235" />
-        <di:waypoint x="310" y="300" />
-        <di:waypoint x="382" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_06ag8ap_di" bpmnElement="Flow_06ag8ap">
-        <di:waypoint x="900" y="440" />
-        <di:waypoint x="1010" y="440" />
-        <di:waypoint x="1010" y="355" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0acc4ir_di" bpmnElement="Flow_0acc4ir">
-        <di:waypoint x="900" y="330" />
-        <di:waypoint x="985" y="330" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1y7clqj_di" bpmnElement="Flow_1y7clqj">
-        <di:waypoint x="1165" y="177" />
-        <di:waypoint x="1232" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ufcsx1_di" bpmnElement="Flow_1ufcsx1">
-        <di:waypoint x="1035" y="330" />
-        <di:waypoint x="1140" y="330" />
-        <di:waypoint x="1140" y="202" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1tc1k2a_di" bpmnElement="UnlabeledSequenceFlowXORSplittingDefault">
         <di:waypoint x="450" y="152" />
         <di:waypoint x="450" y="60" />
@@ -204,104 +144,158 @@
           <dc:Bounds x="751" y="42" width="88" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ufcsx1_di" bpmnElement="Flow_1ufcsx1">
+        <di:waypoint x="1035" y="330" />
+        <di:waypoint x="1140" y="330" />
+        <di:waypoint x="1140" y="202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1y7clqj_di" bpmnElement="Flow_1y7clqj">
+        <di:waypoint x="1165" y="177" />
+        <di:waypoint x="1232" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0acc4ir_di" bpmnElement="Flow_0acc4ir">
+        <di:waypoint x="900" y="330" />
+        <di:waypoint x="985" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06ag8ap_di" bpmnElement="Flow_06ag8ap">
+        <di:waypoint x="900" y="440" />
+        <di:waypoint x="1010" y="440" />
+        <di:waypoint x="1010" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nkhfx1_di" bpmnElement="Flow_1nkhfx1">
+        <di:waypoint x="310" y="235" />
+        <di:waypoint x="310" y="300" />
+        <di:waypoint x="382" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pmsh0b_di" bpmnElement="Flow_0pmsh0b">
+        <di:waypoint x="588" y="177" />
+        <di:waypoint x="1115" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0d5mwrp_di" bpmnElement="Flow_0d5mwrp">
+        <di:waypoint x="700" y="355" />
+        <di:waypoint x="700" y="440" />
+        <di:waypoint x="800" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ot8jkg_di" bpmnElement="Flow_0ot8jkg">
+        <di:waypoint x="725" y="330" />
+        <di:waypoint x="800" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17icp1s_di" bpmnElement="Flow_17icp1s">
+        <di:waypoint x="600" y="330" />
+        <di:waypoint x="675" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hkpdta_di" bpmnElement="UnlabeledSequenceFlowXORSplitting2">
+        <di:waypoint x="450" y="202" />
+        <di:waypoint x="450" y="330" />
+        <di:waypoint x="500" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ex15c3_di" bpmnElement="UnlabeledSequenceFlowXORSplitting1">
+        <di:waypoint x="475" y="177" />
+        <di:waypoint x="552" y="177" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="473" y="159" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0c1053y_di" bpmnElement="Flow_0c1053y">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="425" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ctz669_di" bpmnElement="Flow_1ctz669">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="UnlabeledStartEvent1">
         <dc:Bounds x="179" y="159" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1xikd2v_di" bpmnElement="UnlabeledActivity1">
-        <dc:Bounds x="270" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1uzkwa9_di" bpmnElement="UnlabeledGateWaySplitting" isMarkerVisible="true">
         <dc:Bounds x="425" y="152" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0l9nwm4_di" bpmnElement="UnlabeledActivity2">
-        <dc:Bounds x="500" y="290" width="100" height="80" />
+      <bpmndi:BPMNShape id="Event_00on4fe_di" bpmnElement="UnlabeledEndEvent1">
+        <dc:Bounds x="1232" y="159" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_137c026_di" bpmnElement="UnlabeledParallelGateWaySplitting">
         <dc:Bounds x="675" y="305" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0fmlra8_di" bpmnElement="UnlabeledActivity3">
-        <dc:Bounds x="800" y="290" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0eeuz79_di" bpmnElement="UnlabeledActivity4">
-        <dc:Bounds x="800" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_10k0qu2_di" bpmnElement="UnlabeledIntermediateEvent">
         <dc:Bounds x="552" y="159" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_199pxhl_di" bpmnElement="UnlabeledEndEventBoundary">
-        <dc:Bounds x="382" y="282" width="36" height="36" />
+      <bpmndi:BPMNShape id="Activity_0s6r9xh_di" bpmnElement="UnlabeledActivity2">
+        <dc:Bounds x="500" y="290" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0g9x18r_di" bpmnElement="UnlabeledParallelGateWaySync">
-        <dc:Bounds x="985" y="305" width="50" height="50" />
+      <bpmndi:BPMNShape id="Activity_1ruwt43_di" bpmnElement="UnlabeledActivity3">
+        <dc:Bounds x="800" y="290" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_00on4fe_di" bpmnElement="UnlabeledEndEvent1">
-        <dc:Bounds x="1232" y="159" width="36" height="36" />
+      <bpmndi:BPMNShape id="Activity_19vbf8n_di" bpmnElement="UnlabeledActivity4">
+        <dc:Bounds x="800" y="400" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_02b4udm_di" bpmnElement="UnlabeledMergingXOR1" isMarkerVisible="true">
-        <dc:Bounds x="1115" y="152" width="50" height="50" />
+      <bpmndi:BPMNShape id="Activity_0njgz0e_di" bpmnElement="UnlabeledActivity1">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1ubf8lm_di" bpmnElement="EventSubprocess" isExpanded="true">
         <dc:Bounds x="300" y="600" width="1150" height="290" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_093nkd0_di" bpmnElement="Flow_093nkd0">
-        <di:waypoint x="376" y="740" />
-        <di:waypoint x="430" y="740" />
+      <bpmndi:BPMNEdge id="Flow_0sbwuqi_di" bpmnElement="Flow_0sbwuqi">
+        <di:waypoint x="1118" y="850" />
+        <di:waypoint x="1240" y="850" />
+        <di:waypoint x="1240" y="765" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0nupq4f_di" bpmnElement="Flow_0nupq4f">
-        <di:waypoint x="530" y="740" />
-        <di:waypoint x="575" y="740" />
+      <bpmndi:BPMNEdge id="Flow_1ax24ps_di" bpmnElement="Flow_1ax24ps">
+        <di:waypoint x="1265" y="740" />
+        <di:waypoint x="1352" y="740" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ivnt4s_di" bpmnElement="UnlabeledSequenceFlowORSplitting2">
-        <di:waypoint x="600" y="765" />
-        <di:waypoint x="600" y="800" />
-        <di:waypoint x="670" y="800" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_059r8xp_di" bpmnElement="UnlabeledSequenceFlowORSplitting1">
-        <di:waypoint x="600" y="715" />
-        <di:waypoint x="600" y="670" />
-        <di:waypoint x="670" y="670" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1yih4pz_di" bpmnElement="Flow_1yih4pz">
-        <di:waypoint x="770" y="800" />
-        <di:waypoint x="880" y="800" />
-        <di:waypoint x="880" y="765" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1a2r2t0_di" bpmnElement="Flow_1a2r2t0">
-        <di:waypoint x="905" y="740" />
-        <di:waypoint x="965" y="740" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1hzayi0_di" bpmnElement="Flow_1hzayi0">
-        <di:waypoint x="770" y="670" />
-        <di:waypoint x="880" y="670" />
-        <di:waypoint x="880" y="715" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_11vak6b_di" bpmnElement="UnlabeledSequenceFlowEventSplitting1">
-        <di:waypoint x="1015" y="740" />
-        <di:waypoint x="1082" y="740" />
+      <bpmndi:BPMNEdge id="Flow_1fuxatg_di" bpmnElement="Flow_1fuxatg">
+        <di:waypoint x="1118" y="740" />
+        <di:waypoint x="1215" y="740" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0y8johu_di" bpmnElement="UnlabeledSequenceFlowEventSplitting2">
         <di:waypoint x="990" y="765" />
         <di:waypoint x="990" y="850" />
         <di:waypoint x="1082" y="850" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1fuxatg_di" bpmnElement="Flow_1fuxatg">
-        <di:waypoint x="1118" y="740" />
-        <di:waypoint x="1215" y="740" />
+      <bpmndi:BPMNEdge id="Flow_11vak6b_di" bpmnElement="UnlabeledSequenceFlowEventSplitting1">
+        <di:waypoint x="1015" y="740" />
+        <di:waypoint x="1082" y="740" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ax24ps_di" bpmnElement="Flow_1ax24ps">
-        <di:waypoint x="1265" y="740" />
-        <di:waypoint x="1352" y="740" />
+      <bpmndi:BPMNEdge id="Flow_1hzayi0_di" bpmnElement="Flow_1hzayi0">
+        <di:waypoint x="770" y="670" />
+        <di:waypoint x="880" y="670" />
+        <di:waypoint x="880" y="715" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0sbwuqi_di" bpmnElement="Flow_0sbwuqi">
-        <di:waypoint x="1118" y="850" />
-        <di:waypoint x="1240" y="850" />
-        <di:waypoint x="1240" y="765" />
+      <bpmndi:BPMNEdge id="Flow_1a2r2t0_di" bpmnElement="Flow_1a2r2t0">
+        <di:waypoint x="905" y="740" />
+        <di:waypoint x="965" y="740" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yih4pz_di" bpmnElement="Flow_1yih4pz">
+        <di:waypoint x="770" y="800" />
+        <di:waypoint x="880" y="800" />
+        <di:waypoint x="880" y="765" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_059r8xp_di" bpmnElement="UnlabeledSequenceFlowORSplitting1">
+        <di:waypoint x="600" y="715" />
+        <di:waypoint x="600" y="670" />
+        <di:waypoint x="670" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ivnt4s_di" bpmnElement="UnlabeledSequenceFlowORSplitting2">
+        <di:waypoint x="600" y="765" />
+        <di:waypoint x="600" y="800" />
+        <di:waypoint x="670" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nupq4f_di" bpmnElement="Flow_0nupq4f">
+        <di:waypoint x="530" y="740" />
+        <di:waypoint x="575" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_093nkd0_di" bpmnElement="Flow_093nkd0">
+        <di:waypoint x="376" y="740" />
+        <di:waypoint x="430" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0xrx5mq_di" bpmnElement="UnlabeledStartEvent2">
+        <dc:Bounds x="340" y="722" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0gsbgmq_di" bpmnElement="UnlabeledActivity5">
         <dc:Bounds x="430" y="700" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0xrx5mq_di" bpmnElement="UnlabeledStartEvent2">
-        <dc:Bounds x="340" y="722" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_1p9r89a_di" bpmnElement="UnlabeledEndEvent2">
+        <dc:Bounds x="1352" y="722" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_00kdo45_di" bpmnElement="UnlabeledGatewayInclusiveORSplitting">
         <dc:Bounds x="575" y="715" width="50" height="50" />
@@ -315,9 +309,6 @@
       <bpmndi:BPMNShape id="Gateway_0jt63e9_di" bpmnElement="UnlabeledGatewayInclusiveORSync">
         <dc:Bounds x="855" y="715" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1p9r89a_di" bpmnElement="UnlabeledEndEvent2">
-        <dc:Bounds x="1352" y="722" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1vivp2g_di" bpmnElement="UnlabeledEventBasedGateway">
         <dc:Bounds x="965" y="715" width="50" height="50" />
       </bpmndi:BPMNShape>
@@ -329,6 +320,15 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0iyxhxl_di" bpmnElement="UnlabeledMergingXOR2" isMarkerVisible="true">
         <dc:Bounds x="1215" y="715" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_199pxhl_di" bpmnElement="UnlabeledEndEventBoundary">
+        <dc:Bounds x="382" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0g9x18r_di" bpmnElement="UnlabeledParallelGateWaySync">
+        <dc:Bounds x="985" y="305" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_02b4udm_di" bpmnElement="UnlabeledMergingXOR1" isMarkerVisible="true">
+        <dc:Bounds x="1115" y="152" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_04npfhz_di" bpmnElement="UnlabeledBoundaryEvent">
         <dc:Bounds x="292" y="199" width="36" height="36" />

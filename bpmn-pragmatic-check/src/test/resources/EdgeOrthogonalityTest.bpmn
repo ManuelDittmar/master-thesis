@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0ehytow" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="EdgeOrthogonailty" name="Edge Orthogonailty" isExecutable="true">
+    <bpmn:startEvent id="Event_09vng1w">
+      <bpmn:outgoing>Flow_0qm1yg5</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_0uravuy">
+      <bpmn:incoming>Flow_0qm1yg5</bpmn:incoming>
+      <bpmn:outgoing>No90Degree</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0qm1yg5" sourceRef="Event_09vng1w" targetRef="Activity_0uravuy" />
+    <bpmn:endEvent id="Event_1p4wo9l">
+      <bpmn:incoming>No90Degree</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="No90Degree" sourceRef="Activity_0uravuy" targetRef="Event_1p4wo9l" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="EdgeOrthogonailty">
+      <bpmndi:BPMNEdge id="Flow_0qm1yg5_di" bpmnElement="Flow_0qm1yg5">
+        <di:waypoint x="208" y="190" />
+        <di:waypoint x="260" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ssqu5l_di" bpmnElement="No90Degree">
+        <di:waypoint x="343" y="150" />
+        <di:waypoint x="400" y="80" />
+        <di:waypoint x="488" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_09vng1w_di" bpmnElement="Event_09vng1w">
+        <dc:Bounds x="172" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0uravuy_di" bpmnElement="Activity_0uravuy">
+        <dc:Bounds x="260" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1p4wo9l_di" bpmnElement="Event_1p4wo9l">
+        <dc:Bounds x="482" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
