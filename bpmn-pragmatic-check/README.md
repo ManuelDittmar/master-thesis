@@ -40,6 +40,16 @@ mvn clean test
 
 Only BPMN Diagrams created for the Camunda Platform 7.x can be analysed.
 
+## REST API
+
+### POST /analyze
+
+form-data
+
+| key  | value  |
+|------|--------|
+| file | *.bpmn |
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
